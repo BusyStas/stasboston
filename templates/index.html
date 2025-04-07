@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stas Club</title>
+    <title>Stanislav Prikhodko</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
 </head>
 <body>
     <header> 
         <div class="logo">
-            <img src="{{ url_for('static', filename='images/logo-transparent-cropped.png') }}" alt="Stas Club Logo">
+            <img src="{{ url_for('static', filename='images/logo/logo-transparent-cropped.png') }}" alt="Stas Club Logo">
         </div>
         <nav>
             <ul>
@@ -24,9 +24,12 @@
     </header>
 
     <main>
-        <section id="hero">
-            <h1>Welcome to Stas Club</h1>
-            <p>Software Developer & Aviation Enthusiast</p>
+        <section id="hero" style="display: flex; align-items: center; gap: 20px;">
+            <img src="{{ url_for('static', filename='images/selfie/stas_face_round.jfif') }}" alt="Selfie of Stanislav Prikhodko" style="width:200px;height:auto;border-radius:50%;">
+            <div>
+                <h1>Stanislav Prikhodko</h1>
+                <p>Software Developer & Blockchain Enthusiast</p>
+            </div>
         </section>
 
         <section id="resume">
