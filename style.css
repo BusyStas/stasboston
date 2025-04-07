@@ -3,13 +3,16 @@ body {
     margin: 0;
     padding: 0;
     line-height: 1.6;
+    background: url('assets/plane.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff; /* Text color for better contrast */
 }
 
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #333;
+    background: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
     color: #fff;
     padding: 1rem 2rem;
 }
@@ -27,22 +30,35 @@ nav ul {
 nav ul li a {
     color: #fff;
     text-decoration: none;
+    font-weight: bold;
 }
 
 #hero {
     text-align: center;
-    padding: 2rem;
-    background: #f4f4f4;
+    padding: 4rem 2rem;
+    background: rgba(0, 0, 0, 0.6); /* Semi-transparent overlay */
+    margin: 0;
+}
+
+#hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+#hero p {
+    font-size: 1.5rem;
 }
 
 section {
     padding: 2rem;
     margin: 1rem 0;
+    background: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+    border-radius: 8px;
 }
 
 footer {
     text-align: center;
     padding: 1rem;
-    background: #333;
+    background: rgba(0, 0, 0, 0.8);
     color: #fff;
 }
