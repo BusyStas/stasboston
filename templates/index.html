@@ -1,1 +1,65 @@
-hello boston 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stas Club</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
+</head>
+<body>
+    <header> 
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/logo-transparent-cropped.png') }}" alt="Stas Club Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#resume">Resume</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#hobbies">Hobbies</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero">
+            <h1>Welcome to Stas Club</h1>
+            <p>Software Developer & Aviation Enthusiast</p>
+        </section>
+
+        <section id="resume">
+            <h2>Resume</h2>
+            <p>Details about your skills, experience, and education.</p>
+        </section>
+
+        <section id="portfolio">
+            <h2>Portfolio</h2>
+            <p>Showcase your projects with descriptions and links.</p>
+        </section>
+
+        <section id="blog">
+            <h2>Blog</h2>
+            <p>Write about your experiences, tutorials, or industry insights.</p>
+        </section>
+
+        <section id="hobbies">
+            <h2>Hobbies</h2>
+            <p>I'm a passionate pilot! Here are some of my flying adventures.</p>
+            <img src="{{ url_for('static', filename='images/plane.jpg') }}" alt="Flying Adventure">
+        </section>
+
+        <section id="contact">
+            <h2>Contact</h2>
+            <p>Get in touch with me via email or social media.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Stas Club. All rights reserved.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
