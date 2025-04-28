@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - Stanislav Prikhodko</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        {% include 'navigation.html' %}
+    </header>
+    <main>
+        <section id="shop">
+            <h2>Shop</h2>
+            <p>Welcome to the shop! Explore and purchase items related to my projects and hobbies.</p>
+        </section>
+    </main>
+    {% include 'disclaimer.html' %}
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

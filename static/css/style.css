@@ -12,7 +12,7 @@ body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     margin: 0;
     padding: 0;
-    line-height: 1.6;
+    line-height: 1.4; /* Reduce line height for a more compact look */
     background: var(--primary-color); /* Simplified background color */
     color: var(--text-light);
 }
@@ -22,10 +22,12 @@ header {
     position: fixed;
     top: 0;
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
+    display: flex; /* Align items horizontally */
+    flex-direction: row; /* Ensure horizontal layout */
+    align-items: center; /* Vertically center items */
+    justify-content: flex-start; /* Align items to the left */
+    text-align: left; /* Align text to the left */
+    padding: 0.5rem 1rem; /* Reduce padding */
     background: var(--secondary-color); /* Simplified header background */
     backdrop-filter: blur(10px);
     z-index: 1000;
@@ -33,21 +35,43 @@ header {
 }
 
 header.scrolled {
-    padding: 0.5rem 2rem;
+    padding: 0.25rem 1rem; /* Further reduce padding when scrolled */
     background: var(--secondary-color);
 }
 
+header .logo {
+    display: flex; /* Create a container for the image and name */
+    align-items: center; /* Vertically align image and name */
+    gap: 1rem; /* Add space between image and name */
+}
+
 header .logo img {
-    height: 40px;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
     transition: var(--transition);
+}
+
+header .logo .name {
+    font-size: 1.5rem; /* Style the name */
+    font-weight: bold;
+    color: var(--text-light);
+    text-align: left; /* Align the name to the left */
+}
+
+nav {
+    margin-left: auto; /* Push navigation to the right */
+    margin-top: 0.5rem; /* Add spacing below the name */
 }
 
 nav ul {
     list-style: none;
     display: flex;
-    gap: 2rem;
+    gap: 1rem; /* Reduce spacing between navigation items */
     margin: 0;
     padding: 0;
+    font-size: 0.9rem; /* Reduce font size for navigation */
 }
 
 nav ul li a {
@@ -107,7 +131,7 @@ nav ul li a:hover::after {
 
 /* Main Content */
 main {
-    padding-top: 80px;
+    padding-top: 60px; /* Reduce top padding to adjust for header */
 }
 
 /* Hero Section */
@@ -116,7 +140,7 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
+    padding: 1rem; /* Reduce padding in the hero section */
     text-align: center;
     position: relative;
 }
@@ -124,9 +148,9 @@ main {
 #hero .content {
     display: flex;
     align-items: center;
-    gap: 3rem;
+    gap: 1.5rem; /* Reduce gap between elements */
     background: var(--secondary-color); /* Simplified hero background */
-    padding: 3rem;
+    padding: 2rem; /* Reduce padding */
     border-radius: 20px;
     backdrop-filter: blur(10px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
@@ -150,22 +174,22 @@ main {
 }
 
 #hero h1 {
-    font-size: 3.5rem;
+    font-size: 2.5rem; /* Reduce font size */
     margin: 0;
     background: none; /* Remove gradient */
     color: var(--text-light); /* Simplified text color */
 }
 
 #hero p {
-    font-size: 1.5rem;
+    font-size: 1.2rem; /* Reduce font size */
     margin: 1rem 0 0;
     color: #74b9ff;
 }
 
 /* Content Sections */
 section {
-    margin: 4rem auto;
-    padding: 4rem 2rem;
+    margin: 2rem auto; /* Reduce margin */
+    padding: 2rem 1rem; /* Reduce padding */
     max-width: 1200px;
     background: var(--secondary-color); /* Simplified section background */
     border-radius: 20px;
@@ -180,8 +204,8 @@ section:hover {
 }
 
 section h2 {
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
+    font-size: 2rem; /* Reduce font size */
+    margin-bottom: 1rem; /* Reduce bottom margin */
     color: var(--accent-color); /* Simplified heading color */
     position: relative;
     display: inline-block;
@@ -202,7 +226,7 @@ section h2::after {
     width: 100%;
     max-width: 800px;
     border-radius: 15px;
-    margin: 2rem 0;
+    margin: 1rem 0; /* Reduce margin around images */
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     transition: var(--transition);
 }
@@ -218,20 +242,22 @@ section h2::after {
 
 /* Footer */
 footer {
+    position: static; /* Ensure footer is not fixed */
     text-align: center;
-    padding: 2rem;
+    padding: 1rem;
     background: var(--secondary-color); /* Simplified footer background */
     color: var(--text-light);
+    margin-top: 2rem; /* Add spacing from the content above */
 }
 
 /* Disclaimer */
 .disclaimer {
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 0.8rem; /* Reduce font size */
     color: var(--text-light);
     background: var(--secondary-color); /* Simplified disclaimer background */
-    padding: 1rem;
-    margin-top: 2rem;
+    padding: 0.5rem; /* Reduce padding */
+    margin-top: 1rem; /* Reduce top margin */
     border-top: 1px solid var(--accent-color);
 }
 
@@ -263,4 +289,23 @@ footer {
         margin: 2rem auto;
         padding: 2rem 1rem;
     }
+}
+
+/* Background Color Classes */
+.b1 {
+    background: #31849B; /* Dark teal */
+}
+
+.b2 {
+    background: #93CDDD; /* Light teal */
+    border-top: 1px solid black;
+}
+
+.b3 {
+    background: #B6DDE8; /* Softer teal */
+    border-top: 1px solid black;
+}
+
+.b4 {
+    background: #DBEEF3; /* Very light teal */
 }

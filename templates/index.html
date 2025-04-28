@@ -9,19 +9,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    {% include 'navigation.html' %}
-
-    <main>
-        <section id="hero">
-            <div class="content">
-                <img src="{{ url_for('static', filename='images/selfie/stas_face_round.jfif') }}" alt="Stanislav Prikhodko">
-                <div class="text">
-                    <h1>Stanislav Prikhodko</h1>
-                    <p>Software Developer & Blockchain Enthusiast</p>
-                </div>
+    <header>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/selfie/stas_face_round.jfif') }}" alt="Profile Picture">
+            <div class="name">STANISLAV PRIKHODKO
+                <BR>
+                 
+            {% include 'navigation.html' %}
+            
             </div>
-        </section>
-
+        </div>
+        
+    </header>
+    <main>
         <section id="resume">
             <h2>Resume</h2>
             <p>With a passion for technology and innovation, I specialize in developing robust software solutions and exploring blockchain technologies. My experience spans across various domains of software development, always focusing on creating efficient and scalable solutions.</p>
@@ -39,18 +39,33 @@
 
         <section id="hobbies">
             <h2>Hobbies</h2>
-            <p>Beyond coding, my greatest passion is aviation. As a licensed pilot, I find joy in exploring the skies and pushing the boundaries of what's possible both in the air and in technology.</p>
+            <p>
+                Beyond coding, my greatest passion is aviation.  
+                Follow my aviation adventures on 
+                <a href="https://www.instagram.com/stasik.avia" target="_blank" rel="noopener noreferrer">
+                    Instagram @stasik.avia
+                </a>.
+            </p>
+            <p>
+                I also enjoy figure skating. Check out my skating journey on 
+                <a href="https://www.instagram.com/stasik.ice" target="_blank" rel="noopener noreferrer">
+                    Instagram @stasik.ice
+                </a>.
+            </p>
         </section>
 
         <section id="contact">
             <h2>Contact</h2>
             <p>Interested in collaboration or just want to connect? Feel free to reach out through your preferred channel.</p>
+            <p>
+                <a href="https://www.linkedin.com/in/stasp" target="_blank" rel="noopener noreferrer">
+                    Connect with me on LinkedIn
+                </a>
+            </p>
         </section>
     </main>
 
     {% include 'disclaimer.html' %}
-
-     
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
