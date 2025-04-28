@@ -101,20 +101,24 @@ nav ul li a:hover::after {
 /* Navigation Menu */
 .navigation-menu {
     display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap; /* Ensures items wrap if needed */
-    padding: 0;
-    margin: 0;
+    gap: 1rem;
     list-style: none;
+    margin: 0;
+    padding: 0;
+    z-index: 1000; /* Ensure navigation is above other elements */
 }
 
-.navigation-menu li {
-    margin: 0 10px; /* Adds spacing between items */
-}
-
-.navigation-menu a {
+.navigation-menu li a {
     text-decoration: none;
-    white-space: nowrap; /* Prevents text wrapping */
+    color: var(--text-light);
+    font-weight: 500;
+    position: relative;
+    padding: 0.5rem 1rem;
+    transition: var(--transition);
+}
+
+.navigation-menu li a:hover {
+    color: var(--accent-color); /* Add hover effect */
 }
 
 /* Optional: Add responsive design for smaller screens */

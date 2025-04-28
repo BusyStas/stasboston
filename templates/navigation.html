@@ -1,10 +1,10 @@
 <nav>
-        <ul class="navigation-menu">
-            <li><a href="#resume">Resume</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#blog">Blog</a></li>
-            <li><a href="#hobbies">Hobbies</a></li>
-            <li><a href="{{ url_for('shop') }}">Shop</a></li>
-            <li><a href="#contact">Contact</a></li> 
-        </ul>
-    </nav>
+    <ul class="navigation-menu">
+        <li><a href="{{ url_for('index') }}#resume">Resume</a></li>
+        <li><a href="{{ url_for('index') }}#portfolio">Portfolio</a></li>
+        <li><a href="{{ url_for('index') }}#blog">Blog</a></li>
+        <li><a href="{{ url_for('index') }}#hobbies">Hobbies</a></li>
+        <li><a href="{{ url_for('shop') }}">Shop</a></li>
+        <li><a href="{{ url_for('index') }}#contact">Contact</a></li>
+    </ul>
+</nav>
