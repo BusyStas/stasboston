@@ -309,3 +309,108 @@ footer {
 .b4 {
     background: #DBEEF3; /* Very light teal */
 }
+
+/* Shop Cards */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.card {
+    background: var(--secondary-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    text-align: center;
+    width: 300px;
+    transition: var(--transition);
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card h3 {
+    font-size: 1.5rem;
+    margin: 1rem 0 0.5rem;
+    color: var(--accent-color);
+}
+
+.card p {
+    font-size: 1rem;
+    margin: 0 1rem 1rem;
+    color: var(--text-light);
+}
+
+.card button {
+    background: var(--accent-color);
+    color: var(--text-dark);
+    border: none;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.card button:hover {
+    background: #16a085; /* Darker teal for hover effect */
+}
+
+/* Shop Card Container */
+.shop-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+/* Card Shop */
+.card-shop {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 400px; /* Increased width */
+    text-align: center;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.card-shop img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 8px;
+}
+
+.card-shop h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin: 1rem 0;
+}
+
+.card-shop p {
+    font-size: 1rem;
+    color: #666;
+    margin: 0 0 1rem 0;
+}
+
+.card-shop a {
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.card-shop:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
