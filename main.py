@@ -15,7 +15,7 @@ def shop():
 def trip():
     with open('trips/aug25/trip_aug25.json', 'r') as f:
         schedule = json.load(f)
-    return render_template('trips/aug25/schedule.html', schedule=schedule)
+    return render_template('trips/aug25/trip_sofia_2025.html', schedule=schedule)
 
  
 
