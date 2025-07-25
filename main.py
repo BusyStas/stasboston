@@ -10,9 +10,9 @@ def index():
 def shop():
     return render_template('shop.html')
 
-@app.route('/trip')
-def trip():
-    return render_template('trips/aug25/trip_zurich_2025.html')
+@app.route('/trip') 
+def trip_sofia():
+    return render_template('trips/aug25/trip_sofia_2025.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
