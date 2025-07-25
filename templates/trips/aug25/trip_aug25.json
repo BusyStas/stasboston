@@ -39,7 +39,7 @@
         "location": "Zurich",
         "address": "Zurich Airport",
         "flight": "LX53",
-        "details": "Day trip to Lucerne",
+        "details": "Move to Stara Zagora",
         "steps": [
             {"time": "09:00", "name": "Train to Stara Zagora", "url": "https://www.sbb.ch"},
             {"time": "10:00", "name": "Check-in AirBnb"
@@ -52,7 +52,18 @@
         "location": "Zurich",
         "address": "Zurich Airport",
         "flight": "LX53",
-        "details": "Visit museums",
+        "details": "Move to Plovdiv",
+        "steps": [
+            {"time": "11:00", "name": "Swiss National Museum", "url": "https://www.landesmuseum.ch"},
+            {"time": "15:00", "name": "Kunsthaus Zürich", "url": "https://www.kunsthaus.ch"}
+        ]
+    } ,
+    {
+        "date": "August 5, 2025",
+        "location": "Zurich",
+        "address": "Zurich Airport",
+        "flight": "LX53",
+        "details": "Return to Sofia",
         "steps": [
             {"time": "11:00", "name": "Swiss National Museum", "url": "https://www.landesmuseum.ch"},
             {"time": "15:00", "name": "Kunsthaus Zürich", "url": "https://www.kunsthaus.ch"}
