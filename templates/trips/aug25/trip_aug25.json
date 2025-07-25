@@ -6,8 +6,9 @@
         "flight": "LX53",
         "details": "Flight to Sofia (through Munich)",
         "steps": [
-            {"time": "15:00", "name": "Arrive at airport", "url": "https://www.massport.com/logan-airport"},
-            {"time": "17:30", "name": "Flight LX53 departs", "url": "https://www.swiss.com"}
+            {"time": "20:05", "name": "Terminal E (Lufthansa 425)", "url": "https://www.lufthansa.com/us/en/"},
+            {"time": "09:30", "name": "Layover 6h 20m in Munich", "url": "https://www.prioritypass.com/lounges/germany/munich-franz-josef-strauss"},
+            {"time": "15:50", "name": "Terminal 2 (Lufthansa 1704 or ‌4140)", "url": "https://www.flightaware.com/live/flight/DLH1704"}
         ]
     },
     {
@@ -17,8 +18,9 @@
         "flight": "LX53",
         "details": "Arrival at 7:00 AM, transfer to hotel",
         "steps": [
-            {"time": "07:00", "name": "Arrive in Zurich", "url": "https://www.flughafen-zuerich.ch"},
-            {"time": "08:00", "name": "Transfer to hotel", "url": "https://www.hotel-example.com"}
+            {"time": "18:40", "name": "Arrival to SOF, Terminal 2", "url": "https://www.lufthansa.com/us/en/"},
+            {"time": "20:00", "name": "B1 Boutique Hotel Sofia", "url": "https://www.flughafen-zuerich.ch", "address": "150 bulevard Hristo Botev, 1202"}
+
         ]
     },
     {
@@ -26,7 +28,7 @@
         "location": "Zurich",
         "address": "Zurich Airport",
         "flight": "LX53",
-        "details": "Free day in Zurich",
+        "details": "Full day in Sofia",
         "steps": [
             {"time": "10:00", "name": "Explore Old Town", "url": "https://www.zuerich.com/en/visit/old-town"},
             {"time": "13:00", "name": "Lunch at Zeughauskeller", "url": "https://www.zeughauskeller.ch"}
