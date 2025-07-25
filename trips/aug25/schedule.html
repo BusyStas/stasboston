@@ -16,6 +16,9 @@
         }
         .day-box h3 { margin: 0 0 8px 0; }
         .day-box p { margin: 4px 0; }
+        .steps-list { margin-top: 10px; padding-left: 0; list-style: none; }
+        .steps-list li { margin-bottom: 6px; }
+        .step-time { font-weight: bold; margin-right: 6px; }
     </style>
 </head>
 <body>
@@ -28,6 +31,16 @@
             <p><strong>Address:</strong> {{ day.address }}</p>
             <p><strong>Flight:</strong> {{ day.flight }}</p>
             <p><strong>Details:</strong> {{ day.details }}</p>
+            {% if day.steps %}
+            <ul class="steps-list">
+                {% for step in day.steps %}
+                <li>
+                    <span class="step-time">{{ step.time }}</span>
+                    <a href="{{ step.url }}" target="_blank">{{ step.name }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
         </div>
         {% endfor %}
     </div>
