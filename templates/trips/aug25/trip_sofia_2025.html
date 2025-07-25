@@ -27,11 +27,8 @@
     <div class="schedule-container">
         {% for day in schedule %}
         <div class="day-box">
-            <h3>{{ day.date }}</h3>
-            <p><strong>Location:</strong> {{ day.location }}</p>
-            <p><strong>Address:</strong> {{ day.address }}</p>
-            <p><strong>Flight:</strong> {{ day.flight }}</p>
-            <p><strong>Details:</strong> {{ day.details }}</p>
+            <h3>{{ day.date_with_weekday }}</h3>
+            <p>{{ day.details }}</p>
             {% if day.steps and day.steps|length > 0 %}
             <ul class="steps-list">
                 {% for step in day.steps %}
@@ -47,6 +44,9 @@
             {% endif %}
         </div>
         {% endfor %}
+    </div>
+</body>
+</html>
     </div>
 </body>
 </html>

@@ -4,7 +4,7 @@
         "location": "Boston",
         "address": "Logan International Airport, Terminal E",
         "flight": "LX53",
-        "details": "Departure to Zurich at 5:30 PM",
+        "details": "Flight to Sofia (through Munich)",
         "steps": [
             {"time": "15:00", "name": "Arrive at airport", "url": "https://www.massport.com/logan-airport"},
             {"time": "17:30", "name": "Flight LX53 departs", "url": "https://www.swiss.com"}
