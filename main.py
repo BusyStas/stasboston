@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='.')
 
 @app.route('/')
 def index():
@@ -11,11 +11,7 @@ def shop():
     return render_template('shop.html')
 
 @app.route('/trip')
-def trip():
-    return render_template('trips/aug25/trip_zurich_2025.html')
-
-@app.route('/trip/sofia')
-def trip_sofia():
+def trip(): 
     return render_template('trips/aug25/trip_sofia_2025.html')
 
 if __name__ == '__main__':
