@@ -2,20 +2,90 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trip Schedule: July 31 – Aug 17, 2025</title>
     <style>
-        body { font-family: Arial, sans-serif; }
-        .schedule-container { display: flex; flex-wrap: wrap; gap: 16px; }
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        
+        .schedule-container { 
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 16px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
         .day-box {
             border: 1px solid #ccc;
             border-radius: 8px;
             padding: 16px;
-            width: 300px;
             background: #f9f9f9;
             box-shadow: 2px 2px 8px #eee;
+            box-sizing: border-box;
+            min-height: fit-content;
         }
-        .day-box h3 { margin: 0 0 8px 0; }
-        .day-box p { margin: 4px 0; }
+        
+        .day-box h3 { 
+            margin: 0 0 8px 0; 
+            font-size: 1.1rem;
+        }
+        
+        .day-box p { 
+            margin: 4px 0; 
+            font-size: 0.95rem;
+            word-wrap: break-word;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .schedule-container {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            
+            .day-box {
+                padding: 12px;
+            }
+            
+            .day-box h3 {
+                font-size: 1rem;
+            }
+            
+            .day-box p {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 8px;
+            }
+            
+            .schedule-container {
+                gap: 8px;
+            }
+            
+            .day-box {
+                padding: 10px;
+            }
+            
+            .day-box h3 {
+                font-size: 0.95rem;
+            }
+            
+            .day-box p {
+                font-size: 0.85rem;
+            }
+        }
     </style>
 </head>
 <body>
