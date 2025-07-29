@@ -41,7 +41,8 @@
         "flight": "LX53",
         "details": "Move to Stara Zagora",
         "steps": [
-            {"time": "09:00", "name": "Train to Stara Zagora", "url": "https://www.sbb.ch"},
+            {"time": "09:55", "name": "Train to Stara Zagora", "url": "https://bileti.bdz.bg/profile-tickets"},
+            {"time": "15:23", "name": "Arrival in Stara Zagora", "url": "https://www.bdz.bg/en"},
             {"time": "10:00", "name": "Check-in AirBnb"
                 , "url": "https://www.airbnb.com/trips/v1/reservation-details/ro/RESERVATION2_CHECKIN/HM23KCXMDK"
                 , "address": "кв. Славейков, ulitsa Tsar Ivan Asen II 37, Stara Zagora, Stara Zagora 6002"}
@@ -54,8 +55,11 @@
         "flight": "LX53",
         "details": "Move to Plovdiv",
         "steps": [
-            {"time": "11:00", "name": "Swiss National Museum", "url": "https://www.landesmuseum.ch"},
-            {"time": "15:00", "name": "Kunsthaus Zürich", "url": "https://www.kunsthaus.ch"}
+            {"time": "12:56", "name": "Train to Plovdiv", "url": "https://bileti.bdz.bg/profile-tickets"},
+            {"time": "15:20", "name": "Arrival in Plovdiv", "url": "https://www.bdz.bg/en"},
+            {"time": "10:00", "name": "Check-in AirBnb"
+                , "url": "https://www.airbnb.com/trips/v1/reservation-details/ro/RESERVATION2_CHECKIN/HMXEFARFXE"
+                , "address": "ulitsa Veliko Tarnovo 24, Plovdiv, Plovdiv 4000, Bulgaria"}
         ]
     } ,
     {
@@ -65,8 +69,112 @@
         "flight": "LX53",
         "details": "Return to Sofia",
         "steps": [
-            {"time": "11:00", "name": "Swiss National Museum", "url": "https://www.landesmuseum.ch"},
-            {"time": "15:00", "name": "Kunsthaus Zürich", "url": "https://www.kunsthaus.ch"}
+            {"time": "15:24", "name": "Train to Sofia", "url": "https://bileti.bdz.bg/profile-tickets"},
+            {"time": "18:17", "name": "Arrival in Sofia", "url": "https://www.bdz.bg/en"},
+            {"time": "10:00", "name": "Check-in Favorit Hotel"
+                , "url": "https://secure.booking.com/confirmation.en-us.html?label=msn-8zoYOfVtrBOEstYLRvkliA-80195816981646%3Atikwd-80195992120973%3Aloc-190%3Aneo%3Amte%3Alp103679%3Adec%3Aqsbooking.com&sid=e65ee4938d428a5f2567854de8868f6a&aid=2369661&auth_key=xaq9Z4vFZHjbhHDG&source=mytrips"
+                , "address": "193 Knyaz Boris I Str., 1202 Sofia, Bulgaria"}
+        ]
+    },
+    {
+        "date": "August 6, 2025",
+        "location": "Zurich",
+        "address": "Zurich Airport",
+        "flight": "LX53",
+        "details": "Flight to Warsaw",
+        "steps": [
+            {"time": "14:35", "name": "LO 632 SOF > WAW", "url": ""},
+            {"time": "15:30", "name": "Arrival to Warsaw", "url": ""},
+            {"time": "10:00", "name": "Check-in Superior Koko"
+                , "url": "https://secure.booking.com/confirmation.en-us.html?label=msn-8zoYOfVtrBOEstYLRvkliA-80195816981646%3Atikwd-80195992120973%3Aloc-190%3Aneo%3Amte%3Alp103679%3Adec%3Aqsbooking.com&sid=e65ee4938d428a5f2567854de8868f6a&aid=2369661&auth_key=YAc2yRHNhNqqofQY&source=mytrips"
+                , "address": "Kokoryczki 5, Praga Poludnie, 04-191 Warsaw, Poland"}
+        ]
+    } ,
+    {
+        "date": "August 7, 2025",
+        "location": "Warsaw",
+        "details": "First day in Warsaw",
+        "steps": [
+            {"time": "12:35", "name": "Lunch", "url": ""} 
+        ]
+    } ,
+    {
+        "date": "August 8, 2025",
+        "location": "Warsaw",
+        "details": "Second day in Warsaw",
+        "steps": [
+            {"time": "12:35", "name": "Lunch", "url": ""} 
+        ]
+    } ,
+    {
+        "date": "August 9, 2025",
+        "location": "Warsaw",
+        "details": "Third day in Warsaw",
+        "steps": [
+            {"time": "12:35", "name": "Lunch", "url": ""} 
+        ]
+    } ,
+    {
+        "date": "August 10, 2025",
+        "location": "Warsaw",
+        "details": "4th day in Warsaw",
+        "steps": [
+            {"time": "12:35", "name": "Lunch", "url": ""} 
+        ]
+    } ,
+    {
+        "date": "August 11, 2025",
+        "location": "Warsaw",
+        "details": "5th day in Warsaw",
+        "steps": [
+            {"time": "12:35", "name": "Lunch", "url": ""} 
+        ]
+    } ,
+    {
+        "date": "August 12, 2025",
+        "location": "Warsaw",
+        "details": "Last full day in Warsaw",
+        "steps": [
+            {"time": "12:35", "name": "Lunch", "url": ""} 
+        ]
+    } ,
+    {
+        "date": "August 13, 2025",
+        "location": "Warsaw",
+        "details": "Return to Sofia",
+        "steps": [
+            {"time": "10:45", "name": "LO 631", "url": ""},
+            {"time": "13:50", "name": "Arrival to Sofia", "url": ""},
+            {"time": "10:00", "name": "Check-in Superior Koko"
+                , "url": "https://secure.booking.com/confirmation.en-us.html?label=msn-8zoYOfVtrBOEstYLRvkliA-80195816981646%3Atikwd-80195992120973%3Aloc-190%3Aneo%3Amte%3Alp103679%3Adec%3Aqsbooking.com&sid=e65ee4938d428a5f2567854de8868f6a&aid=2369661&auth_key=6WTia2wSo1Ee725S&source=mytrips"
+                , "address": "4 ulitsa Trapezitsa вх.3, ет.3, 1000 Sofia, Bulgaria"}
+        ]
+    } ,
+    {
+        "date": "August 14, 2025",
+        "location": "Sofia",
+        "details": "Full day in Sofia",
+        "steps": [
+            {"time": "12:35", "name": "Lunch", "url": ""} 
+        ]
+    } ,
+    {
+        "date": "August 15, 2025",
+        "location": "Sofia",
+        "details": "Last day in Sofia",
+        "steps": [
+            {"time": "12:35", "name": "Lunch", "url": ""} 
+        ]
+    } ,
+    {
+        "date": "August 16, 2025",
+        "location": "Sofia",
+        "details": "Returning",
+        "steps": [
+            {"time": "06:15", "name": "Terminal 2 (Lufthansa ‌1431)", "url": "https://www.lufthansa.com/us/en/"},
+            {"time": "07:45", "name": "Layover 5h 45m in Frankfurt", "url": "https://www.prioritypass.com/lounges/germany/munich-franz-josef-strauss"},
+            {"time": "13:50", "name": "Terminal 2 (Lufthansa 1704 or ‌4140)", "url": "https://www.flightaware.com/live/flight/DLH1704"},
+            {"time": "15:40", "name": "Arrival to Boston", "url": "https://www.lufthansa.com/us/en/"}
         ]
     } 
 ]
