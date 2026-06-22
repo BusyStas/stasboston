@@ -53,8 +53,9 @@
     },
     {
         "date": "July 29, 2026",
-        "location": "Chisinau",
-        "details": "Day 1 in Chisinau",
+        "location": "Tvarditsa",
+        "details": "Transfer to Tvarditsa",
+        "detail_url": "/trip/day/jul29",
         "steps": []
     },
     {

@@ -31,6 +31,7 @@ def trip_day(day_id):
         'jul23': 'trips/jul26/day_jul23.html',
         'jul24': 'trips/jul26/day_jul24.html',
         'jul28': 'trips/jul26/day_jul28.html',
+        'jul29': 'trips/jul26/day_jul29.html',
     }
     template = day_templates.get(day_id)
     if template:
