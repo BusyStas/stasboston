@@ -14,7 +14,29 @@ def shop():
 
 @app.route('/trip')
 def trip():
-    return render_template('trips/jul26/trip_july26.html')
+    with open('templates/trips/jul26/trip_jul26.json', 'r') as f:
+        schedule = json.load(f)
+    for day in schedule:
+        try:
+            date_obj = datetime.strptime(day["date"], "%B %d, %Y")
+            weekday = date_obj.strftime("%A")
+            day["date_with_weekday"] = f'{day["date"]} ({weekday})'
+        except Exception:
+            day["date_with_weekday"] = day["date"]
+    return render_template('trips/jul26/trip_july26.html', schedule=schedule)
+
+@app.route('/trip/day/<day_id>')
+def trip_day(day_id):
+    day_templates = {
+        'jul23': 'trips/jul26/day_jul23.html',
+        'jul24': 'trips/jul26/day_jul24.html',
+        'jul28': 'trips/jul26/day_jul28.html',
+    }
+    template = day_templates.get(day_id)
+    if template:
+        return render_template(template)
+    from flask import redirect
+    return redirect('/trip')
 
 @app.route('/trip/2025')
 def trip_2025():

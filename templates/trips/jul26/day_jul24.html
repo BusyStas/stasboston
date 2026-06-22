@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jul 24 — Zürich Layover → Warsaw, Hotel Check-in</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Arial, sans-serif; background: #f4f4f4; color: #333; padding: 1.5rem; }
+        h1 { font-size: 1.5rem; margin-bottom: 0.2rem; color: #1a3a6e; }
+        .subtitle { font-size: 0.88rem; color: #666; margin-bottom: 1.5rem; }
+        .section-title {
+            font-size: 0.9rem; font-weight: 700; color: #2a6dd9;
+            text-transform: uppercase; letter-spacing: 0.04em;
+            margin: 1.5rem 0 0.75rem; padding-bottom: 0.3rem;
+            border-bottom: 2px solid #dce8fc;
+        }
+        .booking-chips { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1.25rem; }
+        .chip { background: #fff; border: 1px solid #d0ddf5; border-radius: 8px; padding: 0.55rem 1rem; min-width: 160px; }
+        .chip-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; color: #888; margin-bottom: 0.15rem; }
+        .chip-value { font-weight: 700; font-size: 1rem; color: #1a3a6e; letter-spacing: 0.04em; }
+        .flight-card { background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 0.75rem; overflow: hidden; }
+        .flight-card-header { background: #f0f4fb; padding: 0.5rem 1rem; font-size: 0.75rem; font-weight: 700; color: #2a6dd9; text-transform: uppercase; letter-spacing: 0.04em; border-bottom: 1px solid #dce8fc; }
+        .flight-card-body { padding: 1rem; }
+        .flight-stop { display: flex; align-items: flex-start; gap: 0.9rem; }
+        .stop-time { font-size: 1.4rem; font-weight: 700; color: #1a3a6e; min-width: 4.5rem; line-height: 1.2; }
+        .stop-time .day { display: block; font-size: 0.68rem; font-weight: 400; color: #999; }
+        .stop-info .city { font-weight: 600; font-size: 0.95rem; }
+        .stop-info .airport { font-size: 0.78rem; color: #666; }
+        .flight-arrow { display: flex; align-items: center; gap: 0.5rem; margin: 0.65rem 0; }
+        .arrow-line { flex: 1; height: 1px; background: #d0ddf5; max-width: 120px; }
+        .arrow-duration { font-size: 0.75rem; color: #888; }
+        .flight-meta { margin-top: 0.75rem; padding-top: 0.65rem; border-top: 1px solid #f0f0f0; display: flex; flex-wrap: wrap; gap: 0.35rem 1.25rem; font-size: 0.78rem; color: #555; }
+        .flight-meta strong { color: #333; }
+        .layover { text-align: center; padding: 0.5rem 1rem; background: #fff8ec; border: 1px dashed #f5c060; border-radius: 8px; font-size: 0.8rem; font-weight: 600; color: #c47900; margin-bottom: 0.75rem; }
+        .total-duration { text-align: center; background: #f0f4fb; border-radius: 8px; padding: 0.7rem 1rem; font-size: 0.88rem; font-weight: 600; color: #1a3a6e; margin-top: 0.25rem; }
+        .hotel-card { background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 0.75rem; overflow: hidden; display: flex; flex-wrap: wrap; }
+        .hotel-card img { width: 220px; min-height: 150px; object-fit: cover; flex-shrink: 0; }
+        .hotel-card-body { padding: 1rem; flex: 1; min-width: 200px; }
+        .hotel-name { font-size: 1rem; font-weight: 700; color: #1a3a6e; margin-bottom: 0.5rem; }
+        .hotel-name a { color: inherit; text-decoration: none; }
+        .hotel-name a:hover { text-decoration: underline; }
+        .hotel-checkin-row { display: flex; flex-wrap: wrap; gap: 0.5rem 2rem; margin-bottom: 0.6rem; }
+        .hotel-checkin-item .ci-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; color: #888; }
+        .hotel-checkin-item .ci-value { font-weight: 700; font-size: 0.9rem; color: #1a3a6e; }
+        .hotel-checkin-item .ci-time { font-size: 0.75rem; color: #666; }
+        .hotel-detail-row { display: flex; flex-wrap: wrap; gap: 0.3rem 1.5rem; font-size: 0.78rem; color: #555; margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid #f0f0f0; }
+        .hotel-detail-row strong { color: #333; }
+        .back-link { display: inline-block; margin-top: 2rem; font-size: 0.82rem; color: #2a6dd9; text-decoration: none; }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <h1>Fri, July 24 — Arrival</h1>
+    <div class="subtitle">Zürich layover → Warsaw, hotel check-in</div>
+
+    <div class="section-title">Booking — BOS → WAW (Swiss via Zürich)</div>
+    <div class="booking-chips">
+        <div class="chip"><div class="chip-label">Confirmation</div><div class="chip-value">B6OA4R</div></div>
+        <div class="chip"><div class="chip-label">Orbitz Itinerary</div><div class="chip-value">73456890773635</div></div>
+    </div>
+
+    <div class="section-title">Layover &amp; Flight — ZRH → WAW</div>
+
+    <div class="layover">🕐 Layover in Zürich (ZRH) — 6 hours 5 minutes (arrived 10:55am, departs 5:00pm)</div>
+
+    <div class="flight-card">
+        <div class="flight-card-header">Swiss LX 1352 · operated by Air Baltic</div>
+        <div class="flight-card-body">
+            <div class="flight-stop">
+                <div class="stop-time">5:00<span class="day">pm · Fri Jul 24</span></div>
+                <div class="stop-info">
+                    <div class="city">Zürich, Switzerland</div>
+                    <div class="airport">ZRH – Zürich Airport</div>
+                </div>
+            </div>
+            <div class="flight-arrow">
+                <div class="arrow-line"></div>
+                <div class="arrow-duration">✈ 1h 55m</div>
+                <div class="arrow-line"></div>
+            </div>
+            <div class="flight-stop">
+                <div class="stop-time">6:55<span class="day">pm · Fri Jul 24</span></div>
+                <div class="stop-info">
+                    <div class="city">Warsaw, Poland</div>
+                    <div class="airport">WAW – Frederic Chopin Airport</div>
+                </div>
+            </div>
+            <div class="flight-meta">
+                <span><strong>Class:</strong> Economy (L)</span>
+                <span><strong>Seats:</strong> 10A, 10C, 11A, 11C</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="total-duration">Total trip: Thu Jul 23 9:40pm → Fri Jul 24 6:55pm · 15h 15m</div>
+
+    <div class="section-title">Hotel — Warsaw</div>
+
+    <div class="hotel-card">
+        <img src="https://r-xx.bstatic.com/xdata/images/hotel/max300/859778320.jpg?k=28bf205b684ff8a0cbba36a55dfd7a417e1880159a32bec9e53f2dca62f178c1&o=" alt="Comfy & Spacious Apartment Warsaw">
+        <div class="hotel-card-body">
+            <div class="hotel-name">
+                <a href="https://www.booking.com/hotel/pl/apartments-warsaw-arabska.en-us.html" target="_blank">
+                    Comfy &amp; Spacious Apartment Warsaw by Noclegi Renters
+                </a>
+            </div>
+            <div class="hotel-checkin-row">
+                <div class="hotel-checkin-item">
+                    <div class="ci-label">Check-in</div>
+                    <div class="ci-value">Fri, Jul 24</div>
+                    <div class="ci-time">from 15:00</div>
+                </div>
+                <div class="hotel-checkin-item">
+                    <div class="ci-label">Check-out</div>
+                    <div class="ci-value">Tue, Jul 28</div>
+                    <div class="ci-time">until 11:00</div>
+                </div>
+                <div class="hotel-checkin-item">
+                    <div class="ci-label">Stay</div>
+                    <div class="ci-value">4 nights</div>
+                    <div class="ci-time">2 adults, 2 children</div>
+                </div>
+            </div>
+            <div class="hotel-detail-row">
+                <span><strong>Address:</strong> Arabska 10, Praga Poludnie, 03-977 Warsaw, Poland</span>
+            </div>
+            <div class="hotel-detail-row">
+                <span><strong>Confirmation:</strong> 6725500725</span>
+                <span><strong>PIN:</strong> 9327</span>
+            </div>
+        </div>
+    </div>
+
+    <a class="back-link" href="/trip">← Back to Trip Overview</a>
+</body>
+</html>

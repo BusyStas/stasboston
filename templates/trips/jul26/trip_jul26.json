@@ -1,0 +1,126 @@
+[
+    {
+        "date": "July 23, 2026",
+        "location": "Boston",
+        "details": "Departure — BOS → Zürich (overnight)",
+        "detail_url": "/trip/day/jul23",
+        "steps": [
+            {"time": "9:40pm",    "name": "Depart BOS Terminal E (LX 53)", "url": ""},
+            {"time": "overnight", "name": "Fly to Zürich — 7h 15m",        "url": ""}
+        ]
+    },
+    {
+        "date": "July 24, 2026",
+        "location": "Warsaw",
+        "details": "Arrive Zürich → fly to Warsaw, hotel check-in",
+        "detail_url": "/trip/day/jul24",
+        "steps": [
+            {"time": "10:55am", "name": "Arrive ZRH — layover 6h 5m",          "url": ""},
+            {"time": "5:00pm",  "name": "Depart ZRH (LX 1352 / Air Baltic)",   "url": ""},
+            {"time": "6:55pm",  "name": "Arrive WAW",                           "url": ""},
+            {"time": "3:00pm+", "name": "Hotel check-in: Arabska 10",
+             "url": "https://www.booking.com/hotel/pl/apartments-warsaw-arabska.en-us.html"}
+        ]
+    },
+    {
+        "date": "July 25, 2026",
+        "location": "Warsaw",
+        "details": "Day 1 in Warsaw",
+        "steps": []
+    },
+    {
+        "date": "July 26, 2026",
+        "location": "Warsaw",
+        "details": "Day 2 in Warsaw",
+        "steps": []
+    },
+    {
+        "date": "July 27, 2026",
+        "location": "Warsaw",
+        "details": "Day 3 in Warsaw",
+        "steps": []
+    },
+    {
+        "date": "July 28, 2026",
+        "location": "Chisinau",
+        "details": "Hotel checkout, fly to Chisinau",
+        "detail_url": "/trip/day/jul28",
+        "steps": [
+            {"time": "by 11:00", "name": "Hotel checkout (Arabska 10)", "url": ""},
+            {"time": "11:00am",  "name": "Depart WAW (LO 513)",         "url": ""},
+            {"time": "1:50pm",   "name": "Arrive RMO — Chisinau",       "url": ""}
+        ]
+    },
+    {
+        "date": "July 29, 2026",
+        "location": "Chisinau",
+        "details": "Day 1 in Chisinau",
+        "steps": []
+    },
+    {
+        "date": "July 30, 2026",
+        "location": "Chisinau",
+        "details": "Day 2 in Chisinau",
+        "steps": []
+    },
+    {
+        "date": "July 31, 2026",
+        "location": "Chisinau",
+        "details": "Day 3 in Chisinau",
+        "steps": []
+    },
+    {
+        "date": "August 1, 2026",
+        "location": "Chisinau",
+        "details": "Day 4 in Chisinau",
+        "steps": []
+    },
+    {
+        "date": "August 2, 2026",
+        "location": "Chisinau",
+        "details": "Day 5 in Chisinau",
+        "steps": []
+    },
+    {
+        "date": "August 3, 2026",
+        "location": "Chisinau",
+        "details": "Day 6 in Chisinau",
+        "steps": []
+    },
+    {
+        "date": "August 4, 2026",
+        "location": "Chisinau",
+        "details": "Day 7 in Chisinau",
+        "steps": []
+    },
+    {
+        "date": "August 5, 2026",
+        "location": "Chisinau",
+        "details": "Day 8 in Chisinau",
+        "steps": []
+    },
+    {
+        "date": "August 6, 2026",
+        "location": "Chisinau",
+        "details": "Day 9 in Chisinau",
+        "steps": []
+    },
+    {
+        "date": "August 7, 2026",
+        "location": "Chisinau",
+        "details": "Day 10 in Chisinau",
+        "steps": []
+    },
+    {
+        "date": "August 8, 2026",
+        "location": "Chisinau",
+        "details": "Last full day in Chisinau",
+        "steps": []
+    },
+    {
+        "date": "August 9, 2026",
+        "location": "Boston",
+        "details": "Return to Boston",
+        "steps": []
+    }
+]
