@@ -14,6 +14,10 @@ def shop():
 
 @app.route('/trip')
 def trip():
+    return render_template('trips/jul26/trip_july26.html')
+
+@app.route('/trip/2025')
+def trip_2025():
     with open('templates/trips/aug25/trip_aug25.json', 'r') as f:
         schedule = json.load(f)
     # Add weekday to date string
