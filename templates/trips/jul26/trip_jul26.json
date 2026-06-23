@@ -100,32 +100,47 @@
     },
     {
         "date": "August 5, 2026",
-        "location": "Chisinau",
-        "details": "Day 8 in Chisinau",
-        "steps": []
+        "location": "Warsaw",
+        "details": "Hotel check-in, Warsaw",
+        "detail_url": "/trip/day/aug5",
+        "steps": [
+            {"time": "14:00+", "name": "Hotel check-in: B&B Hotel Warsaw East", "url": "https://www.booking.com/hotel/pl/bb-hotel-warsaw-east.en-us.html"}
+        ]
     },
     {
         "date": "August 6, 2026",
-        "location": "Chisinau",
-        "details": "Day 9 in Chisinau",
-        "steps": []
+        "location": "Krakow",
+        "details": "Hotel check-in, Krakow",
+        "detail_url": "/trip/day/aug6",
+        "steps": [
+            {"time": "14:00+", "name": "Hotel check-in: Apartments Rynek Glowny APTRG", "url": "https://www.booking.com/hotel/pl/apartamenty-rynek-glowny-6.en-us.html"}
+        ]
     },
     {
         "date": "August 7, 2026",
-        "location": "Chisinau",
-        "details": "Day 10 in Chisinau",
-        "steps": []
+        "location": "Warsaw",
+        "details": "Hotel check-in, Warsaw",
+        "detail_url": "/trip/day/aug7",
+        "steps": [
+            {"time": "16:00+", "name": "Hotel check-in: Afrykańska Urban Chic Apartment", "url": "https://www.booking.com/hotel/pl/afrykanska-urban-chic-apartment-by-bookinghost.en-us.html"}
+        ]
     },
     {
         "date": "August 8, 2026",
-        "location": "Chisinau",
-        "details": "Last full day in Chisinau",
+        "location": "Warsaw",
+        "details": "Day 2 in Warsaw",
         "steps": []
     },
     {
         "date": "August 9, 2026",
         "location": "Boston",
-        "details": "Return to Boston",
-        "steps": []
+        "details": "Return to Boston — WAW → ZRH → BOS",
+        "detail_url": "/trip/day/aug9",
+        "steps": [
+            {"time": "14:50", "name": "Depart WAW (LX 1349 / Air Baltic)", "url": ""},
+            {"time": "16:50", "name": "Arrive ZRH — layover 45m",          "url": ""},
+            {"time": "17:35", "name": "Depart ZRH (LX 52)",                "url": ""},
+            {"time": "19:55", "name": "Arrive BOS Terminal E",             "url": ""}
+        ]
     }
 ]

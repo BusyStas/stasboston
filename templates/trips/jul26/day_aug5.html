@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aug 5 — Hotel Check-in, Warsaw</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Arial, sans-serif; background: #f4f4f4; color: #333; padding: 1.5rem; }
+        h1 { font-size: 1.5rem; margin-bottom: 0.2rem; color: #1a3a6e; }
+        .subtitle { font-size: 0.88rem; color: #666; margin-bottom: 1.5rem; }
+        .section-title {
+            font-size: 0.9rem; font-weight: 700; color: #2a6dd9;
+            text-transform: uppercase; letter-spacing: 0.04em;
+            margin: 1.5rem 0 0.75rem; padding-bottom: 0.3rem;
+            border-bottom: 2px solid #dce8fc;
+        }
+        .hotel-card { background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 0.75rem; overflow: hidden; display: flex; flex-wrap: wrap; }
+        .hotel-card img { width: 220px; min-height: 150px; object-fit: cover; flex-shrink: 0; }
+        .hotel-card-body { padding: 1rem; flex: 1; min-width: 200px; }
+        .hotel-name { font-size: 1rem; font-weight: 700; color: #1a3a6e; margin-bottom: 0.5rem; }
+        .hotel-name a { color: inherit; text-decoration: none; }
+        .hotel-name a:hover { text-decoration: underline; }
+        .hotel-checkin-row { display: flex; flex-wrap: wrap; gap: 0.5rem 2rem; margin-bottom: 0.6rem; }
+        .hotel-checkin-item .ci-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; color: #888; }
+        .hotel-checkin-item .ci-value { font-weight: 700; font-size: 0.9rem; color: #1a3a6e; }
+        .hotel-checkin-item .ci-time { font-size: 0.75rem; color: #666; }
+        .hotel-detail-row { display: flex; flex-wrap: wrap; gap: 0.3rem 1.5rem; font-size: 0.78rem; color: #555; margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid #f0f0f0; }
+        .hotel-detail-row strong { color: #333; }
+        .back-link { display: inline-block; margin-top: 2rem; font-size: 0.82rem; color: #2a6dd9; text-decoration: none; }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <h1>Wed, August 5 — Hotel Check-in</h1>
+    <div class="subtitle">Warsaw</div>
+
+    <div class="section-title">Hotel — Warsaw</div>
+
+    <div class="hotel-card">
+        <img src="https://q-xx.bstatic.com/xdata/images/hotel/max300/792219355.jpg?k=831962e73de4a6feb0e6d3e40b92082f28cdaf2d73fb8acb0459b06a84a7e9df&o=" alt="B&B HOTEL Warsaw East">
+        <div class="hotel-card-body">
+            <div class="hotel-name">
+                <a href="https://www.booking.com/hotel/pl/bb-hotel-warsaw-east.en-us.html" target="_blank">
+                    B&amp;B HOTEL Warsaw East
+                </a>
+            </div>
+            <div class="hotel-checkin-row">
+                <div class="hotel-checkin-item">
+                    <div class="ci-label">Check-in</div>
+                    <div class="ci-value">Wed, Aug 5</div>
+                    <div class="ci-time">from 14:00</div>
+                </div>
+                <div class="hotel-checkin-item">
+                    <div class="ci-label">Check-out</div>
+                    <div class="ci-value">Thu, Aug 6</div>
+                    <div class="ci-time">until 12:00</div>
+                </div>
+                <div class="hotel-checkin-item">
+                    <div class="ci-label">Stay</div>
+                    <div class="ci-value">1 night</div>
+                    <div class="ci-time">2 adults, 2 children</div>
+                </div>
+            </div>
+            <div class="hotel-detail-row">
+                <span><strong>Address:</strong> 8 Kosmatki, Wawer, 03-982 Warsaw, Poland</span>
+            </div>
+        </div>
+    </div>
+
+    <a class="back-link" href="/trip">← Back to Trip Overview</a>
+</body>
+</html>
