@@ -18,7 +18,7 @@
             {"time": "10:55", "name": "Arrive ZRH — layover 6h 5m",          "url": ""},
             {"time": "17:00",  "name": "Depart ZRH (LX 1352 / Air Baltic)",   "url": ""},
             {"time": "18:55",  "name": "Arrive WAW",                           "url": ""},
-            {"time": "15:00+", "name": "Hotel check-in: Arabska 10",
+            {"time": "15:00", "name": "Hotel check-in: Arabska 10",
              "url": "https://www.booking.com/hotel/pl/apartments-warsaw-arabska.en-us.html"}
         ]
     },
@@ -42,14 +42,14 @@
     },
     {
         "date": "July 28, 2026",
-        "location": "Chisinau",
+        "location": "Flight to Chisinau",
         "details": "Hotel checkout, fly to Chisinau",
         "detail_url": "/trip/day/jul28",
         "steps": [
-            {"time": "by 11:00", "name": "Hotel checkout (Arabska 10)", "url": ""},
+            {"time": "10:00", "name": "Hotel checkout (Arabska 10)", "url": ""},
             {"time": "11:00",    "name": "Depart WAW (LO 513)",         "url": ""},
             {"time": "13:50",    "name": "Arrive RMO — Chisinau",       "url": ""},
-            {"time": "14:00+",   "name": "Hotel check-in: Familion ApartHotel", "url": "https://www.booking.com/hotel/md/familion-apart.en-us.html"}
+            {"time": "14:",   "name": "Hotel check-in: Familion ApartHotel", "url": "https://www.booking.com/hotel/md/familion-apart.en-us.html"}
         ]
     },
     {
@@ -61,32 +61,32 @@
     },
     {
         "date": "July 30, 2026",
-        "location": "Chisinau",
-        "details": "Day 2 in Chisinau",
+        "location": "Tvarditsa",
+        "details": "Day 2 in Tvarditsa",
         "steps": []
     },
     {
         "date": "July 31, 2026",
-        "location": "Chisinau",
-        "details": "Day 3 in Chisinau",
+        "location": "Tvarditsa",
+        "details": "Day 3 in Tvarditsa",
         "steps": []
     },
     {
         "date": "August 1, 2026",
-        "location": "Chisinau",
-        "details": "Day 4 in Chisinau",
+        "location": "Tvarditsa",
+        "details": "Day 4 in Tvarditsa",
         "steps": []
     },
     {
         "date": "August 2, 2026",
-        "location": "Chisinau",
-        "details": "Day 5 in Chisinau",
+        "location": "Tvarditsa",
+        "details": "Day 5 in Tvarditsa",
         "steps": []
     },
     {
         "date": "August 3, 2026",
-        "location": "Chisinau",
-        "details": "Day 6 in Chisinau",
+        "location": "Tvarditsa",
+        "details": "Day 6 in Tvarditsa",
         "steps": []
     },
     {
@@ -95,7 +95,7 @@
         "details": "Day 7 in Chisinau",
         "detail_url": "/trip/day/aug4",
         "steps": [
-            {"time": "14:00+", "name": "Hotel check-in: Vasile Alecsandri 80/A", "url": "https://www.booking.com/hotel/md/modern-cozy-apartment.en-us.html"}
+            {"time": "14:00", "name": "Hotel check-in: Vasile Alecsandri 80/A", "url": "https://www.booking.com/hotel/md/modern-cozy-apartment.en-us.html"}
         ]
     },
     {
@@ -104,7 +104,7 @@
         "details": "Hotel check-in, Warsaw",
         "detail_url": "/trip/day/aug5",
         "steps": [
-            {"time": "14:00+", "name": "Hotel check-in: B&B Hotel Warsaw East", "url": "https://www.booking.com/hotel/pl/bb-hotel-warsaw-east.en-us.html"}
+            {"time": "14:00", "name": "Hotel check-in: B&B Hotel Warsaw East", "url": "https://www.booking.com/hotel/pl/bb-hotel-warsaw-east.en-us.html"}
         ]
     },
     {
@@ -113,7 +113,7 @@
         "details": "Hotel check-in, Krakow",
         "detail_url": "/trip/day/aug6",
         "steps": [
-            {"time": "14:00+", "name": "Hotel check-in: Apartments Rynek Glowny APTRG", "url": "https://www.booking.com/hotel/pl/apartamenty-rynek-glowny-6.en-us.html"}
+            {"time": "14:00", "name": "Hotel check-in: Apartments Rynek Glowny APTRG", "url": "https://www.booking.com/hotel/pl/apartamenty-rynek-glowny-6.en-us.html"}
         ]
     },
     {
@@ -122,7 +122,7 @@
         "details": "Hotel check-in, Warsaw",
         "detail_url": "/trip/day/aug7",
         "steps": [
-            {"time": "16:00+", "name": "Hotel check-in: Afrykańska Urban Chic Apartment", "url": "https://www.booking.com/hotel/pl/afrykanska-urban-chic-apartment-by-bookinghost.en-us.html"}
+            {"time": "16:00", "name": "Hotel check-in: Afrykańska Urban Chic Apartment", "url": "https://www.booking.com/hotel/pl/afrykanska-urban-chic-apartment-by-bookinghost.en-us.html"}
         ]
     },
     {
@@ -133,8 +133,8 @@
     },
     {
         "date": "August 9, 2026",
-        "location": "Boston",
-        "details": "Return to Boston — WAW → ZRH → BOS",
+        "location": "Return to Boston",
+        "details": "Flight WAW → ZRH → BOS",
         "detail_url": "/trip/day/aug9",
         "steps": [
             {"time": "14:50", "name": "Depart WAW (LX 1349 / Air Baltic)", "url": ""},
