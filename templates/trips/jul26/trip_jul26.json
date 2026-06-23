@@ -96,7 +96,8 @@
         "details": "Last Day in Chisinau",
         "detail_url": "/trip/day/aug4",
         "steps": [
-            {"time": "14:00", "name": "Hotel check-in: Vasile Alecsandri 80/A", "url": "https://www.booking.com/hotel/md/modern-cozy-apartment.en-us.html"}
+            {"time": "12:00", "name": "Transfer Tvarditsa → Chisinau", "url": "https://www.booking.com/hotel/pl/afrykanska-urban-chic-apartment-by-bookinghost.en-us.html"}
+        ,   {"time": "14:00", "name": "Hotel check-in: Vasile Alecsandri 80/A", "url": "https://www.booking.com/hotel/md/modern-cozy-apartment.en-us.html"}
         ]
     },
     {
@@ -110,7 +111,7 @@
     },
     {
         "date": "August 6, 2026",
-        "location": "Krakow",
+        "location": "Train Trip Krakow",
         "details": "Hotel check-in, Krakow",
         "detail_url": "/trip/day/aug6",
         "steps": [
@@ -120,18 +121,17 @@
     },
     {
         "date": "August 7, 2026",
-        "location": "Warsaw",
+        "location": "Return to Warsaw",
         "details": "Hotel check-in, Warsaw",
         "detail_url": "/trip/day/aug7",
         "steps": [
-            {"time": "12:00", "name": "Transfer Tvarditsa → Chisinau", "url": "https://www.booking.com/hotel/pl/afrykanska-urban-chic-apartment-by-bookinghost.en-us.html"}
-        ,   {"time": "16:00", "name": "Hotel check-in: Afrykańska Urban Chic Apartment", "url": "https://www.booking.com/hotel/pl/afrykanska-urban-chic-apartment-by-bookinghost.en-us.html"}
+            {"time": "16:00", "name": "Hotel check-in: Afrykańska Urban Chic Apartment", "url": "https://www.booking.com/hotel/pl/afrykanska-urban-chic-apartment-by-bookinghost.en-us.html"}
         ]
     },
     {
         "date": "August 8, 2026",
         "location": "Warsaw",
-        "details": "Day 2 in Warsaw",
+        "details": "Last Full Day in Warsaw",
         "steps": []
     },
     {
