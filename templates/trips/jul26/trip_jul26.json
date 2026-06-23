@@ -27,19 +27,25 @@
         "date": "July 25, 2026",
         "location": "Warsaw",
         "details": "Day 1 in Warsaw",
-        "steps": []
+        "steps": [
+            {"time": "17:00", "name": "Róża Wiatrów (Dinner)", "url": "https://rozawiatrow.waw.pl/nasze-menu/?_ga=2.106662854.454544889.1782181421-520432232.1782181421"}
+        ]
     },
     {
         "date": "July 26, 2026",
         "location": "Warsaw",
         "details": "Day 2 in Warsaw",
-        "steps": []
+        "steps": [
+            {"time": "17:00", "name": "Dobra Kuchnia (Dinner)", "url": "https://www.google.com/maps/place/Dobra+Kuchnia/@52.2308033,21.0593067,3a,75y,90t/data=!3m8!1e2!3m6!1sCIABIhDdoazx5Plkw0nym9zMg0Sz!2e10!3e12!6shttps:%2F%2Flh3.googleusercontent.com%2Fgps-cs-s%2FAPNQkAGGcqJYMN1OoXowEMt2dJK_90igeqGKRUDtyYXY0NZpne5FeFdsLwJYdgmiVAl0-PZqu-JkaJXlKQeXVJglB53Trzk7J_CjPeuIKKK70xfWjpGawAjr5kqj2OtM_pmjaamPArGWJZ4ahBzI%3Dw195-h109-k-no!7i4000!8i2252!4m7!3m6!1s0x471ecda86920f827:0x382f8ce8d588d81d!8m2!3d52.2305061!4d21.0590596!10e9!16s%2Fg%2F12nqgnqp2?entry=ttu&g_ep=EgoyMDI2MDYxNi4wIKXMDSoASAFQAw%3D%3D"}
+        ]
     },
     {
         "date": "July 27, 2026",
         "location": "Warsaw",
         "details": "Day 3 in Warsaw",
-        "steps": []
+        "steps": [
+            {"time": "17:00", "name": "Efes Kebab (Dinner)", "url": "https://www.google.com/maps/place/EFES+KEBAB/@52.2317159,21.0557606,3a,75y,90t/data=!3m8!1e2!3m6!1sCIHM0ogKEICAgICZj6vpFg!2e10!3e12!6shttps:%2F%2Flh3.googleusercontent.com%2Fgps-cs-s%2FAPNQkAGpLo7IFMYS231CtTtqEV4lmO1-kXK5mfW8N2ALZ9FdxFws69GcZSMSXBwrsfC1RaGaTJjhVRZVafe1psyOKuJexqITF2Dn3bNZW7YI3XaY9wuAvaORx0bgnqps8Un7QINfgO2D%3Dw128-h86-k-no!7i2560!8i1709!4m7!3m6!1s0x471ecda9a10cc009:0xa482d6e565b4feed!8m2!3d52.2317128!4d21.0555116!10e5!16s%2Fg%2F1tfpng21?entry=ttu&g_ep=EgoyMDI2MDYxNi4wIKXMDSoASAFQAw%3D%3D"}
+        ]
     },
     {
         "date": "July 28, 2026",
