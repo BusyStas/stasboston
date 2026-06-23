@@ -13,7 +13,7 @@
     {
         "date": "July 24, 2026",
         "location": "Warsaw",
-        "details": "Arrive Zürich → fly to Warsaw, hotel check-in",
+        "details": "Arrive Zürich → fly to Warsaw",
         "detail_url": "/trip/day/jul24",
         "steps": [
             {"time": "10:55", "name": "Arrive ZRH — layover 6h 5m",          "url": ""},
@@ -93,7 +93,7 @@
     {
         "date": "August 4, 2026",
         "location": "Chisinau",
-        "details": "Day 7 in Chisinau",
+        "details": "Last Day in Chisinau",
         "detail_url": "/trip/day/aug4",
         "steps": [
             {"time": "14:00", "name": "Hotel check-in: Vasile Alecsandri 80/A", "url": "https://www.booking.com/hotel/md/modern-cozy-apartment.en-us.html"}

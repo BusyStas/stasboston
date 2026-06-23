@@ -31,6 +31,7 @@
         }
 
         .day-box {
+            position: relative;
             border: 1px solid #ccc;
             border-radius: 8px;
             padding: 16px;
@@ -40,6 +41,31 @@
             display: flex;
             flex-direction: column;
             gap: 4px;
+        }
+
+        .day-box.clickable { cursor: pointer; transition: box-shadow 0.15s ease, transform 0.15s ease; }
+        .day-box.clickable:hover { box-shadow: 2px 2px 14px #ddd; transform: translateY(-2px); }
+
+        /* Stretched link: covers the whole card so it's fully clickable,
+           while inner links sit above it via z-index. */
+        .card-link {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            border-radius: 8px;
+        }
+
+        .day-badge {
+            position: absolute;
+            top: 8px;
+            right: 10px;
+            z-index: 2;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #9a9a9a;
+            opacity: 0.5;
+            letter-spacing: 0.02em;
+            pointer-events: none;
         }
 
         .day-box h3 {
@@ -74,6 +100,11 @@
             word-wrap: break-word;
         }
 
+        .steps-list a {
+            position: relative;
+            z-index: 2;
+        }
+
         .step-time {
             font-weight: bold;
             margin-right: 6px;
@@ -81,16 +112,6 @@
             min-width: 60px;
             color: #333;
         }
-
-        .detail-link {
-            display: inline-block;
-            margin-top: 10px;
-            font-size: 0.8rem;
-            color: #2a6dd9;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        .detail-link:hover { text-decoration: underline; }
 
         @media (max-width: 768px) {
             body { padding: 10px; }
@@ -106,7 +127,11 @@
 
     <div class="schedule-container">
         {% for day in schedule %}
-        <div class="day-box">
+        <div class="day-box{% if day.detail_url is defined and day.detail_url %} clickable{% endif %}">
+            {% if day.detail_url is defined and day.detail_url %}
+            <a href="{{ day.detail_url }}" class="card-link" aria-label="Day {{ loop.index }} details"></a>
+            {% endif %}
+            <span class="day-badge" title="Day {{ loop.index }}">D{{ loop.index }}</span>
             <div class="day-location">{{ day.location }}</div>
             <h3>{{ day.date_with_weekday }}</h3>
             <p>{{ day.details }}</p>
@@ -123,9 +148,6 @@
                 </li>
                 {% endfor %}
             </ul>
-            {% endif %}
-            {% if day.detail_url is defined and day.detail_url %}
-            <a href="{{ day.detail_url }}" class="detail-link">Details →</a>
             {% endif %}
         </div>
         {% endfor %}
