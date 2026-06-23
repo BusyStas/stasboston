@@ -5,7 +5,7 @@
         "details": "Departure — BOS → Zürich (overnight)",
         "detail_url": "/trip/day/jul23",
         "steps": [
-            {"time": "9:40pm",    "name": "Depart BOS Terminal E (LX 53)", "url": ""},
+            {"time": "21:40",    "name": "Depart BOS Terminal E (LX 53)", "url": ""},
             {"time": "overnight", "name": "Fly to Zürich — 7h 15m",        "url": ""}
         ]
     },
@@ -15,10 +15,10 @@
         "details": "Arrive Zürich → fly to Warsaw, hotel check-in",
         "detail_url": "/trip/day/jul24",
         "steps": [
-            {"time": "10:55am", "name": "Arrive ZRH — layover 6h 5m",          "url": ""},
-            {"time": "5:00pm",  "name": "Depart ZRH (LX 1352 / Air Baltic)",   "url": ""},
-            {"time": "6:55pm",  "name": "Arrive WAW",                           "url": ""},
-            {"time": "3:00pm+", "name": "Hotel check-in: Arabska 10",
+            {"time": "10:55", "name": "Arrive ZRH — layover 6h 5m",          "url": ""},
+            {"time": "17:00",  "name": "Depart ZRH (LX 1352 / Air Baltic)",   "url": ""},
+            {"time": "18:55",  "name": "Arrive WAW",                           "url": ""},
+            {"time": "15:00+", "name": "Hotel check-in: Arabska 10",
              "url": "https://www.booking.com/hotel/pl/apartments-warsaw-arabska.en-us.html"}
         ]
     },
@@ -47,8 +47,9 @@
         "detail_url": "/trip/day/jul28",
         "steps": [
             {"time": "by 11:00", "name": "Hotel checkout (Arabska 10)", "url": ""},
-            {"time": "11:00am",  "name": "Depart WAW (LO 513)",         "url": ""},
-            {"time": "1:50pm",   "name": "Arrive RMO — Chisinau",       "url": ""}
+            {"time": "11:00",    "name": "Depart WAW (LO 513)",         "url": ""},
+            {"time": "13:50",    "name": "Arrive RMO — Chisinau",       "url": ""},
+            {"time": "14:00+",   "name": "Hotel check-in: Familion ApartHotel", "url": "https://www.booking.com/hotel/md/familion-apart.en-us.html"}
         ]
     },
     {
@@ -92,7 +93,10 @@
         "date": "August 4, 2026",
         "location": "Chisinau",
         "details": "Day 7 in Chisinau",
-        "steps": []
+        "detail_url": "/trip/day/aug4",
+        "steps": [
+            {"time": "14:00+", "name": "Hotel check-in: Vasile Alecsandri 80/A", "url": "https://www.booking.com/hotel/md/modern-cozy-apartment.en-us.html"}
+        ]
     },
     {
         "date": "August 5, 2026",

@@ -35,6 +35,18 @@
         .flight-meta { margin-top: 0.75rem; padding-top: 0.65rem; border-top: 1px solid #f0f0f0; display: flex; flex-wrap: wrap; gap: 0.35rem 1.25rem; font-size: 0.78rem; color: #555; }
         .flight-meta strong { color: #333; }
         .total-duration { text-align: center; background: #f0f4fb; border-radius: 8px; padding: 0.7rem 1rem; font-size: 0.88rem; font-weight: 600; color: #1a3a6e; margin-top: 0.25rem; }
+        .hotel-card { background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 0.75rem; overflow: hidden; display: flex; flex-wrap: wrap; }
+        .hotel-card img { width: 220px; min-height: 150px; object-fit: cover; flex-shrink: 0; }
+        .hotel-card-body { padding: 1rem; flex: 1; min-width: 200px; }
+        .hotel-name { font-size: 1rem; font-weight: 700; color: #1a3a6e; margin-bottom: 0.5rem; }
+        .hotel-name a { color: inherit; text-decoration: none; }
+        .hotel-name a:hover { text-decoration: underline; }
+        .hotel-checkin-row { display: flex; flex-wrap: wrap; gap: 0.5rem 2rem; margin-bottom: 0.6rem; }
+        .hotel-checkin-item .ci-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; color: #888; }
+        .hotel-checkin-item .ci-value { font-weight: 700; font-size: 0.9rem; color: #1a3a6e; }
+        .hotel-checkin-item .ci-time { font-size: 0.75rem; color: #666; }
+        .hotel-detail-row { display: flex; flex-wrap: wrap; gap: 0.3rem 1.5rem; font-size: 0.78rem; color: #555; margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid #f0f0f0; }
+        .hotel-detail-row strong { color: #333; }
         .back-link { display: inline-block; margin-top: 2rem; font-size: 0.82rem; color: #2a6dd9; text-decoration: none; }
         .back-link:hover { text-decoration: underline; }
     </style>
@@ -45,7 +57,7 @@
 
     <div class="section-title">Hotel Checkout — Warsaw</div>
     <div class="info-card">
-        <strong>Checkout by 11:00am</strong> — Comfy &amp; Spacious Apartment Warsaw by Noclegi Renters<br>
+        <strong>Checkout by 11:00</strong> — Comfy &amp; Spacious Apartment Warsaw by Noclegi Renters<br>
         Arabska 10, Praga Poludnie, 03-977 Warsaw · Confirmation: 6725500725 · PIN: 9327
     </div>
 
@@ -61,7 +73,7 @@
         <div class="flight-card-header">LOT Polish Airlines · LO 513</div>
         <div class="flight-card-body">
             <div class="flight-stop">
-                <div class="stop-time">11:00<span class="day">am · Tue Jul 28</span></div>
+                <div class="stop-time">11:00<span class="day">Tue Jul 28</span></div>
                 <div class="stop-info">
                     <div class="city">Warsaw, Poland</div>
                     <div class="airport">WAW – Frederic Chopin Airport</div>
@@ -73,7 +85,7 @@
                 <div class="arrow-line"></div>
             </div>
             <div class="flight-stop">
-                <div class="stop-time">1:50<span class="day">pm · Tue Jul 28</span></div>
+                <div class="stop-time">13:50<span class="day">Tue Jul 28</span></div>
                 <div class="stop-info">
                     <div class="city">Chisinau, Moldova</div>
                     <div class="airport">RMO – Chisinau International</div>
@@ -85,7 +97,39 @@
         </div>
     </div>
 
-    <div class="total-duration">Total flight time: 1h 50m · Tue Jul 28 11:00am → 1:50pm</div>
+    <div class="total-duration">Total flight time: 1h 50m · Tue Jul 28 11:00 → 13:50</div>
+
+    <div class="section-title">Hotel — Chisinau (Check-in)</div>
+    <div class="hotel-card">
+        <img src="https://r-xx.bstatic.com/xdata/images/hotel/max300/54487644.jpg?k=69dea39b4fa603fa265f091ba806c5ebedd1029551a257b0b51fe355f7077b9a&o=" alt="Familion ApartHotel">
+        <div class="hotel-card-body">
+            <div class="hotel-name">
+                <a href="https://www.booking.com/hotel/md/familion-apart.en-us.html" target="_blank">
+                    Familion ApartHotel
+                </a>
+            </div>
+            <div class="hotel-checkin-row">
+                <div class="hotel-checkin-item">
+                    <div class="ci-label">Check-in</div>
+                    <div class="ci-value">Tue, Jul 28</div>
+                    <div class="ci-time">from 14:00</div>
+                </div>
+                <div class="hotel-checkin-item">
+                    <div class="ci-label">Check-out</div>
+                    <div class="ci-value">Wed, Jul 29</div>
+                    <div class="ci-time">until 12:00</div>
+                </div>
+                <div class="hotel-checkin-item">
+                    <div class="ci-label">Stay</div>
+                    <div class="ci-value">1 night</div>
+                    <div class="ci-time">2 adults, 2 children</div>
+                </div>
+            </div>
+            <div class="hotel-detail-row">
+                <span><strong>Address:</strong> Cojocarilor 18, 2001 Chişinău, Moldova</span>
+            </div>
+        </div>
+    </div>
 
     <a class="back-link" href="/trip">← Back to Trip Overview</a>
 </body>
