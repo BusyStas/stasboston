@@ -50,7 +50,8 @@
             {"time": "10:00", "name": "Hotel checkout (Arabska 10)", "url": ""},
             {"time": "11:00",    "name": "Depart WAW (LO 513)",         "url": ""},
             {"time": "13:50",    "name": "Arrive RMO — Chisinau",       "url": ""},
-            {"time": "14:00",   "name": "Hotel check-in: Familion ApartHotel", "url": "https://www.booking.com/hotel/md/familion-apart.en-us.html"}
+            {"time": "14:00",   "name": "Hotel: Familion ApartHotel", "url": "https://www.booking.com/hotel/md/familion-apart.en-us.html"},
+            {"time": "17:00",   "name": "GastHaus (Dinner)", "url": "https://www.facebook.com/gasthaus.md/photos?tab=album&album_id=541226366741326"}
         ]
     },
     {
@@ -98,6 +99,7 @@
         "steps": [
             {"time": "12:00", "name": "Transfer Tvarditsa → Chisinau", "url": "https://www.booking.com/hotel/pl/afrykanska-urban-chic-apartment-by-bookinghost.en-us.html"}
         ,   {"time": "14:00", "name": "Hotel check-in: Vasile Alecsandri 80/A", "url": "https://www.booking.com/hotel/md/modern-cozy-apartment.en-us.html"}
+        ,   {"time": "17:00", "name": "Carmelo (Diner)", "url": "https://www.google.com/maps/place/Carmelo/@47.0187876,28.8367257,19.21z/data=!4m7!3m6!1s0x40c97c306d01b0fd:0x475d020ee0f68b52!8m2!3d47.0190424!4d28.8369096!10e9!16s%2Fg%2F1hhwp046c?entry=ttu&g_ep=EgoyMDI2MDYxNi4wIKXMDSoASAFQAw%3D%3D"}
         ]
     },
     {
