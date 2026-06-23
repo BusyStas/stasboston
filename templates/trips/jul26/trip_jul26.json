@@ -113,9 +113,11 @@
     {
         "date": "August 5, 2026",
         "location": "Warsaw",
-        "details": "Hotel check-in, Warsaw",
+        "details": "Fly Chisinau → Warsaw, hotel check-in",
         "detail_url": "/trip/day/aug5",
         "steps": [
+            {"time": "14:35", "name": "Depart RMO (LO 514)", "url": ""},
+            {"time": "15:25", "name": "Arrive WAW", "url": ""},
             {"time": "14:00", "name": "Hotel check-in: B&B Hotel Warsaw East", "url": "https://www.booking.com/hotel/pl/bb-hotel-warsaw-east.en-us.html"}
         ]
     },
