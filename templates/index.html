@@ -1,187 +1,5 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Stanislav Prikhodko — Software Architect & Pilot</title>
-<meta name="description" content="Stanislav Prikhodko — Boston-based technical lead, builder of collectibles software (FolioVault), pilot and figure skater.">
-<meta property="og:title" content="Stanislav Prikhodko — Software Architect & Pilot">
-<meta property="og:image" content="https://stas.boston/static/images/selfie/stas_face_round.jfif">
-<link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
-<script>
-  /* Day/night theme: light from 7:00 to 19:00 in the VISITOR's local time, dark otherwise.
-     Runs before the page paints (no flash) and re-checks every 5 minutes,
-     so an open tab switches at dusk/dawn. Change DAY_START / DAY_END to taste. */
-  (function () {
-    var DAY_START = 7, DAY_END = 19;
-    function apply() {
-      var h = new Date().getHours();
-      document.documentElement.setAttribute('data-theme', (h >= DAY_START && h < DAY_END) ? 'light' : 'dark');
-    }
-    apply();
-    setInterval(apply, 5 * 60 * 1000);
-  })();
-</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-<style>
-:root{
-  --bg:#ffffff; --surface:#f5f5f5; --card:#ffffff; --fg:#171717; --muted:#5e5e5e; --border:#e2e2e2;
-  --primary:#3f9ad8; --primary-ink:#ffffff;
-  --glow:0 24px 60px -30px rgba(63,154,216,.6);
-  --max:1152px;
-}
-/* Dark scheme: set by the day/night script below (data-theme="dark");
-   falls back to the device setting if JavaScript is off. */
-:root[data-theme="dark"]{
-  --bg:#0e1013; --surface:#171a1f; --card:#14171b; --fg:#eceef1; --muted:#9aa1ab; --border:#272b31;
-  --primary:#5fb0e8; --glow:0 24px 60px -30px rgba(95,176,232,.45);
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme]){
-    --bg:#0e1013; --surface:#171a1f; --card:#14171b; --fg:#eceef1; --muted:#9aa1ab; --border:#272b31;
-    --primary:#5fb0e8; --glow:0 24px 60px -30px rgba(95,176,232,.45);
-  }
-}
-body{transition:background-color .6s,color .6s}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 "DM Sans",ui-sans-serif,system-ui,sans-serif}
-a{color:inherit;text-decoration:none}
-img{display:block;max-width:100%}
-h1,h2,h3,.display{font-family:"Space Grotesk",ui-sans-serif,system-ui,sans-serif;margin:0;font-weight:700}
-.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
-.eyebrow{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--primary);font-weight:600;margin:0}
-
-/* ===== Menu (matches noahlabhart.com) ===== */
-header{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 80%,transparent);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid color-mix(in srgb,var(--border) 60%,transparent)}
-.nav{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:var(--max);margin:0 auto}
-.brand{display:flex;align-items:center;gap:12px;font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:1.125rem;letter-spacing:-.01em}
-.brand .mark{width:32px;height:32px;border-radius:6px;background:var(--primary);color:#fff;display:grid;place-items:center;font-size:.95rem}
-.brand .last{color:var(--primary)}
-.links{display:flex;align-items:center;gap:28px}
-.links a{font-size:.875rem;color:var(--muted);transition:color .15s}
-.links a:hover,.links a[aria-current="page"]{color:var(--fg)}
-.dd{position:relative}
-.dd>a{display:flex;align-items:center;gap:4px}
-.dd>a span{font-size:.6rem}
-.dd-menu{position:absolute;right:0;top:calc(100% + 14px);min-width:220px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:8px;box-shadow:var(--glow),0 8px 24px -12px rgba(0,0,0,.15);opacity:0;visibility:hidden;transform:translateY(-4px);transition:.15s}
-.dd:hover .dd-menu,.dd:focus-within .dd-menu{opacity:1;visibility:visible;transform:none}
-.dd-menu a{display:block;padding:8px 12px;border-radius:8px;color:var(--fg)}
-.dd-menu a small{display:block;color:var(--muted);font-size:.75rem}
-.dd-menu a:hover{background:var(--surface)}
-.menu-btn{display:none;border:1px solid var(--border);background:none;color:var(--fg);border-radius:6px;padding:6px 12px;font:inherit;font-size:.875rem;cursor:pointer}
-
-/* ===== Hero ===== */
-.hero{padding:88px 0 96px;background:
-  radial-gradient(700px 360px at 90% 0%, color-mix(in srgb,var(--primary) 12%,transparent), transparent 70%),
-  linear-gradient(180deg,var(--surface),var(--bg))}
-.hero-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:56px;align-items:center}
-.hero h1{font-size:clamp(2.8rem,6.5vw,4.5rem);line-height:1.05;margin-top:20px}
-.quote{margin:24px 0 0;font-style:italic;color:var(--muted);font-size:1.1rem;max-width:560px}
-.roles{color:var(--muted);margin:16px 0 32px}
-.btns{display:flex;gap:12px;flex-wrap:wrap}
-.btn{display:inline-block;padding:12px 22px;border-radius:999px;font-weight:600;font-size:.9rem}
-.btn.primary{background:var(--primary);color:var(--primary-ink);box-shadow:var(--glow)}
-.btn.ghost{border:1px solid var(--border);background:var(--card)}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
-.chip{border:1px solid var(--border);border-radius:999px;padding:4px 12px;font-size:.78rem;color:var(--muted)}
-.portrait img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:24px;border:1px solid var(--border);box-shadow:var(--glow)}
-
-/* ===== Sections ===== */
-section{padding:96px 0}
-section.alt{background:var(--surface)}
-.head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:40px}
-.head h2,.about h2{font-size:clamp(1.9rem,3.5vw,2.25rem);margin-top:12px}
-.more{color:var(--primary);font-size:.9rem;font-weight:600}
-.about{display:grid;grid-template-columns:1fr 1.2fr;gap:56px}
-.about p{color:var(--muted);margin:0 0 16px;line-height:1.75}
-
-/* ===== Cards (matches his "Where I spend my days") ===== */
-.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
-.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:32px;box-shadow:var(--glow)}
-.card .logo{width:56px;height:56px;border-radius:12px;border:1px solid var(--border);margin-bottom:20px;display:grid;place-items:center;font-family:"Space Grotesk",sans-serif;font-weight:700;color:#fff;font-size:1.2rem}
-.card h3{font-size:1.5rem;margin-top:12px}
-.card .role{margin:4px 0 0;font-size:.875rem;color:var(--primary)}
-.card p.desc{margin:16px 0 0;font-size:.875rem;line-height:1.7;color:var(--muted)}
-
-/* ===== List rows (his "Recent appearances") ===== */
-.rows{border-top:1px solid var(--border)}
-.row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:20px 0;border-bottom:1px solid var(--border);transition:color .15s}
-a.row:hover{color:var(--primary)}
-.row .l{display:flex;align-items:center;gap:16px}
-.row .thumb{width:48px;height:48px;border-radius:8px;display:grid;place-items:center;color:#fff;font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:.85rem;flex:none}
-.row .t{font-family:"Space Grotesk",sans-serif;font-size:1.125rem}
-.row .meta{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
-
-/* ===== Hobby cards ===== */
-.hobby{border-radius:18px;padding:32px;min-height:230px;color:#fff;display:flex;flex-direction:column;justify-content:flex-end;box-shadow:var(--glow)}
-.hobby .eyebrow{color:#ffffffcc}
-.hobby h3{font-size:1.5rem;margin:10px 0 6px}
-.hobby p{margin:0 0 14px;opacity:.9;font-size:.9rem}
-.hobby a{font-weight:600;font-size:.9rem}
-.sky{background:linear-gradient(160deg,#3f9ad8,#1c4a74)}
-.ice{background:linear-gradient(160deg,#7fb6cf,#2f4870)}
-
-/* ===== Testimonials (his "What people say") ===== */
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-blockquote{margin:0;background:var(--surface);border-radius:18px;padding:28px}
-section.alt blockquote{background:var(--card)}
-blockquote p{margin:0;font-size:.875rem;line-height:1.7;color:var(--muted)}
-blockquote footer{margin-top:20px;display:flex;align-items:center;gap:12px;font-family:"Space Grotesk",sans-serif;font-size:.875rem}
-blockquote .av{width:36px;height:36px;border-radius:50%;background:var(--border)}
-.placeholder{outline:1px dashed var(--border);outline-offset:-1px}
-
-.contact{text-align:center}
-.contact p{color:var(--muted);max-width:540px;margin:14px auto 28px}
-
-footer.site{border-top:1px solid var(--border);padding:40px 0;text-align:center;color:var(--muted);font-size:.85rem}
-footer.site .q{font-style:italic;margin-bottom:16px}
-footer.site nav{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:14px}
-footer.site nav a:hover{color:var(--fg)}
-
-@media (max-width:900px){
-  .hero-grid,.about{grid-template-columns:1fr;gap:40px}
-  .portrait{max-width:300px}
-  .grid3{grid-template-columns:1fr}
-}
-@media (max-width:767px){
-  .menu-btn{display:block}
-  .links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:var(--bg);border-bottom:1px solid var(--border);padding:8px 24px 16px}
-  .links.open{display:flex}
-  .links>a,.dd>a{padding:12px 0;border-bottom:1px solid var(--border);font-size:.95rem}
-  .dd-menu{position:static;opacity:1;visibility:visible;transform:none;box-shadow:none;border:0;padding:4px 0 8px 12px;min-width:0}
-  .grid2{grid-template-columns:1fr}
-  section{padding:64px 0}
-  .wrap,.nav{padding-left:16px;padding-right:16px}
-}
-</style>
-</head>
-<body>
-
-<header>
-  <div class="nav">
-    <a class="brand" href="/"><span class="mark">SP</span>Stanislav<span class="last">Prikhodko</span></a>
-    <nav class="links" id="links">
-      <a href="/" aria-current="page">Home</a>
-      <a href="#about">About</a>
-      <a href="#work">Work</a>
-      <a href="#portfolio">Portfolio</a>
-      <a href="#blog">Blog</a>
-      <a href="#contact">Contact</a>
-      <div class="dd">
-        <a href="#hobbies" aria-haspopup="true">More<span aria-hidden="true">▼</span></a>
-        <div class="dd-menu">
-          <a href="#hobbies">Hobbies<small>Aviation &amp; figure skating</small></a>
-          <a href="{{ url_for('shop') }}">Shop<small>Items for sale</small></a>
-          <a href="{{ url_for('trip') }}">Trip Planner<small>Trip schedule</small></a>
-        </div>
-      </div>
-    </nav>
-    <button class="menu-btn" type="button" aria-label="Toggle navigation" aria-expanded="false">Menu</button>
-  </div>
-</header>
-
+{% extends "layout.html" %}
+{% block content %}
 <div class="hero">
   <div class="wrap hero-grid">
     <div>
@@ -250,7 +68,12 @@ footer.site nav a:hover{color:var(--fg)}
   <section id="blog" class="alt">
     <div class="wrap">
       <div class="head"><div><p class="eyebrow">Blog</p><h2>Notes from the build</h2></div></div>
-      <p style="color:var(--muted);max-width:640px;margin:0">Insights from software development, blockchain, and aviation — technical deep-dives coming soon.</p>
+      <div class="rows">
+        {% for post in posts[:3] %}
+        <a class="row" href="{{ url_for('blog_post', slug=post.slug) }}"><span class="t">{{ post.title }}</span><span class="meta">{{ post.date_label }}</span></a>
+        {% endfor %}
+      </div>
+      <p style="margin:32px 0 0"><a class="more" href="{{ url_for('blog') }}">All posts →</a></p>
     </div>
   </section>
 
@@ -287,25 +110,4 @@ footer.site nav a:hover{color:var(--fg)}
     </div>
   </section>
 </main>
-
-<footer class="site">
-  <div class="wrap">
-    <p class="q">Robust, scalable software by day. Clear skies and clean ice the rest of the time.</p>
-    <nav>
-      <a href="https://www.linkedin.com/in/stasp">LinkedIn</a>
-      <a href="https://foliovault.org">FolioVault</a>
-      <a href="https://www.instagram.com/stasik.avia">Aviation</a>
-      <a href="https://www.instagram.com/stasik.ice">Skating</a>
-    </nav>
-    <div>© <span id="y"></span> Stanislav Prikhodko · For informational purposes only; not professional advice.</div>
-  </div>
-</footer>
-
-<script>
-  document.getElementById('y').textContent = new Date().getFullYear();
-  const btn = document.querySelector('.menu-btn'), links = document.getElementById('links');
-  btn.addEventListener('click', () => { const o = links.classList.toggle('open'); btn.setAttribute('aria-expanded', o); });
-  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
-</script>
-</body>
-</html>
+{% endblock %}

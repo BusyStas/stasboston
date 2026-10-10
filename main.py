@@ -1,12 +1,35 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, abort
 import json
-from datetime import datetime
+from datetime import datetime, date
 
 app = Flask(__name__ )
 
+# Blog posts, newest first. Each post's body lives in templates/posts/<slug>.html.
+POSTS = [
+    {
+        "slug": "ai-price-collapse",
+        "title": "Will AI Make Everything Cheaper? Who Wins, Who Loses",
+        "date": date(2026, 10, 4),
+        "summary": "AI is collapsing the price of thinking work, but not of land, licenses or physical labor. The investing question is who keeps the savings.",
+    },
+]
+for _post in POSTS:
+    _post["date_label"] = f'{_post["date"]:%B} {_post["date"].day}, {_post["date"].year}'
+
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', posts=POSTS)
+
+@app.route('/blog')
+def blog():
+    return render_template('blog.html', posts=POSTS)
+
+@app.route('/blog/<slug>')
+def blog_post(slug):
+    post = next((p for p in POSTS if p["slug"] == slug), None)
+    if post is None:
+        abort(404)
+    return render_template('blog_post.html', post=post)
 
 @app.route('/shop')
 def shop():

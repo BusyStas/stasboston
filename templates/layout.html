@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Stanislav Prikhodko — Software Architect & Pilot{% endblock %}</title>
+<meta name="description" content="{% block description %}Stanislav Prikhodko — Boston-based technical lead, builder of collectibles software (FolioVault), pilot and figure skater.{% endblock %}">
+<meta property="og:title" content="{{ self.title() }}">
+<meta property="og:image" content="https://stas.boston/static/images/selfie/stas_face_round.jfif">
+<link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
+<script>
+  /* Day/night theme: light from 7:00 to 19:00 in the VISITOR's local time, dark otherwise.
+     Runs before the page paints (no flash) and re-checks every 5 minutes,
+     so an open tab switches at dusk/dawn. Change DAY_START / DAY_END to taste. */
+  (function () {
+    var DAY_START = 7, DAY_END = 19;
+    function apply() {
+      var h = new Date().getHours();
+      document.documentElement.setAttribute('data-theme', (h >= DAY_START && h < DAY_END) ? 'light' : 'dark');
+    }
+    apply();
+    setInterval(apply, 5 * 60 * 1000);
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+</head>
+<body>
+{% set home = url_for('index') %}
+<header>
+  <div class="nav">
+    <a class="brand" href="{{ home }}"><span class="mark">SP</span>Stanislav<span class="last">Prikhodko</span></a>
+    <nav class="links" id="links">
+      <a href="{{ home }}"{% if request.endpoint == 'index' %} aria-current="page"{% endif %}>Home</a>
+      <a href="{{ home }}#about">About</a>
+      <a href="{{ home }}#work">Work</a>
+      <a href="{{ home }}#portfolio">Portfolio</a>
+      <a href="{{ url_for('blog') }}"{% if request.endpoint in ('blog', 'blog_post') %} aria-current="page"{% endif %}>Blog</a>
+      <a href="{{ home }}#contact">Contact</a>
+      <div class="dd">
+        <a href="{{ home }}#hobbies" aria-haspopup="true">More<span aria-hidden="true">▼</span></a>
+        <div class="dd-menu">
+          <a href="{{ home }}#hobbies">Hobbies<small>Aviation &amp; figure skating</small></a>
+          <a href="{{ url_for('shop') }}">Shop<small>Items for sale</small></a>
+          <a href="{{ url_for('trip') }}">Trip Planner<small>Trip schedule</small></a>
+        </div>
+      </div>
+    </nav>
+    <button class="menu-btn" type="button" aria-label="Toggle navigation" aria-expanded="false">Menu</button>
+  </div>
+</header>
+
+{% block content %}{% endblock %}
+
+<footer class="site">
+  <div class="wrap">
+    <p class="q">Robust, scalable software by day. Clear skies and clean ice the rest of the time.</p>
+    <nav>
+      <a href="https://www.linkedin.com/in/stasp">LinkedIn</a>
+      <a href="https://foliovault.org">FolioVault</a>
+      <a href="https://www.instagram.com/stasik.avia">Aviation</a>
+      <a href="https://www.instagram.com/stasik.ice">Skating</a>
+    </nav>
+    <div>© <span id="y"></span> Stanislav Prikhodko · For informational purposes only; not professional advice.</div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('y').textContent = new Date().getFullYear();
+  const btn = document.querySelector('.menu-btn'), links = document.getElementById('links');
+  btn.addEventListener('click', () => { const o = links.classList.toggle('open'); btn.setAttribute('aria-expanded', o); });
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+</script>
+</body>
+</html>

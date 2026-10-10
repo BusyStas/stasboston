@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block title %}{{ post.title }} — Stanislav Prikhodko{% endblock %}
+{% block description %}{{ post.summary }}{% endblock %}
+{% block content %}
+<main>
+  <article class="post">
+    <div class="wrap">
+      <div class="post-head">
+        <p class="eyebrow"><a href="{{ url_for('blog') }}">Blog</a></p>
+        <h1>{{ post.title }}</h1>
+        <p class="byline">{{ post.date_label }} · Stanislav Prikhodko</p>
+      </div>
+      <div class="prose">
+        {% include 'posts/' ~ post.slug ~ '.html' %}
+      </div>
+      <p class="post-back"><a class="more" href="{{ url_for('blog') }}">← All posts</a></p>
+    </div>
+  </article>
+</main>
+{% endblock %}
