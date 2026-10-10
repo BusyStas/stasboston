@@ -167,3 +167,4 @@ footer.site nav a:hover{color:var(--fg)}
   .post-item{padding:24px}
   .prose table{min-width:560px}
 }
+.grid1{max-width:760px}
