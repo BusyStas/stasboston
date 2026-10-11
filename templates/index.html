@@ -100,7 +100,10 @@
       <p class="eyebrow">Contact</p>
       <h2 style="font-size:2.25rem;margin-top:12px">Let's connect</h2>
       <p>Interested in collaboration or just want to say hello? Reach out through your preferred channel.</p>
-      <a class="btn primary" href="https://www.linkedin.com/in/stasp">Connect on LinkedIn</a>
+      <div class="btns" style="justify-content:center">
+        <a class="btn primary" href="https://www.linkedin.com/in/stasp">Connect on LinkedIn</a>
+        {% if pitch_enabled %}<a class="btn ghost" href="{{ url_for('pitch_a_job') }}">Pitch me a job →</a>{% endif %}
+      </div>
     </div>
   </section>
 </main>

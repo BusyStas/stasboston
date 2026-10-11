@@ -1,0 +1,210 @@
+{% extends "layout.html" %}
+{% block title %}Pitch Me a Job — Stanislav Prikhodko{% endblock %}
+{% block description %}Paste a job description and my AI agent will tell you right away how well it fits what I'm looking for.{% endblock %}
+{% block content %}
+<main>
+  <section class="pitch">
+    <div class="wrap">
+      <div class="pitch-head">
+        <p class="eyebrow">Pitch me a job</p>
+        <h1>Have a role in mind for me?</h1>
+        <p class="pitch-lead">Paste everything you have about the position: the job description, the email you were going to send, notes from the hiring manager. Don't worry about formatting.</p>
+        <ol class="pitch-steps">
+          <li><strong>You paste it.</strong> Dump the whole thing into the box below, as messy as it is.</li>
+          <li><strong>My AI agent reads it.</strong> It pulls out what matters (role, company, location, pay, seniority) and checks it against my preferences.</li>
+          <li><strong>You get an answer right away.</strong> It tells you how this job compares with the others I've been looking at.</li>
+        </ol>
+      </div>
+
+      <form class="pitch-form" id="pitch-form" novalidate>
+        <div class="field-row">
+          <label class="field">
+            <span>Your name</span>
+            <input type="text" name="name" autocomplete="name" maxlength="200" required>
+          </label>
+          <label class="field">
+            <span>Your contact info</span>
+            <input type="text" name="contact" autocomplete="email" maxlength="500" placeholder="Email, phone or LinkedIn" required>
+          </label>
+        </div>
+
+        <label class="field">
+          <span>Job position</span>
+          <textarea name="position" rows="12" maxlength="60000" required placeholder="Paste the job description and anything else you know about the role."></textarea>
+        </label>
+
+        <label class="field">
+          <span>Job URL <em>(optional)</em></span>
+          <input type="url" name="url" inputmode="url" maxlength="1000" placeholder="https://">
+          <span class="field-note" id="url-note" hidden>Are you sure you don't want to share the URL? It helps me find the original posting. Submit again to send without it.</span>
+        </label>
+
+        <!-- Left empty by people; filled in by most spam bots -->
+        <label class="hp" aria-hidden="true">Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+
+        <label class="consent">
+          <input type="checkbox" name="consent" required>
+          <span>I understand that everything I submit here, including my name and contact info, will be stored in Stanislav's database and read by his AI agent.</span>
+        </label>
+
+        <p class="form-error" id="form-error" role="alert" hidden></p>
+
+        <button class="btn primary" type="submit" id="pitch-submit">Send to my AI agent</button>
+      </form>
+
+      <div class="pitch-result" id="pitch-result" aria-live="polite" hidden>
+        <div class="working" id="working">
+          <span class="spinner" aria-hidden="true"></span>
+          <p id="working-text">Sending the job to my AI agent…</p>
+          <p class="working-note">This usually takes under a minute. Please keep this page open.</p>
+        </div>
+        <div class="verdict" id="verdict" hidden>
+          <p class="eyebrow">My AI agent says</p>
+          <p class="verdict-main" id="verdict-main"></p>
+          <p class="verdict-job" id="verdict-job"></p>
+          <p class="verdict-thanks">Thanks for thinking of me. I've got your details and will be in touch if it's a fit.</p>
+          <a class="btn ghost" href="{{ url_for('pitch_a_job') }}">Pitch another job</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+/* Database warm-up, ported from contentedwife.com (static/js/warmup.js).
+   The database is Azure SQL serverless and pauses when idle; resuming can take
+   a minute. Someone opening this page is a minute or two away from submitting,
+   so knock as soon as it opens, then again on a widening schedule until it
+   answers warm. Nothing on the page depends on it. */
+(function () {
+  var PING_GAPS_MS = [0, 2000, 5000, 30000, 60000];
+  var STORAGE_KEY = 'stas.db.warm';
+  var timer = null, stopped = false;
+
+  function alreadyWarm() {
+    try { return sessionStorage.getItem(STORAGE_KEY) === '1'; } catch (e) { return false; }
+  }
+  function rememberWarm() {
+    try { sessionStorage.setItem(STORAGE_KEY, '1'); } catch (e) {}
+  }
+  function stop() {
+    stopped = true;
+    if (timer !== null) { clearTimeout(timer); timer = null; }
+  }
+  function schedule(i) {
+    if (stopped || i >= PING_GAPS_MS.length) return;
+    timer = setTimeout(function () { ping(i); }, PING_GAPS_MS[i]);
+  }
+  function ping(i) {
+    fetch('{{ url_for("warm_up") }}', { cache: 'no-store', headers: { Accept: 'application/json' } })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (p) {
+        if (p && p.warm) { rememberWarm(); stop(); return; }
+        if (p && p.status === 'not_configured') { stop(); return; }
+        schedule(i + 1);
+      })
+      .catch(function () { schedule(i + 1); });
+  }
+  window.addEventListener('pagehide', stop);
+  if (!alreadyWarm()) schedule(0);
+})();
+
+/* The form */
+(function () {
+  var form = document.getElementById('pitch-form');
+  var errorBox = document.getElementById('form-error');
+  var urlNote = document.getElementById('url-note');
+  var submitBtn = document.getElementById('pitch-submit');
+  var result = document.getElementById('pitch-result');
+  var working = document.getElementById('working');
+  var workingText = document.getElementById('working-text');
+  var verdict = document.getElementById('verdict');
+  var askedAboutUrl = false;
+
+  var STAGES = [
+    [0, 'Sending the job to my AI agent…'],
+    [4000, 'Reading the job description…'],
+    [15000, 'Pulling out the role, company, location and pay…'],
+    [30000, 'Comparing it with my preferences…'],
+    [55000, 'Ranking it against the other jobs I\'m looking at…'],
+    [90000, 'Still working. The database may have been asleep; almost there…']
+  ];
+
+  function showError(msg) {
+    errorBox.textContent = msg;
+    errorBox.hidden = !msg;
+  }
+
+  form.url.addEventListener('input', function () { urlNote.hidden = true; });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    showError('');
+
+    var data = {
+      name: form.name.value.trim(),
+      contact: form.contact.value.trim(),
+      position: form.position.value.trim(),
+      url: form.url.value.trim(),
+      consent: form.consent.checked,
+      website: form.website.value
+    };
+
+    if (!data.name) { showError('Please tell me your name.'); form.name.focus(); return; }
+    if (!data.contact) { showError('Please leave a way to reach you.'); form.contact.focus(); return; }
+    if (data.position.length < 40) { showError('Please paste a bit more about the job.'); form.position.focus(); return; }
+    if (!data.consent) { showError('Please tick the box to confirm the storage notice.'); form.consent.focus(); return; }
+    if (!data.url && !askedAboutUrl) {
+      askedAboutUrl = true;
+      urlNote.hidden = false;
+      submitBtn.textContent = 'Send without a URL';
+      form.url.focus();
+      return;
+    }
+
+    form.hidden = true;
+    result.hidden = false;
+    working.hidden = false;
+    verdict.hidden = true;
+    var timers = STAGES.map(function (s) {
+      return setTimeout(function () { workingText.textContent = s[1]; }, s[0]);
+    });
+    result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    fetch('{{ url_for("pitch_a_job_submit") }}', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(data)
+    })
+      .then(function (r) {
+        return r.json().catch(function () { return {}; }).then(function (body) { return { ok: r.ok, body: body }; });
+      })
+      .then(function (res) {
+        timers.forEach(clearTimeout);
+        if (!res.ok) throw new Error(res.body.error || 'Something went wrong. Please try again.');
+        showVerdict(res.body);
+      })
+      .catch(function (err) {
+        timers.forEach(clearTimeout);
+        result.hidden = true;
+        form.hidden = false;
+        showError(err.message && err.message !== 'Failed to fetch' ? err.message : 'Could not reach my AI agent. Please check your connection and try again.');
+        errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+  });
+
+  function showVerdict(r) {
+    var main = document.getElementById('verdict-main');
+    if (r.better_than === null || r.better_than === undefined) {
+      main.textContent = 'This is the first job in my list. It scored ' + r.match_rank + ' out of 100 against my preferences.';
+    } else {
+      main.innerHTML = 'This job position is better than <strong>' + r.better_than + '%</strong> of the other jobs I was looking at.';
+    }
+    var job = [r.title, r.company].filter(Boolean).join(' at ');
+    document.getElementById('verdict-job').textContent = job ? 'I read it as: ' + job + '.' : '';
+    working.hidden = true;
+    verdict.hidden = false;
+  }
+})();
+</script>
+{% endblock %}

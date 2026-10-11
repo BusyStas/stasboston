@@ -175,3 +175,42 @@ footer.site nav a:hover{color:var(--fg)}
 .share-btn svg{width:16px;height:16px}
 .share-btn:hover{border-color:var(--primary);color:var(--primary)}
 .share+.post-back{margin-top:28px}
+
+/* ===== Pitch me a job ===== */
+.pitch{padding:72px 0 96px}
+.pitch-head,.pitch-form,.pitch-result{max-width:720px;margin-left:auto;margin-right:auto}
+.pitch-head h1{font-size:clamp(2rem,4.5vw,3rem);line-height:1.12;margin:14px 0 16px}
+.pitch-lead{font-size:1.1rem;color:var(--muted);margin:0 0 24px}
+.pitch-steps{margin:0 0 40px;padding-left:1.25rem;color:var(--muted)}
+.pitch-steps li{margin-bottom:10px}
+.pitch-steps li::marker{color:var(--primary);font-weight:600}
+.pitch-steps strong{color:var(--fg);font-weight:600}
+.pitch-form{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:32px;box-shadow:var(--glow);display:grid;gap:20px}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.field{display:grid;gap:8px;font-size:.875rem;font-weight:600}
+.field em{font-style:normal;font-weight:400;color:var(--muted)}
+.field input,.field textarea{width:100%;font:inherit;font-weight:400;font-size:1rem;color:var(--fg);background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px 14px;transition:border-color .15s}
+.field textarea{resize:vertical;min-height:220px;line-height:1.5}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px color-mix(in srgb,var(--primary) 20%,transparent)}
+.field-note{font-weight:500;color:#b7791f;font-size:.875rem}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.consent{display:flex;gap:12px;align-items:flex-start;font-size:.875rem;color:var(--muted);background:var(--surface);border-radius:10px;padding:14px 16px;cursor:pointer}
+.consent input{margin-top:3px;width:18px;height:18px;flex:none;accent-color:var(--primary)}
+.form-error{margin:0;color:#c0503c;font-weight:500;font-size:.9rem}
+.pitch-form .btn{justify-self:start;border:0;cursor:pointer;font:inherit;font-weight:600}
+.pitch-result,.form-error{scroll-margin-top:96px}
+.pitch-result{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:40px 32px;box-shadow:var(--glow);text-align:center}
+.working p{margin:0}
+#working-text{font-family:"Space Grotesk",sans-serif;font-size:1.2rem;margin-top:20px}
+.working-note{color:var(--muted);font-size:.875rem;margin-top:8px!important}
+.spinner{display:inline-block;width:36px;height:36px;border-radius:50%;border:3px solid var(--border);border-top-color:var(--primary);animation:spin .9s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.verdict-main{font-family:"Space Grotesk",sans-serif;font-size:clamp(1.4rem,3vw,1.9rem);line-height:1.3;margin:14px 0 12px}
+.verdict-main strong{color:var(--primary)}
+.verdict-job{color:var(--muted);margin:0 0 8px}
+.verdict-thanks{color:var(--muted);margin:0 0 24px}
+@media (max-width:767px){
+  .pitch{padding:48px 0 64px}
+  .pitch-form{padding:22px}
+  .field-row{grid-template-columns:1fr}
+}

@@ -1,6 +1,11 @@
-from flask import Flask, render_template, url_for, abort
+from flask import Flask, render_template, url_for, abort, request, jsonify
 import json
+import re
+import time
+from collections import defaultdict, deque
 from datetime import datetime, date
+
+import job_agent
 
 app = Flask(__name__ )
 
@@ -24,7 +29,7 @@ for _post in POSTS:
 
 @app.route('/')
 def index():
-    return render_template('index.html', posts=POSTS)
+    return render_template('index.html', posts=POSTS, pitch_enabled=job_agent.configured())
 
 @app.route('/blog')
 def blog():
@@ -36,6 +41,63 @@ def blog_post(slug):
     if post is None:
         abort(404)
     return render_template('blog_post.html', post=post)
+
+@app.route('/pitch-a-job')
+def pitch_a_job():
+    return render_template('pitch_a_job.html')
+
+@app.route('/health/warm-up')
+def warm_up():
+    """Background ping from the pitch page: starts the paused database resuming. Always 200."""
+    response = jsonify(job_agent.warm_up())
+    response.headers['Cache-Control'] = 'no-store'
+    return response
+
+# Each pitch costs a Claude call, so one visitor gets a handful per hour.
+# In memory per instance: enough to stop a stuck button or a casual script.
+PITCH_LIMIT, PITCH_WINDOW_SECONDS = 5, 3600
+_pitches = defaultdict(deque)
+
+def _rate_limited(ip: str) -> bool:
+    now = time.monotonic()
+    hits = _pitches[ip]
+    while hits and now - hits[0] > PITCH_WINDOW_SECONDS:
+        hits.popleft()
+    if len(hits) >= PITCH_LIMIT:
+        return True
+    hits.append(now)
+    return False
+
+@app.route('/pitch-a-job', methods=['POST'])
+def pitch_a_job_submit():
+    data = request.get_json(silent=True) or {}
+    if data.get('website'):  # honeypot field, invisible to people
+        return jsonify(error='Rejected.'), 400
+
+    name = (data.get('name') or '').strip()[:200]
+    contact = (data.get('contact') or '').strip()[:500]
+    position = (data.get('position') or '').strip()[:60000]
+    url = (data.get('url') or '').strip()[:1000]
+
+    if not name or not contact:
+        return jsonify(error='Please tell me your name and how to reach you.'), 400
+    if len(position) < 40:
+        return jsonify(error='Please paste a bit more about the job so my AI agent has something to read.'), 400
+    if url and not re.match(r'^https?://', url):
+        url = 'https://' + url
+    if url and not re.match(r'^https?://\S+$', url):
+        return jsonify(error="That job URL doesn't look right."), 400
+    if data.get('consent') is not True:
+        return jsonify(error='Please confirm the storage notice first.'), 400
+
+    ip = (request.headers.get('X-Forwarded-For') or request.remote_addr or '').split(',')[0].strip()
+    if _rate_limited(ip):
+        return jsonify(error="You've sent several jobs already. Please try again in an hour."), 429
+
+    try:
+        return jsonify(job_agent.evaluate_offer(name, contact, position, url))
+    except job_agent.AgentError as e:
+        return jsonify(error=str(e)), 502
 
 @app.route('/shop')
 def shop():
