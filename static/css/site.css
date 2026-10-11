@@ -95,6 +95,7 @@ a.row:hover{color:var(--primary)}
 .hobby a{font-weight:600;font-size:.9rem}
 .sky{background:linear-gradient(160deg,#3f9ad8,#1c4a74)}
 .ice{background:linear-gradient(160deg,#7fb6cf,#2f4870)}
+.studio{background:linear-gradient(160deg,#9a6bc4,#3b2a63)}
 
 /* ===== Testimonials (his "What people say") ===== */
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
