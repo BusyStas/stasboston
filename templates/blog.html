@@ -1,11 +1,11 @@
 {% extends "layout.html" %}
 {% block title %}Blog — Stanislav Prikhodko{% endblock %}
-{% block description %}Notes from the build: software, AI, markets and aviation by Stanislav Prikhodko.{% endblock %}
+{% block description %}Thoughts on AI, crypto and money by Stanislav Prikhodko.{% endblock %}
 {% block content %}
 <main>
   <section>
     <div class="wrap">
-      <div class="head"><div><p class="eyebrow">Blog</p><h2>Notes from the build</h2></div></div>
+      <div class="head"><div><p class="eyebrow">Blog</p><h2>Thoughts on AI, Crypto and Money</h2></div></div>
       <div class="post-list">
         {% for post in posts %}
         <a class="post-item" href="{{ url_for('blog_post', slug=post.slug) }}">

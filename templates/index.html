@@ -60,7 +60,7 @@
 
   <section id="blog" class="alt">
     <div class="wrap">
-      <div class="head"><div><p class="eyebrow">Blog</p><h2>Notes from the build</h2></div></div>
+      <div class="head"><div><p class="eyebrow">Blog</p><h2>Thoughts on AI, Crypto and Money</h2></div></div>
       <div class="rows">
         {% for post in posts[:3] %}
         <a class="row" href="{{ url_for('blog_post', slug=post.slug) }}"><span class="t">{{ post.title }}</span><span class="meta">{{ post.date_label }}</span></a>
