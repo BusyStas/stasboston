@@ -7,7 +7,10 @@ which calls the API with the X-API-Key header.
 Configuration (Cloud Run environment variables):
     PA_API_URL   e.g. https://personalassistants-api-xxxxx.us-east1.run.app
     PA_API_KEY   this site's key from the personalassistants-api-keys secret
-    PA_USER_ID   Stanislav's UserId in PersonalAssistants (the Job Finder owner)
+    PA_WHOSE_JOB_FINDER_TO_USE   Stanislav's UserId in PersonalAssistants: the API
+                                 serves many users, and this picks whose Job Finder
+                                 (profile, weights, saved jobs) a pitch is scored
+                                 against and saved to
 """
 import logging
 import os
@@ -19,7 +22,7 @@ logger = logging.getLogger(__name__)
 
 API_URL = os.environ.get('PA_API_URL', '').rstrip('/')
 API_KEY = os.environ.get('PA_API_KEY', '')
-USER_ID = int(os.environ.get('PA_USER_ID', '0') or 0)
+USER_ID = int(os.environ.get('PA_WHOSE_JOB_FINDER_TO_USE', '').strip() or 0)
 
 # The API refuses a posting without a web address. When the visitor declines
 # to give one, the posting is filed under this page and the notes say so.
