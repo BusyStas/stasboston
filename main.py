@@ -7,6 +7,12 @@ app = Flask(__name__ )
 # Blog posts, newest first. Each post's body lives in templates/posts/<slug>.html.
 POSTS = [
     {
+        "slug": "smartest-developer",
+        "title": "Stop Telling Your Smartest Developer What to Do",
+        "date": date(2026, 10, 10),
+        "summary": "We hire smart people and AI for their judgment, then dictate every decision. Give them the outcome, the constraints and the definition of done instead.",
+    },
+    {
         "slug": "ai-price-collapse",
         "title": "Will AI Make Everything Cheaper? Who Wins, Who Loses",
         "date": date(2026, 10, 4),

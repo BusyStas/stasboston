@@ -168,3 +168,9 @@ footer.site nav a:hover{color:var(--fg)}
   .prose table{min-width:560px}
 }
 .grid1{max-width:760px}
+.share{max-width:720px;margin:48px auto 0;padding-top:28px;border-top:1px solid var(--border);display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.share-label{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-right:8px}
+.share-btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);background:var(--card);color:var(--fg);transition:border-color .15s,color .15s}
+.share-btn svg{width:16px;height:16px}
+.share-btn:hover{border-color:var(--primary);color:var(--primary)}
+.share+.post-back{margin-top:28px}
