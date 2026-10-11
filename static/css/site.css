@@ -214,3 +214,9 @@ footer.site nav a:hover{color:var(--fg)}
   .pitch-form{padding:22px}
   .field-row{grid-template-columns:1fr}
 }
+.submit-row{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px}
+.submit-note{margin:0;font-size:.85rem;color:var(--muted);flex:1 1 240px}
+.pitch-form .btn{display:inline-flex;align-items:center;gap:10px}
+.pitch-form .btn:disabled{background:var(--border);color:var(--muted);box-shadow:none;cursor:not-allowed}
+.btn-spinner{display:none;width:14px;height:14px;border-radius:50%;border:2px solid currentColor;border-top-color:transparent;animation:spin .9s linear infinite}
+.btn.is-warming .btn-spinner{display:inline-block}

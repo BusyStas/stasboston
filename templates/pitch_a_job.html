@@ -49,7 +49,10 @@
 
         <p class="form-error" id="form-error" role="alert" hidden></p>
 
-        <button class="btn primary" type="submit" id="pitch-submit">Send to my AI agent</button>
+        <div class="submit-row">
+          <button class="btn primary is-warming" type="submit" id="pitch-submit" disabled><span class="btn-spinner" aria-hidden="true"></span><span id="pitch-submit-label">Warming up my AI agent…</span></button>
+          <p class="submit-note" id="submit-note">Waking up my database, usually under a minute. Go ahead and fill in the form meanwhile.</p>
+        </div>
       </form>
 
       <div class="pitch-result" id="pitch-result" aria-live="polite" hidden>
@@ -73,13 +76,31 @@
 <script>
 /* Database warm-up, ported from contentedwife.com (static/js/warmup.js).
    The database is Azure SQL serverless and pauses when idle; resuming can take
-   a minute. Someone opening this page is a minute or two away from submitting,
-   so knock as soon as it opens, then again on a widening schedule until it
-   answers warm. Nothing on the page depends on it. */
-(function () {
+   a minute. Knock as soon as the page opens, then again on a widening schedule
+   until it answers warm. The submit button stays disabled until then, so a
+   pitch is only sent once the database can save it. */
+var pitchReady = (function () {
   var PING_GAPS_MS = [0, 2000, 5000, 30000, 60000];
   var STORAGE_KEY = 'stas.db.warm';
   var timer = null, stopped = false;
+  var btn = document.getElementById('pitch-submit');
+  var label = document.getElementById('pitch-submit-label');
+  var note = document.getElementById('submit-note');
+
+  function setButton(state) {
+    btn.classList.toggle('is-warming', state === 'warming');
+    if (state === 'ready' || state === 'slow') {
+      btn.disabled = false;
+      label.textContent = 'Pitch job';
+      note.hidden = state === 'ready';
+      note.textContent = 'My database is slow to wake up today, so your pitch may take a little longer.';
+    } else if (state === 'offline') {
+      btn.disabled = true;
+      label.textContent = 'AI agent offline';
+      note.hidden = false;
+      note.textContent = 'My AI agent is not available right now. Please reach out on LinkedIn instead.';
+    }
+  }
 
   function alreadyWarm() {
     try { return sessionStorage.getItem(STORAGE_KEY) === '1'; } catch (e) { return false; }
@@ -92,21 +113,28 @@
     if (timer !== null) { clearTimeout(timer); timer = null; }
   }
   function schedule(i) {
-    if (stopped || i >= PING_GAPS_MS.length) return;
+    if (stopped) return;
+    // Out of knocks without a warm answer: let them send anyway, the server
+    // waits for the database rather than failing
+    if (i >= PING_GAPS_MS.length) { setButton('slow'); return; }
     timer = setTimeout(function () { ping(i); }, PING_GAPS_MS[i]);
   }
   function ping(i) {
     fetch('{{ url_for("warm_up") }}', { cache: 'no-store', headers: { Accept: 'application/json' } })
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (p) {
-        if (p && p.warm) { rememberWarm(); stop(); return; }
-        if (p && p.status === 'not_configured') { stop(); return; }
+        if (p && p.warm) { rememberWarm(); stop(); setButton('ready'); return; }
+        if (p && p.status === 'not_configured') { stop(); setButton('offline'); return; }
         schedule(i + 1);
       })
       .catch(function () { schedule(i + 1); });
   }
   window.addEventListener('pagehide', stop);
-  if (!alreadyWarm()) schedule(0);
+
+  if (alreadyWarm()) setButton('ready');
+  else schedule(0);
+
+  return function () { return !btn.disabled; };
 })();
 
 /* The form */
@@ -114,7 +142,6 @@
   var form = document.getElementById('pitch-form');
   var errorBox = document.getElementById('form-error');
   var urlNote = document.getElementById('url-note');
-  var submitBtn = document.getElementById('pitch-submit');
   var result = document.getElementById('pitch-result');
   var working = document.getElementById('working');
   var workingText = document.getElementById('working-text');
@@ -139,6 +166,7 @@
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
+    if (!pitchReady()) return;
     showError('');
 
     var data = {
@@ -157,7 +185,7 @@
     if (!data.url && !askedAboutUrl) {
       askedAboutUrl = true;
       urlNote.hidden = false;
-      submitBtn.textContent = 'Send without a URL';
+      document.getElementById('pitch-submit-label').textContent = 'Pitch job without a URL';
       form.url.focus();
       return;
     }
