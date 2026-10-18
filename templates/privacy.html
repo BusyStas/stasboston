@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block title %}Privacy — Stanislav Prikhodko{% endblock %}
+{% block description %}What stas.boston collects about visitors, and why.{% endblock %}
+{% block content %}
+<main>
+  <article class="post">
+    <div class="wrap">
+      <div class="post-head">
+        <p class="eyebrow">Privacy</p>
+        <h1>Privacy Policy</h1>
+        <p class="byline">Last updated October 18, 2026</p>
+      </div>
+      <div class="prose">
+
+        <h3>Visit statistics</h3>
+        <p>This site uses Google Analytics to count visits and see which pages are read. Google Analytics sets
+           cookies and receives your browser's address and basic details such as device type and rough location.
+           It does not tell me who you are. Google's own use of that data is described in
+           <a href="https://policies.google.com/privacy">Google's privacy policy</a>, and you can opt out with
+           Google's <a href="https://tools.google.com/dlpage/gaoptout">opt-out browser add-on</a>.</p>
+
+        <h3>Pitch me a job</h3>
+        <p>If you send a job through the <a href="{{ url_for('pitch_a_job') }}">Pitch me a job</a> page, what you
+           type - your name, how to reach you, the job description and its link - is stored in my own database and
+           read by my AI agent, which uses Anthropic's Claude to compare the role with my profile. I use it only to
+           consider the role and reply to you. It is never sold or shared for marketing.</p>
+
+        <h3>Everything else</h3>
+        <p>There are no accounts on this site, and nothing else you do here is recorded beyond the hosting
+           provider's standard server logs.</p>
+
+        <h3>Questions</h3>
+        <p>To ask about or remove anything you sent, message me on
+           <a href="https://www.linkedin.com/in/stasp">LinkedIn</a>.</p>
+      </div>
+    </div>
+  </article>
+</main>
+{% endblock %}

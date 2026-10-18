@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, abort, request, jsonify
+from flask import Flask, render_template, url_for, abort, request, jsonify, Response
 import json
 import re
 import time
@@ -150,6 +150,38 @@ def trip_2025():
     return render_template('trips/aug25/trip_sofia_2025.html', schedule=schedule)
 
  
+@app.route('/privacy')
+def privacy():
+    return render_template('privacy.html')
+
+# Pages search engines are pointed at. The trip itineraries stay reachable by
+# link but are left out: they are plans for friends, not pages to be found
+SITE_URL = 'https://stas.boston'
+
+@app.route('/robots.txt')
+def robots_txt():
+    body = ("User-agent: *\n"
+            "Allow: /\n"
+            "Disallow: /health/\n"
+            "\n"
+            f"Sitemap: {SITE_URL}/sitemap.xml\n")
+    return Response(body, mimetype='text/plain')
+
+@app.route('/sitemap.xml')
+def sitemap_xml():
+    pages = [(url_for('index'), None), (url_for('blog'), POSTS[0]['date'] if POSTS else None)]
+    pages += [(url_for('blog_post', slug=p['slug']), p['date']) for p in POSTS]
+    pages += [(url_for('pitch_a_job'), None), (url_for('shop'), None), (url_for('privacy'), None)]
+    entries = ''.join(
+        f"  <url><loc>{SITE_URL}{path}</loc>"
+        + (f"<lastmod>{d.isoformat()}</lastmod>" if d else '')
+        + "</url>\n"
+        for path, d in pages)
+    body = ('<?xml version="1.0" encoding="UTF-8"?>\n'
+            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+            + entries + '</urlset>\n')
+    return Response(body, mimetype='application/xml')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
