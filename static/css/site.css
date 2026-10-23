@@ -220,3 +220,12 @@ footer.site nav a:hover{color:var(--fg)}
 .pitch-form .btn:disabled{background:var(--border);color:var(--muted);box-shadow:none;cursor:not-allowed}
 .btn-spinner{display:none;width:14px;height:14px;border-radius:50%;border:2px solid currentColor;border-top-color:transparent;animation:spin .9s linear infinite}
 .btn.is-warming .btn-spinner{display:inline-block}
+.prose code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.86em;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere}
+.prose td code{white-space:nowrap}
+.prose ol{margin:0 0 20px;padding-left:1.4rem}
+.prose ol li::marker{color:var(--primary);font-weight:600}
+.prose li > ul{margin:10px 0 0}
+.prose ul.checklist{list-style:none;padding-left:0}
+.prose ul.checklist li{position:relative;padding-left:32px}
+.prose ul.checklist li::before{content:"";position:absolute;left:0;top:.3em;width:18px;height:18px;border:2px solid var(--primary);border-radius:5px}
+.prose ul.sources{font-size:.9rem}

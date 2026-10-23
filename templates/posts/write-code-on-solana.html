@@ -1,0 +1,147 @@
+<p class="lead">Solana is a public blockchain where anyone can deploy special-purpose programs (smart contracts) that hold and move money, and "writing code on Solana" means building those programs. To do it you need Rust, the Solana CLI (Agave), the Anchor framework, a fast local test harness, and a security toolkit built for Solana, not Ethereum. This post explains what Solana is, then walks through each tool.</p>
+
+<h2>What is Solana?</h2>
+
+<p>Solana is a blockchain: a shared database run by thousands of independent computers (validators) around the world, with no company in charge. Nobody can quietly edit its records, and anyone can read them or add to them by paying a small fee.</p>
+
+<p>It launched in 2020, founded by Anatoly Yakovenko, and its native currency is <strong>SOL</strong>. Fees are paid in SOL, and validators stake SOL to earn the right to process transactions.</p>
+
+<p>What sets Solana apart is speed and cost. Ethereum, the best-known programmable blockchain, processes transactions largely one after another; Solana is designed to process many in parallel. Transactions confirm in well under a second and usually cost a fraction of a cent. That makes Solana popular for trading, payments, and apps where users make many small transactions.</p>
+
+<h2>What "writing code on Solana" means</h2>
+
+<p>On a regular website, the code runs on a server the owner controls. On Solana, the code runs on the blockchain itself, and nobody, not even its author, can secretly change how it behaves.</p>
+
+<p>That code is called a <strong>program</strong> (Ethereum calls the same idea a "smart contract"). A program is a set of rules that every validator runs identically. Examples:</p>
+<ul>
+  <li>A token: "this account holds 100 coins; only its owner can send them."</li>
+  <li>An exchange: "swap token A for token B at the current pool price."</li>
+  <li>An escrow: "release the payment only when both sides have signed."</li>
+</ul>
+
+<p>These are not ordinary apps. A Solana program can't browse the web, read files, show a screen or run on a timer. It runs only when a transaction calls it, gets a strict compute budget per call, and must give the same result on every validator. In practice it does one job: read and update account data according to its rules.</p>
+
+<p>Writing code on Solana usually means two things:</p>
+<ol>
+  <li><strong>The on-chain program</strong>, written in Rust. It is compiled and uploaded to the blockchain, where it lives at a fixed address. It handles the money and enforces the rules.</li>
+  <li><strong>The client</strong>, usually a website or app written in TypeScript. It shows the user buttons and balances, then asks their wallet to sign transactions that call the program.</li>
+</ol>
+
+<p>The stakes are what make it different from normal software. A program often holds real money, its code is public, and attackers can call it directly. A bug is not a crash; it is a theft. That is why testing and security tools take up so much of this guide.</p>
+
+<h2>Why Solana feels different</h2>
+
+<p>If you come from Ethereum, three things change at once:</p>
+<ul>
+  <li><strong>Programs, not contracts.</strong> On Solana, on-chain code is called a <em>program</em>, and it is stateless. All data lives in separate <em>accounts</em> that are passed into each instruction.</li>
+  <li><strong>Rust, not Solidity.</strong> Programs compile from Rust to sBPF bytecode and run in the Solana Virtual Machine (SVM).</li>
+  <li><strong>Explicit accounts.</strong> Every transaction lists up front which accounts it reads and writes. That is what lets Solana run transactions in parallel, and it is also where most Solana bugs hide: missing signer checks, unchecked account owners, and spoofed Program Derived Addresses (PDAs).</li>
+</ul>
+
+<p>That last point matters for tooling. Ethereum security tools assume Solidity and the EVM, so most of them simply do not apply to Solana. More on that below.</p>
+
+<h2>Languages and frameworks</h2>
+
+<p>Most new programs are written in Rust with Anchor; Pinocchio is the choice when every compute unit counts.</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Layer</th><th>Tool</th><th>What it does</th></tr></thead>
+  <tbody>
+    <tr><td>Program framework</td><td><a href="https://solana.com/docs/intro/installation/dependencies">Anchor</a></td><td>The standard framework. Macros handle account validation, serialization and IDL generation. Version 1.0 shipped in April 2026; the Rust crate is still <code>anchor-lang</code>.</td></tr>
+    <tr><td>Program framework</td><td><a href="https://solana.com/developers/templates/pinocchio-counter">Pinocchio</a></td><td>Zero-dependency library for native programs. Lower compute cost and full control, but no built-in IDL.</td></tr>
+    <tr><td>IDL and client codegen</td><td>Codama (with Shank for Pinocchio)</td><td>Generates typed TypeScript and Rust clients from a program's IDL.</td></tr>
+    <tr><td>TypeScript client</td><td><code>@solana/kit</code></td><td>The modern JavaScript SDK for building transactions and calling programs. Replaces the older <code>@solana/web3.js</code> 1.x for new work.</td></tr>
+    <tr><td>Python client</td><td><code>solana-py</code> / <code>solders</code></td><td>Python SDK; <code>solders</code> provides the core types.</td></tr>
+  </tbody>
+</table></div>
+
+<p>If you are new, start with Anchor. It removes a whole class of account-validation bugs and gives you an IDL for free.</p>
+
+<h2>Setting up your machine</h2>
+
+<p>You need four things installed: Rust, the Solana CLI, Anchor, and a local validator. The Solana Foundation publishes a one-line installer that sets up all of them; the steps below are the manual route. Windows users should work inside WSL.</p>
+<ol>
+  <li><strong>Rust, using rustup.</strong> rustup is Rust's official installer. Run <code>curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh</code> (or the Windows installer from rust-lang.org) and you get two things: <code>rustc</code>, the Rust compiler, and <strong>Cargo</strong>, Rust's build tool and package manager. You need both: Anchor installs through <code>cargo install</code>, and Solana programs are compiled with <code>cargo build-sbf</code>, a Cargo command the Solana CLI adds in the next step. rustup also keeps Rust updated (<code>rustup update</code>). Check with <code>cargo --version</code>.</li>
+  <li><strong>Solana CLI (Agave).</strong> Agave is Anza's validator client, formerly the Solana Labs client, but the command is still <code>solana</code>. Check with <code>solana --version</code> and upgrade with <code>agave-install update</code>.</li>
+  <li><strong>Anchor</strong> through the Anchor Version Manager:
+    <ul>
+      <li><code>cargo install --git https://github.com/solana-foundation/anchor avm --force</code></li>
+      <li><code>avm install latest</code>, then <code>anchor --version</code></li>
+    </ul>
+  </li>
+  <li><strong>Surfpool</strong>, the newer replacement for <code>solana-test-validator</code>. Anchor 1.0 uses it by default for <code>anchor test</code> and <code>anchor localnet</code>.</li>
+  <li><strong>A wallet keypair:</strong> <code>solana-keygen new</code>, then <code>solana config set --url devnet</code> and <code>solana airdrop 2</code> to get free devnet SOL.</li>
+</ol>
+
+<p>From there, <code>anchor init my_program</code> gives you a working project with a program, tests and a TypeScript client.</p>
+
+<h2>Testing</h2>
+
+<p>Solana testing is a three-layer stack: Mollusk for single instructions, LiteSVM for full program flows, and Surfpool for integration tests against realistic network state.</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Layer</th><th>Tool</th><th>Use it for</th></tr></thead>
+  <tbody>
+    <tr><td>Single instruction</td><td><a href="https://github.com/anza-xyz/mollusk">Mollusk</a> (Anza)</td><td>Pure instruction logic, compute-unit benchmarking, fixture-based regression tests.</td></tr>
+    <tr><td>Multi-instruction</td><td><a href="https://github.com/LiteSVM/litesvm">LiteSVM</a></td><td>Runs a Solana VM inside your test process. Fast, with full bank state, sysvars and cross-program calls. Works from Rust, TypeScript and Python.</td></tr>
+    <tr><td>Integration</td><td>Surfpool</td><td>A local network that can mirror mainnet accounts, for end-to-end and client tests.</td></tr>
+  </tbody>
+</table></div>
+
+<p>Two older tools you will see in tutorials: <code>solana-program-test</code> still works but LiteSVM is its successor for new projects, and <code>solana-bankrun</code> has been deprecated by its own author in favor of LiteSVM (<a href="https://docs.chainstack.com/docs/solana-litesvm-testing">source</a>).</p>
+
+<h2>Security tools: what you can and can't borrow from Ethereum</h2>
+
+<p>Slither, Echidna, Halmos and Foundry are excellent, but they are Ethereum (EVM) tools and do not run on Solana programs. They read Solidity or EVM bytecode; Solana programs are Rust compiled to sBPF.</p>
+
+<p>What each one is, and its closest Solana counterpart:</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>EVM tool</th><th>What it is</th><th>Solana counterpart</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Slither</strong></td><td>Trail of Bits' static analyzer for Solidity and Vyper, written in Python, with 90+ built-in vulnerability detectors. Usually the first tool wired into CI.</td><td><code>cargo clippy</code> plus Anchor's account constraints; commercial Solana scanners and audit firms fill the gap.</td></tr>
+    <tr><td><strong>Echidna</strong></td><td>Trail of Bits' property-based fuzzer. You write invariants ("total supply never exceeds X") and it hunts for inputs that break them.</td><td><a href="https://github.com/Ackee-Blockchain/trident">Trident</a> by Ackee Blockchain: stateful, guided fuzzing for Solana programs, backed by the Solana Foundation.</td></tr>
+    <tr><td><strong>Halmos</strong></td><td>a16z's symbolic testing tool. It reuses Foundry-style tests but checks them over all possible inputs, a step toward formal verification.</td><td>No mainstream equivalent yet; property tests in Trident and careful audits cover most of this ground.</td></tr>
+    <tr><td><strong>Foundry</strong></td><td>The leading Solidity dev framework: <code>forge</code> (build and test, with built-in fuzzing), <code>cast</code> (chain CLI), <code>anvil</code> (local node) and <code>chisel</code> (REPL).</td><td>Anchor + Solana CLI + LiteSVM/Surfpool together play the same role.</td></tr>
+  </tbody>
+</table></div>
+
+<p>On Solana, the bugs that matter most are account bugs: a missing signer check, a missing owner check, an unvalidated PDA, or an unchecked arithmetic overflow. Anchor's constraint macros prevent many of these by default, which is a strong reason to start with it. Fuzz anything that holds funds with Trident, and get an independent audit before mainnet.</p>
+
+<h2>Deploying and verifying</h2>
+
+<p>Deploy to devnet first, then publish a verified build so anyone can confirm your on-chain program matches your public source.</p>
+<ol>
+  <li><strong>Deploy:</strong> <code>anchor deploy</code> or <code>solana program deploy target/deploy/&lt;name&gt;.so</code>.</li>
+  <li><strong>Verified build:</strong> install the <a href="https://github.com/solana-foundation/solana-verifiable-build">Solana Verify CLI</a> (<code>cargo install solana-verify --locked</code>), build inside Docker with <code>solana-verify build</code>, deploy that exact binary, then run <code>solana-verify verify-from-repo</code> against your GitHub repository. Don't rebuild with <code>anchor build</code> in between, or the hashes won't match.</li>
+  <li><strong>Upgrade authority:</strong> decide who can upgrade the program. A multisig or governance program is safer than a single hot key.</li>
+</ol>
+
+<p>A verified build proves the source matches the deployed code. It does not prove the code is safe.</p>
+
+<h2>Your starter checklist</h2>
+<ul class="checklist">
+  <li>Install Rust, Solana CLI (Agave), Anchor via AVM, and Surfpool</li>
+  <li>Create a keypair and get devnet SOL</li>
+  <li><code>anchor init</code> a project and read the generated program</li>
+  <li>Learn the account model: accounts, PDAs, cross-program invocations, rent</li>
+  <li>Write unit tests in LiteSVM or Mollusk</li>
+  <li>Fuzz anything that holds value with Trident</li>
+  <li>Deploy to devnet, then publish a verified build</li>
+  <li>Get an audit before mainnet</li>
+</ul>
+
+<p>Best places to keep learning: the official <a href="https://solana.com/docs">Solana docs</a>, the Anchor book, and the Solana Foundation's <a href="https://solana.com/developers/templates/pinocchio-counter">program templates</a>.</p>
+
+<h2>Sources</h2>
+<ul class="sources">
+  <li><a href="https://solana.com/docs/intro/installation/dependencies">Solana: Install dependencies</a></li>
+  <li><a href="https://docs.chainstack.com/docs/solana-tooling">Chainstack: Solana tooling</a></li>
+  <li><a href="https://docs.chainstack.com/docs/solana-litesvm-testing">Chainstack: Testing with LiteSVM</a></li>
+  <li><a href="https://github.com/LiteSVM/litesvm">LiteSVM on GitHub</a></li>
+  <li><a href="https://github.com/Ackee-Blockchain/trident">Trident on GitHub</a></li>
+  <li><a href="https://github.com/solana-foundation/solana-verifiable-build">Solana Verified Builds</a></li>
+  <li><a href="https://solana.com/developers/templates/pinocchio-counter">Pinocchio Counter template</a></li>
+  <li><a href="https://cyfrin.io/blog/industry-leading-smart-contract-auditing-and-security-tools">Cyfrin: Smart contract security tools</a></li>
+  <li><a href="https://hashlock.com/blog/top-free-smart-contract-security-and-audit-tools-2025">Hashlock: Free smart contract security tools</a></li>
+</ul>
