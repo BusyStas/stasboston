@@ -12,6 +12,12 @@ app = Flask(__name__ )
 # Blog posts, newest first. Each post's body lives in templates/posts/<slug>.html.
 POSTS = [
     {
+        "slug": "phone-couldnt-buy-coffee",
+        "title": "The Day My Phone Couldn't Buy a Coffee",
+        "date": date(2026, 10, 23),
+        "summary": "Field notes on paying abroad from Poland, Turkey and Moldova: where a good card stops working, why taxis need offline payments, and the travel app someone should build.",
+    },
+    {
         "slug": "write-code-on-solana",
         "title": "Everything You Need to Write Code on Solana",
         "date": date(2026, 10, 22),
