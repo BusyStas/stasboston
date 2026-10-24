@@ -35,6 +35,12 @@ POSTS = [
         "date": date(2026, 10, 4),
         "summary": "AI is collapsing the price of thinking work, but not of land, licenses or physical labor. The investing question is who keeps the savings.",
     },
+    {
+        "slug": "invisible-wallet-business",
+        "title": "The Invisible Wallet Business: Privy, Stripe and Who Owns the Rest",
+        "date": date(2026, 10, 3),
+        "summary": "The crypto wallets most people will use are ones they never see. Who builds them, who now owns them, and how fast Privy, the leader inside Stripe, is growing.",
+    },
 ]
 for _post in POSTS:
     _post["date_label"] = f'{_post["date"]:%B} {_post["date"].day}, {_post["date"].year}'
