@@ -157,7 +157,7 @@ footer.site nav a:hover{color:var(--fg)}
 .table-wrap{overflow-x:auto;margin:0 0 24px;border:1px solid var(--border);border-radius:14px}
 .prose table{width:100%;border-collapse:collapse;font-size:.88rem;line-height:1.5}
 .prose th,.prose td{text-align:left;vertical-align:top;padding:12px 14px;border-bottom:1px solid var(--border)}
-.prose th{background:var(--surface);font-family:"Space Grotesk",sans-serif;font-weight:500;white-space:nowrap}
+.prose th{background:var(--surface);font-family:"Space Grotesk",sans-serif;font-weight:500}
 .prose tr:last-child td{border-bottom:0}
 .prose td.num,.prose th.num{text-align:right;font-variant-numeric:tabular-nums}
 .prose td.up{color:#c0503c}
@@ -166,7 +166,6 @@ footer.site nav a:hover{color:var(--fg)}
 @media (max-width:767px){
   .post{padding:48px 0 64px}
   .post-item{padding:24px}
-  .prose table{min-width:560px}
 }
 .grid1{max-width:760px}
 .share{max-width:720px;margin:48px auto 0;padding-top:28px;border-top:1px solid var(--border);display:flex;flex-wrap:wrap;align-items:center;gap:12px}
@@ -221,7 +220,6 @@ footer.site nav a:hover{color:var(--fg)}
 .btn-spinner{display:none;width:14px;height:14px;border-radius:50%;border:2px solid currentColor;border-top-color:transparent;animation:spin .9s linear infinite}
 .btn.is-warming .btn-spinner{display:inline-block}
 .prose code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.86em;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere}
-.prose td code{white-space:nowrap}
 .prose ol{margin:0 0 20px;padding-left:1.4rem}
 .prose ol li::marker{color:var(--primary);font-weight:600}
 .prose li > ul{margin:10px 0 0}
@@ -243,4 +241,20 @@ footer.site nav a:hover{color:var(--fg)}
 @media (max-width:640px){
   .prose figure.chart{overflow-x:auto}
   .chart svg{min-width:600px}
+}
+
+/* Tables with 5+ columns break out of the reading column on wide screens */
+@media (min-width:960px){
+  .table-wrap.wide{width:min(1104px,calc(100vw - 48px));position:relative;left:50%;transform:translateX(-50%)}
+}
+/* On phones, tables with 3+ columns become one card per row, labelled by column */
+@media (max-width:700px){
+  .prose table.stack thead{display:none}
+  .prose table.stack,.prose table.stack tbody,.prose table.stack tr,.prose table.stack td{display:block;width:100%}
+  .prose table.stack tr{padding:8px 0;border-bottom:1px solid var(--border)}
+  .prose table.stack tr:last-child{border-bottom:0}
+  .prose table.stack td{border:0;padding:6px 16px}
+  .prose table.stack td::before{content:attr(data-label);display:block;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+  .prose table.stack td:first-child{font-family:"Space Grotesk",sans-serif;font-size:1.05rem;font-weight:500}
+  .prose table.stack td:first-child::before{display:none}
 }

@@ -30,4 +30,20 @@
     </div>
   </article>
 </main>
+<script>
+  /* Label each cell with its column name (shown on phones, where wide tables
+     become one card per row) and let 5+ column tables use the full page width. */
+  document.querySelectorAll('.prose table').forEach(function (table) {
+    var heads = [].map.call(table.querySelectorAll('thead th'), function (th) { return th.textContent.trim(); });
+    if (heads.length >= 3) {
+      table.classList.add('stack');
+      table.querySelectorAll('tbody tr').forEach(function (tr) {
+        [].forEach.call(tr.children, function (td, i) { td.setAttribute('data-label', heads[i] || ''); });
+      });
+    }
+    if (heads.length >= 5 && table.parentElement.classList.contains('table-wrap')) {
+      table.parentElement.classList.add('wide');
+    }
+  });
+</script>
 {% endblock %}
