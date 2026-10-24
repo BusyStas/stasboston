@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, abort, request, jsonify, Response
+from flask import Flask, render_template, url_for, abort, request, jsonify, Response, stream_with_context
 import json
 import re
 import time
@@ -6,6 +6,7 @@ from collections import defaultdict, deque
 from datetime import datetime, date
 
 import job_agent
+import talk_client
 
 app = Flask(__name__ )
 
@@ -117,6 +118,63 @@ def pitch_a_job_submit():
     except job_agent.AgentError as e:
         return jsonify(error=str(e)), 502
 
+@app.route('/talk')
+def talk():
+    return render_template('talk.html', talk_enabled=talk_client.configured())
+
+# Talk to me: the browser calls these two, and they forward to the API with
+# its key. The daily limit, the bot checks and the saving all happen there.
+TALK_BODY_LIMIT = 4096
+TALK_OFFLINE = {'code': 'Offline', 'message': "Mia is offline right now. Please reach out on LinkedIn instead."}
+
+def _talk_json(upstream) -> Response:
+    """The API's JSON answer, passed through with its status code."""
+    response = Response(upstream.content, status=upstream.status_code,
+                        mimetype=upstream.headers.get('Content-Type', 'application/json'))
+    response.headers['Cache-Control'] = 'no-store'
+    return response
+
+@app.route('/api/talk/status')
+def talk_status():
+    try:
+        return _talk_json(talk_client.status())
+    except talk_client.TalkUnavailable:
+        return jsonify(TALK_OFFLINE), 503
+
+@app.route('/api/talk/ask', methods=['POST'])
+def talk_ask():
+    if (request.content_length or 0) > TALK_BODY_LIMIT or len(request.get_data()) > TALK_BODY_LIMIT:
+        return jsonify(code='BodyTooLarge', message='That request is too large.'), 413
+    data = request.get_json(silent=True)
+    if not isinstance(data, dict):
+        return jsonify(code='BadRequest', message='Expected a JSON body.'), 400
+
+    visitor = {
+        'ip': (request.headers.get('X-Forwarded-For') or request.remote_addr or '').split(',')[0].strip(),
+        'user_agent': request.headers.get('User-Agent', '')[:500],
+        'referrer': request.headers.get('Referer', '')[:1000],
+        'origin': request.headers.get('Origin', '')[:200],
+    }
+    try:
+        upstream = talk_client.ask(data, visitor, request.headers.get('X-Talk-Admin-Token', ''))
+    except talk_client.TalkUnavailable:
+        return jsonify(TALK_OFFLINE), 503
+
+    if not upstream.headers.get('Content-Type', '').startswith('text/event-stream'):
+        return _talk_json(upstream)
+
+    def relay():
+        try:
+            for chunk in upstream.iter_content(chunk_size=None):
+                yield chunk
+        finally:
+            upstream.close()
+
+    response = Response(stream_with_context(relay()), mimetype='text/event-stream')
+    response.headers['Cache-Control'] = 'no-store'
+    response.headers['X-Accel-Buffering'] = 'no'
+    return response
+
 @app.route('/shop')
 def shop():
     return render_template('shop.html')
@@ -181,6 +239,7 @@ def robots_txt():
     body = ("User-agent: *\n"
             "Allow: /\n"
             "Disallow: /health/\n"
+            "Disallow: /api/\n"
             "\n"
             f"Sitemap: {SITE_URL}/sitemap.xml\n")
     return Response(body, mimetype='text/plain')
@@ -189,7 +248,8 @@ def robots_txt():
 def sitemap_xml():
     pages = [(url_for('index'), None), (url_for('blog'), POSTS[0]['date'] if POSTS else None)]
     pages += [(url_for('blog_post', slug=p['slug']), p['date']) for p in POSTS]
-    pages += [(url_for('pitch_a_job'), None), (url_for('shop'), None), (url_for('privacy'), None)]
+    pages += [(url_for('pitch_a_job'), None), (url_for('talk'), None), (url_for('shop'), None),
+              (url_for('privacy'), None)]
     entries = ''.join(
         f"  <url><loc>{SITE_URL}{path}</loc>"
         + (f"<lastmod>{d.isoformat()}</lastmod>" if d else '')

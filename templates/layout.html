@@ -41,6 +41,7 @@
       <a href="{{ home }}#work">Work</a>
       <a href="{{ home }}#portfolio">Portfolio</a>
       <a href="{{ url_for('blog') }}"{% if request.endpoint in ('blog', 'blog_post') %} aria-current="page"{% endif %}>Blog</a>
+      <a href="{{ url_for('talk') }}"{% if request.endpoint == 'talk' %} aria-current="page"{% endif %}>Talk to me</a>
       <a href="{{ home }}#contact">Contact</a>
       <div class="dd">
         <a href="{{ home }}#hobbies" aria-haspopup="true">More<span aria-hidden="true">▼</span></a>

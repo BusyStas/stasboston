@@ -1,0 +1,361 @@
+{% extends "layout.html" %}
+{% block title %}Talk to Me — Stanislav Prikhodko{% endblock %}
+{% block description %}Ask Mia, Stas's AI assistant, about his work, his projects and his hobbies.{% endblock %}
+{% block content %}
+<main>
+  <section class="talk">
+    <div class="wrap">
+      <div class="talk-head">
+        <p class="eyebrow">Talk to me</p>
+        <h1>Ask Mia about Stas</h1>
+        <p class="talk-lead">Mia is my AI assistant. She knows about my work, the things I build, what I write about and what I do for fun.</p>
+      </div>
+
+      <div class="talk-card">
+        <p class="talk-label" id="talk-label">Mia, Stas's AI assistant. She can be wrong.</p>
+
+        <div class="talk-log" id="talk-log" role="log" aria-live="polite" aria-labelledby="talk-label"></div>
+
+        <div class="talk-starters" id="talk-starters" hidden></div>
+
+        <form class="talk-form" id="talk-form" novalidate>
+          <p class="talk-quota" id="talk-quota" aria-live="polite">Waking Mia up…</p>
+          <label class="sr-only" for="talk-input">Your question for Mia</label>
+          <textarea id="talk-input" name="question" rows="3" placeholder="Ask about Stas's work, projects or hobbies" disabled></textarea>
+          <!-- Left empty by people; filled in by most spam bots -->
+          <label class="hp" aria-hidden="true">Website <input type="text" name="website" id="talk-website" tabindex="-1" autocomplete="off"></label>
+          <div class="talk-send-row">
+            <span class="talk-count" id="talk-count" aria-live="polite">0 / 500</span>
+            <button class="btn primary" type="submit" id="talk-send" disabled>Send</button>
+          </div>
+          <p class="form-error" id="talk-error" role="alert" hidden></p>
+        </form>
+
+        <p class="talk-notice">Questions are saved and may be read by Stas. Only 20 questions a day can be asked across the whole site.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  var CONTACT = 'https://www.linkedin.com/in/stasp';
+  var STORE_KEY = 'stas.talk.chat';
+  var MIN_MS_BEFORE_FIRST = 3000;
+  var TOKEN_REFRESH_MS = 45 * 60 * 1000; // the page token stops working after 2 hours
+  var BOT_AGENTS = /HeadlessChrome|PhantomJS|Puppeteer|Playwright|Selenium/i;
+
+  var log = document.getElementById('talk-log');
+  var form = document.getElementById('talk-form');
+  var input = document.getElementById('talk-input');
+  var send = document.getElementById('talk-send');
+  var count = document.getElementById('talk-count');
+  var quota = document.getElementById('talk-quota');
+  var errorBox = document.getElementById('talk-error');
+  var starters = document.getElementById('talk-starters');
+  var honeypot = document.getElementById('talk-website');
+
+  var loadedAt = Date.now();
+  var interacted = false;
+  var pageToken = null;
+  var maxChars = 500;
+  var limitToday = 20;
+  var streaming = false;
+  var closed = false; // blocked, out of questions or offline: nothing more can be sent
+  var chat = loadChat();
+
+  /* ----- chat kept for this tab, so a refresh continues it ----- */
+  function loadChat() {
+    try {
+      var saved = JSON.parse(sessionStorage.getItem(STORE_KEY) || 'null');
+      if (saved && Array.isArray(saved.turns)) return saved;
+    } catch (e) {}
+    return { chat_id: null, turns: [] };
+  }
+  function saveChat() {
+    try { sessionStorage.setItem(STORE_KEY, JSON.stringify(chat)); } catch (e) {}
+  }
+  function forgetChat() {
+    chat = { chat_id: null, turns: [] };
+    try { sessionStorage.removeItem(STORE_KEY); } catch (e) {}
+  }
+
+  /* ----- light bot checks: they stop scripts, not a determined attacker ----- */
+  function signals() {
+    return {
+      webdriver: !!navigator.webdriver,
+      screen_w: (window.screen && screen.width) || 0,
+      screen_h: (window.screen && screen.height) || 0,
+      window_w: window.innerWidth || 0,
+      window_h: window.innerHeight || 0,
+      honeypot: honeypot.value,
+      ms_since_load: Date.now() - loadedAt,
+      had_interaction: interacted
+    };
+  }
+  function looksAutomated(s) {
+    return s.webdriver || BOT_AGENTS.test(navigator.userAgent) || !!s.honeypot ||
+      s.screen_w < 320 || s.screen_h < 480 || s.screen_w > 7680 || s.screen_h > 4320 ||
+      !s.window_w || !s.window_h;
+  }
+  ['pointerdown', 'mousemove', 'touchstart', 'keydown'].forEach(function (name) {
+    window.addEventListener(name, function () { interacted = true; refreshSend(); }, { passive: true });
+  });
+
+  /* ----- drawing the conversation ----- */
+  // Answers are plain text: links become <a>, nothing else is ever parsed as HTML
+  function fillText(el, text) {
+    el.textContent = '';
+    var re = /https?:\/\/[^\s<>"')\]]+/g, last = 0, m;
+    while ((m = re.exec(text)) !== null) {
+      var url = m[0].replace(/[.,;:!?]+$/, '');
+      if (m.index > last) el.appendChild(document.createTextNode(text.slice(last, m.index)));
+      var a = document.createElement('a');
+      a.href = url; a.textContent = url; a.target = '_blank'; a.rel = 'noopener noreferrer';
+      el.appendChild(a);
+      last = m.index + url.length;
+      re.lastIndex = last;
+    }
+    if (last < text.length) el.appendChild(document.createTextNode(text.slice(last)));
+  }
+  function bubble(role, text) {
+    var item = document.createElement('div');
+    item.className = 'talk-msg ' + role;
+    var who = document.createElement('p');
+    who.className = 'talk-who';
+    who.textContent = role === 'me' ? 'You' : 'Mia';
+    var body = document.createElement('p');
+    body.className = 'talk-text';
+    fillText(body, text || '');
+    item.appendChild(who); item.appendChild(body);
+    log.appendChild(item);
+    log.scrollTop = log.scrollHeight;
+    return body;
+  }
+  function redraw() {
+    log.textContent = '';
+    chat.turns.forEach(function (t) { bubble('me', t.q); bubble('mia', t.a); });
+    starters.hidden = chat.turns.length > 0 || !starters.childNodes.length;
+  }
+
+  function showError(msg, withContact) {
+    errorBox.textContent = msg || '';
+    if (msg && withContact) {
+      errorBox.appendChild(document.createTextNode(' '));
+      var a = document.createElement('a');
+      a.href = CONTACT; a.textContent = 'Reach Stas on LinkedIn.';
+      errorBox.appendChild(a);
+    }
+    errorBox.hidden = !msg;
+  }
+  function setQuota(remaining, limit) {
+    quota.textContent = remaining + ' of ' + limit + ' questions left today';
+    if (remaining <= 0) outOfQuestions();
+  }
+  function close(message, withContact) {
+    closed = true;
+    input.disabled = true;
+    send.disabled = true;
+    starters.hidden = true;
+    showError(message, withContact);
+  }
+  function outOfQuestions() {
+    quota.textContent = '0 questions left today';
+    close("Today's questions are used up. Back at midnight Eastern.", true);
+  }
+  function blocked() {
+    close("You've been blocked by our security agent.");
+  }
+
+  /* ----- the Send button ----- */
+  function refreshSend() {
+    var length = input.value.trim().length;
+    count.textContent = input.value.length + ' / ' + maxChars;
+    count.classList.toggle('over', input.value.length > maxChars);
+    var waitFirst = !chat.chat_id && Date.now() - loadedAt < MIN_MS_BEFORE_FIRST;
+    send.disabled = closed || streaming || !pageToken || !interacted || waitFirst ||
+      length === 0 || input.value.length > maxChars;
+  }
+  input.addEventListener('input', refreshSend);
+  input.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); if (!send.disabled) form.requestSubmit(); }
+  });
+  // The first question waits a few seconds after the page loads; enable Send once it may go
+  setTimeout(refreshSend, MIN_MS_BEFORE_FIRST + 50);
+
+  /* ----- status: questions left and the page token ----- */
+  function loadStatus(first) {
+    return fetch('{{ url_for("talk_status") }}', { cache: 'no-store', headers: { Accept: 'application/json' } })
+      .then(function (r) { return r.json().then(function (b) { return { ok: r.ok, body: b }; }); })
+      .then(function (res) {
+        if (!res.ok) throw new Error(res.body.message || 'offline');
+        pageToken = res.body.page_token;
+        if (first) {
+          renderStarters(res.body.starter_questions || []);
+          if (!closed) { input.disabled = false; }
+        }
+        limitToday = res.body.limit_today;
+        setQuota(res.body.remaining_today, limitToday);
+        refreshSend();
+      })
+      .catch(function () {
+        if (first) { quota.textContent = 'Mia is offline right now.'; close('Please try again later.', true); }
+      });
+  }
+  function renderStarters(questions) {
+    starters.textContent = '';
+    questions.slice(0, 4).forEach(function (q) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'chip talk-chip'; b.textContent = q;
+      b.addEventListener('click', function () {
+        input.value = q; refreshSend(); input.focus();
+        if (!send.disabled) form.requestSubmit();
+      });
+      starters.appendChild(b);
+    });
+    starters.hidden = chat.turns.length > 0 || !questions.length;
+  }
+
+  /* ----- asking ----- */
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var question = input.value.trim();
+    var s = signals();
+    if (looksAutomated(s)) { blocked(); return; }
+    refreshSend();
+    if (send.disabled) return;
+    ask(question, s);
+  });
+
+  function ask(question, s) {
+    showError('');
+    streaming = true;
+    refreshSend();
+    starters.hidden = true;
+    bubble('me', question);
+    var answerEl = bubble('mia', '');
+    answerEl.parentNode.classList.add('pending');
+    var answer = '';
+    input.value = '';
+    refreshSend();
+
+    function fail(message, keepQuestion, withContact) {
+      log.removeChild(answerEl.parentNode);
+      log.removeChild(log.lastChild);
+      if (keepQuestion) input.value = question;
+      showError(message, withContact);
+    }
+
+    fetch('{{ url_for("talk_ask") }}', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'text/event-stream' },
+      body: JSON.stringify({ chat_id: chat.chat_id, question: question, page_token: pageToken, signals: s })
+    })
+      .then(function (r) {
+        if ((r.headers.get('Content-Type') || '').indexOf('text/event-stream') !== 0) {
+          return r.json().catch(function () { return {}; }).then(function (b) { handleRefusal(r.status, b, fail, question); });
+        }
+        return readEvents(r, {
+          meta: function (d) {
+            chat.chat_id = d.chat_id;
+            setQuota(d.remaining_today, limitToday);
+          },
+          delta: function (d) {
+            answer += d.text;
+            answerEl.parentNode.classList.remove('pending');
+            fillText(answerEl, answer);
+            log.scrollTop = log.scrollHeight;
+          },
+          done: function () {
+            chat.turns.push({ q: question, a: answer });
+            saveChat();
+          },
+          error: function (d) {
+            if (answer) {
+              chat.turns.push({ q: question, a: answer });
+              saveChat();
+              showError(d.message || 'Mia could not finish that answer. Please try again.');
+            } else {
+              fail(d.message || 'Mia could not answer just now. Please try again.', true);
+            }
+          }
+        });
+      })
+      .catch(function () {
+        fail('Could not reach Mia. Please check your connection and try again.', true);
+      })
+      .then(function () {
+        streaming = false;
+        refreshSend();
+        if (!closed) input.focus();
+      });
+  }
+
+  function handleRefusal(status, body, fail, question) {
+    var code = body.code;
+    if (code === 'BotBlocked') { fail(''); blocked(); return; }
+    if (code === 'DailyLimitReached') { fail('', true); outOfQuestions(); return; }
+    if (code === 'ChatNotFound') {
+      forgetChat();
+      redraw();
+      input.value = question;
+      showError('That chat expired, so a new one has started. Please send your question again.');
+      return;
+    }
+    if (code === 'QuestionTooLong') {
+      if (body.max_chars) maxChars = body.max_chars;
+      fail('Questions can be up to ' + maxChars + ' characters.', true);
+      return;
+    }
+    if (code === 'QuestionEmpty') { fail('Please type a question.', false); return; }
+    if (code === 'Offline' || code === 'NotConfigured') { fail('', true); close('Mia is offline right now.', true); return; }
+    fail(body.message || 'Mia could not answer just now. Please try again in a moment.', true);
+  }
+
+  // Server-Sent Events over fetch: blocks separated by a blank line, "event:" and "data:" lines
+  function readEvents(response, handlers) {
+    var reader = response.body.getReader();
+    var decoder = new TextDecoder();
+    var buffer = '';
+    function dispatch(block) {
+      var name = 'message', data = '';
+      block.split('\n').forEach(function (line) {
+        if (line.indexOf('event:') === 0) name = line.slice(6).trim();
+        else if (line.indexOf('data:') === 0) data += line.slice(5).trim();
+      });
+      if (handlers[name]) {
+        try { handlers[name](data ? JSON.parse(data) : {}); } catch (e) {}
+      }
+    }
+    function pump() {
+      return reader.read().then(function (part) {
+        buffer += decoder.decode(part.value || new Uint8Array(), { stream: !part.done });
+        var blocks = buffer.split('\n\n');
+        buffer = blocks.pop();
+        blocks.forEach(function (b) { if (b.trim()) dispatch(b.replace(/\r/g, '')); });
+        if (part.done) { if (buffer.trim()) dispatch(buffer); return; }
+        return pump();
+      });
+    }
+    return pump();
+  }
+
+  /* ----- start ----- */
+  {% if talk_enabled %}
+  // Only the signs that cannot change are checked on load: a tab opened in the
+  // background can report a zero-size window until it is shown. The rest are
+  // checked when Send is pressed
+  if (navigator.webdriver || BOT_AGENTS.test(navigator.userAgent)) {
+    blocked();
+  } else {
+    redraw();
+    loadStatus(true);
+    setInterval(function () { if (!closed) loadStatus(false); }, TOKEN_REFRESH_MS);
+  }
+  {% else %}
+  quota.textContent = 'Mia is offline right now.';
+  close('Please reach out on LinkedIn instead.', true);
+  {% endif %}
+})();
+</script>
+{% endblock %}
