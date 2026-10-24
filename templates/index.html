@@ -102,6 +102,7 @@
       <div class="btns" style="justify-content:center">
         <a class="btn primary" href="https://www.linkedin.com/in/stasp">Connect on LinkedIn</a>
         {% if pitch_enabled %}<a class="btn ghost" href="{{ url_for('pitch_a_job') }}">Pitch me a job →</a>{% endif %}
+        {% if talk_enabled %}<a class="btn ghost" href="{{ url_for('talk') }}">Chat with me →</a>{% endif %}
       </div>
     </div>
   </section>

@@ -48,7 +48,8 @@ for _post in POSTS:
 
 @app.route('/')
 def index():
-    return render_template('index.html', posts=POSTS, pitch_enabled=job_agent.configured())
+    return render_template('index.html', posts=POSTS, pitch_enabled=job_agent.configured(),
+                           talk_enabled=talk_client.configured())
 
 @app.route('/blog')
 def blog():
