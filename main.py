@@ -12,6 +12,12 @@ app = Flask(__name__ )
 # Blog posts, newest first. Each post's body lives in templates/posts/<slug>.html.
 POSTS = [
     {
+        "slug": "invisible-wallet-business",
+        "title": "The Invisible Wallet Business: Privy, Stripe and Who Owns the Rest",
+        "date": date(2026, 10, 24),
+        "summary": "The crypto wallets most people will use are ones they never see. Who builds them, who now owns them, and how fast Privy, the leader inside Stripe, is growing.",
+    },
+    {
         "slug": "phone-couldnt-buy-coffee",
         "title": "The Day My Phone Couldn't Buy a Coffee",
         "date": date(2026, 10, 23),
@@ -34,12 +40,6 @@ POSTS = [
         "title": "Will AI Make Everything Cheaper? Who Wins, Who Loses",
         "date": date(2026, 10, 4),
         "summary": "AI is collapsing the price of thinking work, but not of land, licenses or physical labor. The investing question is who keeps the savings.",
-    },
-    {
-        "slug": "invisible-wallet-business",
-        "title": "The Invisible Wallet Business: Privy, Stripe and Who Owns the Rest",
-        "date": date(2026, 10, 3),
-        "summary": "The crypto wallets most people will use are ones they never see. Who builds them, who now owns them, and how fast Privy, the leader inside Stripe, is growing.",
     },
 ]
 for _post in POSTS:
