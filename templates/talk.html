@@ -316,8 +316,12 @@
         setQuota(res.body.remaining_today, limitToday);
         refreshSend();
       })
-      .catch(function () {
-        if (first) { quota.textContent = 'Mia is offline right now.'; close('Please try again later.', true); }
+      .catch(function (err) {
+        // The API's own sentence when there is one (a paused database says
+        // until when); a plain "try later" when the page could not reach it
+        var reason = err && err.message && err.message !== 'offline' && err.message !== 'Failed to fetch' &&
+          err.message.indexOf('Mia is offline') !== 0 ? err.message : '';
+        if (first) { quota.textContent = 'Mia is offline right now.'; close(reason || 'Please try again later.', true); }
       });
   }
   function renderStarters(questions) {
@@ -431,6 +435,12 @@
     }
     if (code === 'QuestionEmpty') { fail('Please type a question.', false); return; }
     if (code === 'Offline' || code === 'NotConfigured') { fail('', true); close('Mia is offline right now.', true); return; }
+    if (code === 'DatabaseUnavailable') {
+      fail('', true);
+      quota.textContent = 'Mia is offline right now.';
+      close(body.message || 'Please try again later.', true);
+      return;
+    }
     fail(body.message || 'Mia could not answer just now. Please try again in a moment.', true);
   }
 
