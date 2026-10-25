@@ -38,6 +38,12 @@
       </div>
     </div>
   </section>
+
+  <!-- Shown only while Mia is speaking: one tap pauses her, another resumes -->
+  <button class="talk-player" type="button" id="talk-player" aria-label="Pause Mia" hidden>
+    <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+    <svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>
+  </button>
 </main>
 
 <script>
@@ -72,8 +78,31 @@
     };
     var synth = window.speechSynthesis;
     var button = document.getElementById('talk-voice');
+    var player = document.getElementById('talk-player');
     var on = true, pending = '', spokenUpTo = 0;
+    var queued = 0, paused = false; // sentences waiting or being spoken; whether the red button paused them
+    var round = 0; // bumped on every cancel: a cancelled sentence reports its end late, and must not count
     if (!synth || !window.SpeechSynthesisUtterance) return { start: function () {}, feed: function () {}, finish: function () {}, stop: function () {} };
+
+    /* The red button: visible while anything is queued, pause sign while she
+       talks, play sign while paused */
+    function paintPlayer() {
+      player.hidden = queued === 0;
+      player.classList.toggle('paused', paused);
+      player.setAttribute('aria-label', paused ? 'Resume Mia' : 'Pause Mia');
+    }
+    function silence() {
+      round += 1;
+      synth.cancel();
+      queued = 0;
+      paused = false;
+      paintPlayer();
+    }
+    player.addEventListener('click', function () {
+      if (paused) { synth.resume(); paused = false; }
+      else { synth.pause(); paused = true; }
+      paintPlayer();
+    });
 
     try { on = localStorage.getItem(VOICE_KEY) !== 'off'; } catch (e) {}
     function paint() {
@@ -86,7 +115,7 @@
     button.addEventListener('click', function () {
       on = !on;
       try { localStorage.setItem(VOICE_KEY, on ? 'on' : 'off'); } catch (e) {}
-      if (!on) synth.cancel();
+      if (!on) silence();
       paint();
     });
 
@@ -112,6 +141,15 @@
       if (v) { u.voice = v; u.lang = v.lang; } else { u.lang = lang === 'ru' ? 'ru-RU' : 'en-US'; }
       u.rate = 1.02;
       u.pitch = 1.1;
+      var mine = round;
+      u.onend = u.onerror = function () {
+        if (mine !== round) return;
+        queued = Math.max(0, queued - 1);
+        if (queued === 0) paused = false;
+        paintPlayer();
+      };
+      queued += 1;
+      paintPlayer();
       synth.speak(u);
     }
     // Speak each sentence as soon as it is complete; short pieces also avoid
@@ -128,10 +166,10 @@
       spokenUpTo += last;
     }
     return {
-      start: function () { synth.cancel(); spokenUpTo = 0; pending = ''; },
+      start: function () { silence(); spokenUpTo = 0; pending = ''; },
       feed: feed,
       finish: function (answer) { say(answer.slice(spokenUpTo)); spokenUpTo = answer.length; },
-      stop: function () { synth.cancel(); }
+      stop: silence
     };
   })();
 
