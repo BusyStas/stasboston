@@ -7,13 +7,16 @@ reaches the browser, and adds what it saw of the visitor (IP, user agent,
 referrer, Origin): the API applies its bot checks and hashes the IP from these,
 and never sees the raw request.
 
-Configuration: the same PA_API_URL and PA_API_KEY as the "Pitch me a job" page.
+Configuration: the same PA_API_URL and PA_API_KEY as the "Pitch me a job" page,
+and the same PA_WHOSE_JOB_FINDER_TO_USE: Stanislav's UserId, which picks whose
+assistant answers - her name and what she knows are edited on contentedwife.com
+under Avatar Agent. Without it the API answers from its built-in text.
 """
 import logging
 
 import requests
 
-from job_agent import API_KEY, API_URL
+from job_agent import API_KEY, API_URL, USER_ID
 
 logger = logging.getLogger(__name__)
 
@@ -41,6 +44,7 @@ def status() -> requests.Response:
         raise TalkUnavailable('not configured')
     try:
         return requests.get(f'{API_URL}/api/v1/talk/status', timeout=STATUS_TIMEOUT,
+                            params={'owner_user_id': USER_ID} if USER_ID else None,
                             headers={'X-API-Key': API_KEY})
     except requests.exceptions.RequestException as e:
         logger.warning(f'Talk status failed: {type(e).__name__}: {e}')
@@ -53,6 +57,8 @@ def ask(data: dict, visitor: dict, admin_token: str = '') -> requests.Response:
         raise TalkUnavailable('not configured')
     body = {k: data.get(k) for k in ASK_FIELDS if k in data}
     body['visitor'] = visitor
+    if USER_ID:
+        body['owner_user_id'] = USER_ID
     headers = {'X-API-Key': API_KEY, 'Accept': 'text/event-stream'}
     if admin_token:
         headers['X-Talk-Admin-Token'] = admin_token
