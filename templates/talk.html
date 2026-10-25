@@ -12,7 +12,10 @@
       </div>
 
       <div class="talk-card">
-        <p class="talk-label" id="talk-label">Mia, Stas's AI assistant. She can be wrong.</p>
+        <div class="talk-top">
+          <p class="talk-label" id="talk-label">Mia, Stas's AI assistant. She can be wrong.</p>
+          <button class="talk-voice" type="button" id="talk-voice" aria-pressed="true" hidden>Voice on</button>
+        </div>
 
         <div class="talk-log" id="talk-log" role="log" aria-live="polite" aria-labelledby="talk-label"></div>
 
@@ -54,6 +57,83 @@
   var errorBox = document.getElementById('talk-error');
   var starters = document.getElementById('talk-starters');
   var honeypot = document.getElementById('talk-website');
+
+  /* ----- Mia's voice: the browser's own text-to-speech, sentence by sentence as the answer streams ----- */
+  var voice = (function () {
+    var VOICE_KEY = 'stas.talk.voice';
+    // Browsers do not say which voices are female, so these are known female
+    // voices on each platform, best first: Edge/Windows, Chrome, Apple, Android
+    var FEMALE = {
+      en: ['Microsoft Aria Online', 'Microsoft Jenny Online', 'Microsoft Ava Online', 'Google US English',
+           'Samantha', 'Ava', 'Allison', 'Susan', 'Karen', 'Moira', 'Tessa', 'Serena', 'Victoria',
+           'Google UK English Female', 'Microsoft Zira', 'Microsoft Hazel', 'Microsoft Susan', 'female'],
+      ru: ['Microsoft Svetlana Online', 'Microsoft Dariya Online', 'Milena', 'Katya', 'Google русский',
+           'Microsoft Irina', 'female']
+    };
+    var synth = window.speechSynthesis;
+    var button = document.getElementById('talk-voice');
+    var on = true, pending = '', spokenUpTo = 0;
+    if (!synth || !window.SpeechSynthesisUtterance) return { start: function () {}, feed: function () {}, finish: function () {}, stop: function () {} };
+
+    try { on = localStorage.getItem(VOICE_KEY) !== 'off'; } catch (e) {}
+    function paint() {
+      button.textContent = on ? 'Voice on' : 'Voice off';
+      button.setAttribute('aria-pressed', on ? 'true' : 'false');
+      button.setAttribute('aria-label', on ? 'Mia reads her answers aloud. Turn voice off' : 'Turn on Mia reading her answers aloud');
+    }
+    button.hidden = false;
+    paint();
+    button.addEventListener('click', function () {
+      on = !on;
+      try { localStorage.setItem(VOICE_KEY, on ? 'on' : 'off'); } catch (e) {}
+      if (!on) synth.cancel();
+      paint();
+    });
+
+    function pick(lang) {
+      var voices = synth.getVoices().filter(function (v) { return v.lang.toLowerCase().indexOf(lang) === 0; });
+      var names = FEMALE[lang] || [];
+      for (var i = 0; i < names.length; i++) {
+        for (var j = 0; j < voices.length; j++) {
+          if (voices[j].name.toLowerCase().indexOf(names[i].toLowerCase()) !== -1) return voices[j];
+        }
+      }
+      return voices[0] || null;
+    }
+    synth.getVoices();  // Chrome loads the list in the background on first ask
+
+    function say(text) {
+      // A link is read out as its site name: "contentedwife.org", not the whole address
+      text = text.replace(/https?:\/\/(?:www\.)?([^\/\s]+)\S*/g, '$1').replace(/\s+/g, ' ').trim();
+      if (!on || !text) return;
+      var lang = /[а-яё]/i.test(text) ? 'ru' : 'en';
+      var u = new SpeechSynthesisUtterance(text);
+      var v = pick(lang);
+      if (v) { u.voice = v; u.lang = v.lang; } else { u.lang = lang === 'ru' ? 'ru-RU' : 'en-US'; }
+      u.rate = 1.02;
+      u.pitch = 1.1;
+      synth.speak(u);
+    }
+    // Speak each sentence as soon as it is complete; short pieces also avoid
+    // Chrome cutting long utterances off after about 15 seconds
+    // A sentence ends at . ! or ? followed by a space, or at a line break; the
+    // dots inside a web address are not followed by a space, so they never split
+    function feed(answer) {
+      pending = answer.slice(spokenUpTo);
+      var re = /[.!?]+["')\]]*\s+|\n+/g, m, last = 0;
+      while ((m = re.exec(pending)) !== null) {
+        say(pending.slice(last, m.index + m[0].length));
+        last = m.index + m[0].length;
+      }
+      spokenUpTo += last;
+    }
+    return {
+      start: function () { synth.cancel(); spokenUpTo = 0; pending = ''; },
+      feed: feed,
+      finish: function (answer) { say(answer.slice(spokenUpTo)); spokenUpTo = answer.length; },
+      stop: function () { synth.cancel(); }
+    };
+  })();
 
   var loadedAt = Date.now();
   var interacted = false;
@@ -238,6 +318,7 @@
     var answer = '';
     input.value = '';
     refreshSend();
+    voice.start();
 
     function fail(message, keepQuestion, withContact) {
       log.removeChild(answerEl.parentNode);
@@ -265,12 +346,15 @@
             answerEl.parentNode.classList.remove('pending');
             fillText(answerEl, answer);
             log.scrollTop = log.scrollHeight;
+            voice.feed(answer);
           },
           done: function () {
+            voice.finish(answer);
             chat.turns.push({ q: question, a: answer });
             saveChat();
           },
           error: function (d) {
+            voice.stop();
             if (answer) {
               chat.turns.push({ q: question, a: answer });
               saveChat();

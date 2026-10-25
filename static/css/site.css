@@ -296,3 +296,8 @@ footer.site nav a:hover{color:var(--fg)}
   .talk-card{padding:16px}
   .talk-msg{max-width:100%}
 }
+.talk-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.talk-top .talk-label{padding-bottom:0;border-bottom:0}
+.talk-voice{flex:none;font:inherit;font-size:.8rem;font-weight:600;color:var(--muted);background:var(--card);border:1px solid var(--border);border-radius:999px;padding:6px 12px;cursor:pointer;transition:border-color .15s,color .15s}
+.talk-voice[aria-pressed="true"]{color:var(--primary);border-color:var(--primary)}
+.talk-voice:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
