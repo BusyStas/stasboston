@@ -1,5 +1,6 @@
 from flask import Flask, render_template, url_for, abort, request, jsonify, Response, stream_with_context
 import json
+import os
 import re
 import time
 from collections import defaultdict, deque
@@ -12,6 +13,12 @@ app = Flask(__name__ )
 
 # Blog posts, newest first. Each post's body lives in templates/posts/<slug>.html.
 POSTS = [
+    {
+        "slug": "free-cloud-tiers",
+        "title": "Hunting Freebies in the Clouds",
+        "date": date(2026, 10, 25),
+        "summary": "The permanent free tiers worth building on: Azure for a free SQL database, Google Cloud Run for web apps, AWS for serverless glue, plus Oracle and Cloudflare compared.",
+    },
     {
         "slug": "invisible-wallet-business",
         "title": "The Invisible Wallet Business: Privy, Stripe and Who Owns the Rest",
@@ -45,6 +52,9 @@ POSTS = [
 ]
 for _post in POSTS:
     _post["date_label"] = f'{_post["date"]:%B} {_post["date"].day}, {_post["date"].year}'
+    with open(os.path.join(app.root_path, 'templates', 'posts', f'{_post["slug"]}.html'), encoding='utf-8') as _f:
+        _post["word_count"] = len(re.sub(r'<[^>]+>', ' ', _f.read()).split())
+    _post["read_minutes"] = max(1, round(_post["word_count"] / 230))
 
 @app.route('/')
 def index():
@@ -60,7 +70,8 @@ def blog_post(slug):
     post = next((p for p in POSTS if p["slug"] == slug), None)
     if post is None:
         abort(404)
-    return render_template('blog_post.html', post=post)
+    more_posts = [p for p in POSTS if p is not post][:3]
+    return render_template('blog_post.html', post=post, more_posts=more_posts)
 
 @app.route('/pitch-a-job')
 def pitch_a_job():
@@ -234,6 +245,41 @@ def privacy():
 # Pages search engines are pointed at. The trip itineraries stay reachable by
 # link but are left out: they are plans for friends, not pages to be found
 SITE_URL = 'https://stas.boston'
+
+@app.context_processor
+def inject_site_urls():
+    """Canonical address of the current page, always on stas.boston, so search
+    engines don't index the run.app copy of the same page."""
+    return {'site_url': SITE_URL, 'canonical_url': SITE_URL + request.path}
+
+@app.route('/feed.xml')
+def feed_xml():
+    """Atom feed of the blog, for feed readers and aggregators."""
+    def esc(text):
+        return (text.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
+                .replace('"', '&quot;'))
+    updated = f"{POSTS[0]['date'].isoformat()}T12:00:00Z" if POSTS else '2026-01-01T00:00:00Z'
+    entries = ''.join(
+        f"""  <entry>
+    <title>{esc(p['title'])}</title>
+    <link href="{SITE_URL}{url_for('blog_post', slug=p['slug'])}"/>
+    <id>{SITE_URL}{url_for('blog_post', slug=p['slug'])}</id>
+    <published>{p['date'].isoformat()}T12:00:00Z</published>
+    <updated>{p['date'].isoformat()}T12:00:00Z</updated>
+    <summary>{esc(p['summary'])}</summary>
+  </entry>
+""" for p in POSTS)
+    body = f"""<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Stanislav Prikhodko: Thoughts on AI, Crypto and Money</title>
+  <link href="{SITE_URL}{url_for('blog')}"/>
+  <link rel="self" href="{SITE_URL}/feed.xml"/>
+  <id>{SITE_URL}{url_for('blog')}</id>
+  <updated>{updated}</updated>
+  <author><name>Stanislav Prikhodko</name><uri>{SITE_URL}/</uri></author>
+{entries}</feed>
+"""
+    return Response(body, mimetype='application/atom+xml')
 
 @app.route('/robots.txt')
 def robots_txt():

@@ -311,3 +311,11 @@ footer.site nav a:hover{color:var(--fg)}
 .talk-player:not(.paused)::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid #e0352b;animation:talk-ring 1.6s ease-out infinite}
 @keyframes talk-ring{from{transform:scale(1);opacity:.7}to{transform:scale(1.5);opacity:0}}
 @media (prefers-reduced-motion:reduce){.talk-player:not(.paused)::after{animation:none}}
+.more-posts{max-width:720px;margin:48px auto 0;padding-top:28px;border-top:1px solid var(--border);display:grid;gap:4px}
+.more-posts .eyebrow{margin-bottom:10px}
+.more-post{display:grid;gap:2px;padding:12px 0;border-bottom:1px solid var(--border)}
+.more-post:last-child{border-bottom:0}
+.more-post .meta{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+.more-post-title{font-family:"Space Grotesk",sans-serif;font-size:1.1rem;transition:color .15s}
+.more-post:hover .more-post-title{color:var(--primary)}
+.share+.more-posts{margin-top:28px}

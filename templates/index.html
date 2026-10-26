@@ -1,4 +1,18 @@
 {% extends "layout.html" %}
+{% block head_extra %}
+<script type="application/ld+json">
+{{ {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Stanislav Prikhodko",
+  "url": site_url ~ "/",
+  "image": site_url ~ "/static/images/selfie/stas_face_round.jfif",
+  "jobTitle": "Software Architect",
+  "address": {"@type": "PostalAddress", "addressLocality": "Boston", "addressRegion": "MA", "addressCountry": "US"},
+  "sameAs": ["https://www.linkedin.com/in/stasp", "https://www.instagram.com/stasik.avia", "https://www.instagram.com/stasik.ice"]
+} | tojson }}
+</script>
+{% endblock %}
 {% block content %}
 <div class="hero">
   <div class="wrap hero-grid">

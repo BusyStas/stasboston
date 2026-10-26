@@ -1,0 +1,112 @@
+<p class="lead">A production app does not need one cloud; it needs the right cloud for each job, and each of the big three has one area where its permanent free allowance is hard to beat: Azure for databases, Google for web apps, AWS for serverless building blocks.</p>
+
+<p>I compared the always-free allowances on each cloud as of October 2026, then checked whether anyone else matches them. I left out sign-up credits and trials: every provider has them, and they expire. Only permanent allowances can sit under a production app, so those are what this post covers.</p>
+
+<h2>Azure: a free SQL Server database, or ten</h2>
+
+<p>Azure's standout freebie is a real managed SQL database that stays free for the life of your subscription. Each subscription can have up to 10 General Purpose databases, and every one gets 100,000 vCore seconds of serverless compute, 32 GB of data and 32 GB of backup storage free each month (<a href="https://learn.microsoft.com/azure/azure-sql/database/free-offer">Microsoft Learn</a>).</p>
+<ul>
+  <li><strong>Permanent:</strong> the offer works on any subscription type and stays free as long as the subscription is active (<a href="https://techcommunity.microsoft.com/blog/azuresqlblog/-/4372418">Azure SQL blog</a>).</li>
+  <li><strong>Production-ready:</strong> it is a full General Purpose database, so growing past the free amount takes a few clicks rather than a migration (<a href="https://devblogs.microsoft.com/azure-sql/new-azure-sql-database-free-offer/">Azure SQL devblog</a>).</li>
+  <li><strong>How far the compute goes:</strong> 100,000 vCore seconds is about 28 hours of one vCore per database per month (my arithmetic), or a million vCore seconds across all ten.</li>
+  <li><strong>Catch 1, billing:</strong> if you keep a database online past the monthly free amount, the overage is billed at standard serverless rates, so choose to let it pause instead if you want a hard stop.</li>
+  <li><strong>Catch 2, region:</strong> all your free databases in a subscription share one region, picked once and fixed.</li>
+  <li><strong>Catch 3, features:</strong> a free database cannot join an elastic pool or a failover group.</li>
+</ul>
+
+<p>Azure also reportedly added a free SQL Managed Instance in May 2025, with 720 vCore hours and 64 GB of storage per month (<a href="https://www.schneider.im/lu/microsoft-azure-free-sql-managed-instance-and-database/">summary</a>).</p>
+
+<h2>Google Cloud: ship a web app without the paperwork</h2>
+
+<p>Google's best freebie is Cloud Run: hand it a container and you get a public HTTPS service that scales to zero and costs nothing inside the free quota. The always-free monthly quota is 2 million requests, 180,000 vCPU-seconds and 360,000 GiB-seconds of memory, applied across all your Cloud Run services (<a href="https://cloudchipr.com/blog/cloud-run-pricing">Cloudchipr</a>). Custom domains with HTTPS are free too (<a href="https://nicheelab.com/en/articles/gcp/gcp-free-tier-complete/">Niche e-Lab</a>).</p>
+
+<p>Cloud Run pairs naturally with Google's other free pieces:</p>
+<ul>
+  <li><strong>Firestore:</strong> a NoSQL database for app data, with 1 GiB of storage and daily caps of 50,000 reads, 20,000 writes and 20,000 deletes.</li>
+  <li><strong>Firebase Auth:</strong> ready-made login for your app: email and password, Google, Apple and other providers, plus login tokens your backend can verify. Free for up to 50,000 monthly active users. Optional multi-factor authentication (MFA) by SMS code needs an Identity Platform upgrade, which caps free-plan projects at 3,000 daily active users.</li>
+  <li><strong>BigQuery:</strong> quick SQL scans of large datasets, with 1 TiB of queries and 10 GiB of storage per month.</li>
+  <li><strong>Compute Engine:</strong> a small virtual server that can run a bot or task that stays on all the time. One e2-micro VM per month, in selected US regions only.</li>
+  <li><strong>Pub/Sub:</strong> messaging between app components, 10 GiB per month; <strong>Cloud Build:</strong> automated builds and deploys, 120 build minutes per day.</li>
+</ul>
+
+<h2>AWS: a pantry of serverless building blocks</h2>
+
+<p>AWS has no single standout freebie; what it gives away permanently is a set of small serverless building blocks. More than 30 services are always free within monthly limits (<a href="https://aws.amazon.com/free/faqs/">AWS Free Tier FAQs</a>). The ones that matter for a production app:</p>
+<ul>
+  <li><strong>Lambda:</strong> runs your code only when something triggers it, like a web request or file upload, 1 million requests per month.</li>
+  <li><strong>SQS:</strong> a waiting line for jobs: one part of your app drops in a message and another picks it up when ready, 1 million requests per month (<a href="https://git.hackliberty.org/Git-Mirrors/free-for-dev/commit/bfd3c6a7a9353d07096250ab82fd8cbf06750dde">community list</a>).</li>
+  <li><strong>SNS:</strong> sends one message to many receivers at once, such as email, text messages or other services, 1 million publishes per month (<a href="https://git.hackliberty.org/Git-Mirrors/free-for-dev/commit/bfd3c6a7a9353d07096250ab82fd8cbf06750dde">community list</a>).</li>
+  <li><strong>DynamoDB:</strong> a fast NoSQL database, 25 GB of storage (<a href="https://agentdeals.dev/gcp-free-tier-2026">2026 guide</a>).</li>
+</ul>
+
+<p>The catch: AWS's managed relational databases, RDS and Aurora, are not part of the always-free allowance. Keep your relational data on Azure's free database and let AWS handle the plumbing.</p>
+
+<p>AWS is the natural home for the glue: queues, functions and events that connect the other pieces. It is also the vocabulary that crypto and fintech job listings keep naming.</p>
+
+<h2>Is anyone else giving away a SQL database?</h2>
+
+<p>Among the big three, only Azure does, but it is not alone in the wider industry. Two others I found:</p>
+<ul>
+  <li><strong>Oracle Cloud:</strong> the Always Free tier includes two Autonomous Databases, each with 1 OCPU and 20 GB of storage, with no time limit (<a href="https://blogs.oracle.com/database/freeadb">Oracle</a>). They cannot be backed up or restored unless you upgrade to a paid instance (<a href="https://docs.cloud.oracle.com/pt-br/iaas/Content/Database/Concepts/adbfreeoverview.htm">Oracle docs</a>). Oracle also gives away up to four Arm cores and 24 GB of RAM as always-free compute (<a href="https://www.cnx-software.com/2021/08/25/oracle-cloud-always-free-services-include-ampere-a1-arm-compute-instances/">CNX Software</a>).</li>
+  <li><strong>Cloudflare:</strong> D1 is a serverless SQLite database on the free Workers plan, with 5 GB of storage, 5 million rows read per day and 100,000 rows written per day (<a href="https://developers.cloudflare.com/d1/platform/pricing/">Cloudflare</a>). Since September 1, 2026, queries fail once you pass the daily limits (<a href="https://developers.cloudflare.com/changelog/post/2026-09-01-d1-free-tier-limit-enforcement/">changelog</a>).</li>
+</ul>
+
+<p>So "nobody else gives you a free SQL database" is not quite true. What is true is that Azure's offer is the largest I found: ten databases on the SQL Server engine at 32 GB each, for as long as you keep the subscription. Oracle's is two databases at 20 GB, and Cloudflare's is 5 GB total on SQLite.</p>
+
+<p>I did not survey every provider. Platforms like DigitalOcean, Vercel, Supabase and Neon are outside this comparison.</p>
+
+<h2>The scorecard</h2>
+
+<p>Azure leads on free relational databases, Google on painless web hosting, and AWS on breadth of building blocks.</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Area</th><th>Azure</th><th>Google Cloud</th><th>AWS</th><th>Others</th></tr></thead>
+  <tbody>
+    <tr><td>Free relational database</td><td>Up to 10 databases, 32 GB each, SQL Server engine</td><td>None found on always-free lists</td><td>Not in the always-free allowance (RDS, Aurora)</td><td>Oracle: 2 databases, 20 GB each. Cloudflare D1: 5 GB SQLite</td></tr>
+    <tr><td>NoSQL database</td><td>Not checked</td><td>Firestore (app-data documents), 1 GiB</td><td>DynamoDB (fast key-value data), 25 GB</td><td>Cloudflare KV (simple key-value store, free plan)</td></tr>
+    <tr><td>Serverless compute</td><td>Functions (runs code when triggered), 1M requests (community list)</td><td>Cloud Run (hosts web apps in containers), 2M requests</td><td>Lambda (runs code when triggered), 1M requests</td><td>Cloudflare Workers (runs code near users), 100,000 requests per day</td></tr>
+    <tr><td>Always-free VM</td><td>Not checked</td><td>One e2-micro, selected US regions</td><td>None</td><td>Oracle: 4 Arm cores, 24 GB RAM</td></tr>
+    <tr><td>Best production use</td><td>Relational data</td><td>Web apps and APIs</td><td>Queues, functions, event glue</td><td>Oracle: extra compute. Cloudflare: edge reads</td></tr>
+    <tr><td>Biggest catch</td><td>Overage bills unless you pause</td><td>Firestore daily caps; VM regions limited</td><td>No free managed SQL</td><td>Cloudflare hard-stops at daily limits</td></tr>
+  </tbody>
+</table></div>
+
+<h2>Mix and match: the right cloud for the right job</h2>
+
+<p>Build a production app from the free allowances that fit each part of it, and set a budget alert before you depend on any of them.</p>
+<ul>
+  <li><strong>Free is not the same as safe.</strong> Azure overage bills unless you let the database pause. Google quotas are capped per billing account or project. Cloudflare simply stops your queries.</li>
+  <li><strong>Allowances change.</strong> Google itself says always-free offers are subject to change, so recheck the official page before you commit to a design.</li>
+  <li><strong>Region matters.</strong> Azure's free databases lock to one region, and Google's free VM runs only in selected US regions.</li>
+</ul>
+
+<p><strong>Which one for what:</strong></p>
+<ul>
+  <li>Relational database: Azure.</li>
+  <li>Web app or API hosting: Google Cloud Run.</li>
+  <li>Queues, functions and event glue: AWS.</li>
+  <li>A tiny SQL database at the edge: Cloudflare D1.</li>
+</ul>
+
+<p class="answer">Nothing stops you from mixing them: a production app can keep its data on one cloud, serve its web tier from another, and run its background jobs on a third.</p>
+
+<h2>Sources</h2>
+
+<p class="source-note">Checked October 25, 2026. Google figures come from third-party summaries because Google's own page could not be opened; the rest are from vendor pages unless noted.</p>
+<ul class="sources">
+  <li><a href="https://learn.microsoft.com/azure/azure-sql/database/free-offer">Azure SQL Database free offer</a> (Microsoft Learn)</li>
+  <li><a href="https://techcommunity.microsoft.com/blog/azuresqlblog/-/4372418">Enhanced Azure SQL Database free offer, GA</a> (Microsoft)</li>
+  <li><a href="https://devblogs.microsoft.com/azure-sql/new-azure-sql-database-free-offer/">New Azure SQL Database free offer</a> (Microsoft)</li>
+  <li><a href="https://www.schneider.im/lu/microsoft-azure-free-sql-managed-instance-and-database/">Azure free SQL Managed Instance summary</a> (third party)</li>
+  <li><a href="https://cloudchipr.com/blog/cloud-run-pricing">Cloud Run pricing guide</a> (third party)</li>
+  <li><a href="https://agentdeals.dev/gcp-free-tier-2026">GCP free tier guide 2026</a> (third party)</li>
+  <li><a href="https://nicheelab.com/en/articles/gcp/gcp-free-tier-complete/">GCP free tier complete list</a> (third party)</li>
+  <li><a href="https://www.infoworld.com/article/3585633/how-to-make-the-most-of-the-google-cloud-free-tier.html">How to make the most of the Google Cloud free tier</a> (InfoWorld)</li>
+  <li><a href="https://aws.amazon.com/free/faqs/">AWS Free Tier FAQs</a> (AWS)</li>
+  <li><a href="https://git.hackliberty.org/Git-Mirrors/free-for-dev/commit/bfd3c6a7a9353d07096250ab82fd8cbf06750dde">free-for-dev list mirror</a> (community)</li>
+  <li><a href="https://blogs.oracle.com/database/freeadb">Oracle free Autonomous Database</a> and <a href="https://docs.cloud.oracle.com/pt-br/iaas/Content/Database/Concepts/adbfreeoverview.htm">restrictions</a> (Oracle)</li>
+  <li><a href="https://www.cnx-software.com/2021/08/25/oracle-cloud-always-free-services-include-ampere-a1-arm-compute-instances/">Oracle Always Free Arm compute</a> (CNX Software, 2021)</li>
+  <li><a href="https://developers.cloudflare.com/d1/platform/pricing/">Cloudflare D1 pricing</a> and <a href="https://developers.cloudflare.com/changelog/post/2026-09-01-d1-free-tier-limit-enforcement/">free limit enforcement</a> (Cloudflare)</li>
+  <li><a href="https://developers.cloudflare.com/workers/platform/pricing/">Cloudflare Workers pricing</a> (Cloudflare)</li>
+  <li><a href="https://firebase.google.com/docs/auth/">Firebase Authentication</a> (Google)</li>
+</ul>

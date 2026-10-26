@@ -9,8 +9,18 @@
 <meta property="og:title" content="{{ self.title() }}">
 <meta property="og:description" content="{{ self.description() }}">
 <meta property="og:type" content="{% block og_type %}website{% endblock %}">
-<meta property="og:url" content="{{ url_for(request.endpoint, _external=True, _scheme='https', **(request.view_args or {})) }}">
-<meta property="og:image" content="https://stas.boston/static/images/selfie/stas_face_round.jfif">
+<link rel="canonical" href="{{ canonical_url }}">
+<meta property="og:url" content="{{ canonical_url }}">
+<meta property="og:site_name" content="Stanislav Prikhodko">
+<meta property="og:image" content="{{ site_url }}/static/images/selfie/stas_face_round.jfif">
+<meta property="og:image:alt" content="Portrait of Stanislav Prikhodko">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{{ self.title() }}">
+<meta name="twitter:description" content="{{ self.description() }}">
+<meta name="twitter:image" content="{{ site_url }}/static/images/selfie/stas_face_round.jfif">
+<meta name="author" content="Stanislav Prikhodko">
+<link rel="alternate" type="application/atom+xml" title="Stanislav Prikhodko: blog" href="{{ site_url }}/feed.xml">
+{% block head_extra %}{% endblock %}
 <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
 <script>
   /* Day/night theme: light from 7:00 to 19:00 in the VISITOR's local time, dark otherwise.
