@@ -14,6 +14,12 @@ app = Flask(__name__ )
 # Blog posts, newest first. Each post's body lives in templates/posts/<slug>.html.
 POSTS = [
     {
+        "slug": "digital-nomad-visas-us-citizens-2026",
+        "title": "Digital Nomad Visas for US Citizens (2026)",
+        "date": date(2026, 10, 26),
+        "summary": "How digital nomad visas work for Americans who keep a US job or US clients, and how Spain, Portugal, Thailand, Panama, Estonia, Vietnam and Singapore compare.",
+    },
+    {
         "slug": "free-cloud-tiers",
         "title": "Hunting Freebies in the Clouds",
         "date": date(2026, 10, 25),
