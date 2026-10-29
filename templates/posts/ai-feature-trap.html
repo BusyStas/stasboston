@@ -1,0 +1,93 @@
+<p class="lead">The standard story about AI and business costs is simple: add AI, automate the work, spend less. For a company that uses AI behind the scenes, to triage tickets, summarize calls or clean data, that story often holds.</p>
+
+<p>A whole category of companies runs the other way. They did not use AI to lower their own costs. They shipped it inside the product as a feature, on top of a seat license that was priced before anyone imagined one user could trigger dollars of inference in a single afternoon. Every click on the AI button now costs the vendor real money, and the seat price does not move.</p>
+
+<p>Over the past year the same move has repeated across the industry: the AI part of the product quietly becomes a meter. Here is why it happens, who has done it, and what happens to businesses that had no choice but to adopt it.</p>
+
+<h2>Two ways to use AI, two different cost curves</h2>
+
+<p><strong>AI as internal optimization.</strong> The company decides where to use it, how much, and with which model. Volume is bounded by its own processes, so the cost is a budget line it controls, and the savings show up as headcount, throughput or speed.</p>
+
+<p><strong>AI as a product feature.</strong> The customers decide the volume. The vendor sets one price per seat, but each user chooses how many tokens to burn. The cost lands in the vendor's cost of goods sold, and the most enthusiastic users become the most expensive ones.</p>
+
+<p>Agents make this sharper. One request to an agent can fan out into many model calls, so a single click is no longer a single unit of cost. That is why the pressure shows up first where agents run longest, in workflow automation and content generation.</p>
+
+<h2>Why a seat license cannot absorb it</h2>
+
+<p>Seat pricing rests on one assumption: serving one more user costs almost nothing. That is why software margins used to be so high. Inference breaks the assumption, because cost now scales with use rather than with users.</p>
+
+<p>An illustration, with made-up numbers: a seat that costs the vendor almost nothing to serve is a great business. If one heavy user triggers more in inference each month than the seat pays, that seat loses money, and the vendor cannot tell the two users apart on the invoice.</p>
+
+<p>There is a second squeeze. Oliver Wyman points out that as customers automate more work with AI, they may need fewer seats, so vendors face less seat revenue and higher inference costs at once.</p>
+
+<h2>Companies that learned and adjusted</h2>
+
+<p>These vendors have put a meter on the AI part of the product, or have announced one.</p>
+
+<p><strong>Adobe.</strong> The most direct admission came early. When Adobe put Firefly into Creative Cloud and raised prices, it pointed partly to new costs of generative AI content creation. Generative actions run on monthly credits, and Adobe has since split its AI into standard and premium features and started enforcing the limits.</p>
+
+<p><strong>Figma.</strong> Every seat includes a monthly allowance of AI credits. Overage was free at first, then the limits were enforced. Past the limit, paid AI features stop until credits reset or an admin pays for more.</p>
+
+<p><strong>Atlassian.</strong> Announced this September, with billing starting in December. The meters cover Rovo AI credits, automation steps, Assets objects, Bitbucket usage and AI agent resolutions in Customer Service Management. Seats are unchanged, allowances pool across the organization and reset monthly, and extra usage is on by default for most customers, so overage gets billed rather than blocked.</p>
+
+<p><strong>Salesforce.</strong> Agentforce was first priced per conversation. Flex Credits now price it per action, alongside per-user licenses with unmetered employee-facing agent usage. A seat and a meter, side by side.</p>
+
+<h2>Companies that have not adjusted yet</h2>
+
+<p>These vendors include AI in the base price to attract and keep customers, so the flat price is a choice, not an oversight.</p>
+
+<p>For this group, AI behaves like inflation. The cost of serving each customer keeps rising, because usage grows and features move from simple suggestions to agents. The price can't follow: these features can't justify a price increase, and if they aren't free, nobody uses them. It's a hard choice, and the cost lands on the margin. Zoom's AI Companion usage more than tripled in a year, and customers pay nothing extra. None of them reports what AI costs it, so the size of the hit is unknown.</p>
+
+<p>Zoom and GoDaddy have started to build paid tiers at the edge.</p>
+
+<p><strong>Zoom.</strong> AI Companion has been included at no additional cost with paid plans since it launched. The agentic features now sit above it: ZoomMate, launched this June, is a paid tier with monthly AI credits, according to Rework.</p>
+
+<p><strong>GoDaddy.</strong> Its website and WordPress hosting plans come with Airo AI tools built in. The metering starts at the agentic edge: Airo AI Builder, which builds and edits a site through chat, runs on monthly credits, starting with the free plan. GoDaddy's AI terms, as quoted by Zoutons, reserve the right to change how credits are priced and allocated, and to withdraw free credits at any time.</p>
+
+<p>Both groups end up in the same place: a flat price for a variable cost eventually gets a meter. The first group installed it after the costs showed up, and Adobe was the most direct about why. The second group is earlier on the same road, with flat bundles for now and the first paid tiers and caps appearing at the edges.</p>
+
+<h2>Shopify: the AI you cannot charge for</h2>
+
+<p>Shopify is the example everyone knows, and it shows the trap more clearly than any other. Merchants run their whole business from its admin, a maze of settings, apps and themes. Sidekick, its AI assistant, started out answering help questions. Today it sits on every screen, and Shopify's president says it is quickly becoming "the default way merchants get things done."</p>
+
+<p>What it does now goes far beyond answering questions. Merchants ask it to set up their store, change themes, create discounts, build automations and even write small custom apps. They had nearly 34 million conversations with it in a single quarter, and the apps built through it tripled from the quarter before. Roughly half of the early conversations were about setup, design and themes, the jobs every new merchant has to get through.</p>
+
+<p>Here is the trap. A feature people need just to use the product cannot be put behind credits. A merchant who cannot find a setting will not buy a credit pack first, and a platform that charged for help would lose the merchant. So Sidekick is free on every plan. Asked on the latest earnings call whether Shopify would charge for it directly, management said its current approach is built around merchant success and that it reserves the right to reconsider.</p>
+
+<p>The bill lands on Shopify. Every conversation and every agent-style task runs on a large language model. Shopify's finance chief has said that scale and support savings are being partly offset by rising model costs, driven mainly by merchants using Sidekick, and that he expects this to continue. Subscription gross margin has held steady, with efficiency gains covering the rising cost, and investors have worried about a longer margin squeeze.</p>
+
+<p>Usage keeps pushing the cost up. Daily use of Sidekick more than tripled in a year, and agent-style tasks, like building an app, use far more model calls than answering a question. It is the inflation problem in its plainest form: the cost grows with usage, usage grows because the assistant is useful, and the price cannot move.</p>
+
+<p>Shopify is growing fast and can absorb this today. A company that grows more slowly, or has thinner margins, and faces the same must-have assistant has no such cushion.</p>
+
+<h2>Outside software: pushed into AI, little back</h2>
+
+<p>These organizations did not add AI as a product feature. Fraudsters, staff and rivals pushed them into it, and they cannot simply charge more for it, so the cost has nowhere to go.</p>
+
+<p><strong>Insurers.</strong> Fraudsters forced this one. Verisk's survey found nearly all insurers say AI editing tools are fueling digital fraud, and Allianz reported doctored photo and video claims roughly tripling in a year. Insurers answer with more AI, buying detection tools or building their own, yet only a third are confident they could identify a deepfake. The spend earns no revenue; it only defends the profit they already had. Banks are in the same race: fraud mitigation and AI are bankers' top two tech spending priorities for 2026.</p>
+
+<p><strong>Employers buying AI for everyone.</strong> Staff already use AI, so employers feel pushed to buy it for all. The UK Department for Business and Trade trialed Copilot licences for three months: most users were satisfied, but there was no clear productivity gain, and the average user barely touched it, about one action a day. Banks are watching the bill. Westpac now tracks staff AI token use and routes simpler tasks to cheaper models, while Macquarie wants every employee using AI daily and has not disclosed the cost.</p>
+
+<p>In each case the cost comes with no price increase to pay for it, so it comes out of profit.</p>
+
+<h2>How to spot the companies at risk</h2>
+
+<p>Companies do not report what AI costs them, so listeners have to read the signs. Five signs a company is exposed:</p>
+
+<ul>
+  <li><strong>AI sits inside a flat price.</strong> Seats or subscriptions cover the AI, so every new user and every heavier user adds cost with no new revenue. Zoom, Shopify and GoDaddy are here today.</li>
+  <li><strong>They cannot raise the price.</strong> If charging for the AI would send users away, if the product is hard to use without it, or if someone else sets the price, the cost stays with the company.</li>
+  <li><strong>The AI was forced on them.</strong> Rivals, fraudsters or staff demanded it, so they spend whether or not it pays. Insurers fighting AI-made fraud are here.</li>
+  <li><strong>They cannot show the return.</strong> Listen for a dollar figure on earnings calls. Bank of America's CEO has put a number on it, with benefits at twice the cost, while JPMorgan's CFO has said proving AI savings is hard. A company that gives no number is one to watch.</li>
+  <li><strong>The meter has started.</strong> Credits, allowances, caps and "extra usage" mean a flat price stopped working. Adobe, Figma and Atlassian are already there, and the first paid tiers at Zoom and GoDaddy are early signs.</li>
+</ul>
+
+<p>None of these signs proves a company will fail. They show where the squeeze lands first.</p>
+
+<h2>The takeaway</h2>
+
+<p>AI lowers your costs when you control the volume. When your customers control it, AI is a cost of goods that grows with their enthusiasm. A flat price only works if customers barely use the AI, and vendor after vendor is finding that they do. If someone else sets your price, the cost has nowhere to go but your profit.</p>
+
+<p>The companies to watch are the ones that had to adopt AI and cannot charge for it. Their cost rises every time customers use it more, their price stays put, and the gap comes out of profit. Some will add meters, as Adobe, Figma and Atlassian have. The ones that cannot, because rivals give AI away or someone else sets their price, are the most exposed.</p>
+
+<p>So when a company announces its next AI feature, ask two questions. What does it cost them when I use it? And who pays when I use it a lot?</p>
