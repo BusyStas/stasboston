@@ -96,6 +96,9 @@ def evaluate_offer(name: str, contact: str, position: str, url: str) -> dict:
             'scores': analysis['scores'],
             'targets': analysis['targets'],
             'ai_model': analysis.get('ai_model'),
+            # Shows on Job Openings as pitched by a visitor (the API also
+            # marks anything saved with this site's key that way)
+            'source': 'Pitch',
         })
         posting_id = saved['job_posting_id']
 
