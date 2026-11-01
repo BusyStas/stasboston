@@ -65,6 +65,10 @@
           <p class="eyebrow">My AI agent says</p>
           <p class="verdict-main" id="verdict-main"></p>
           <p class="verdict-job" id="verdict-job"></p>
+          <div class="verdict-resume" id="verdict-resume" hidden>
+            <p class="verdict-resume-text">This one looks like a strong fit. Here's my resume so you can see what I bring.</p>
+            <a class="btn primary" id="resume-download" href="{{ url_for('static', filename='resume/Stanislav-Prikhodko-Resume.pdf') }}" download="Stanislav-Prikhodko-Resume.pdf">Download my resume (PDF)</a>
+          </div>
           <p class="verdict-thanks">Thanks for thinking of me. I've got your details and will be in touch if it's a fit.</p>
           <a class="btn ghost" href="{{ url_for('pitch_a_job') }}">Pitch another job</a>
         </div>
@@ -230,6 +234,8 @@ var pitchReady = (function () {
     }
     var job = [r.title, r.company].filter(Boolean).join(' at ');
     document.getElementById('verdict-job').textContent = job ? 'I read it as: ' + job + '.' : '';
+    // A strong match earns the resume straight away, no extra step
+    document.getElementById('verdict-resume').hidden = !(r.better_than !== null && r.better_than >= 90);
     working.hidden = true;
     verdict.hidden = false;
   }
