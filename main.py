@@ -255,8 +255,8 @@ def trip_2025():
 CERTIFICATES = [
     {"title": "Blockchain Essentials for Developers", "issuer": "IBM", "date": date(2016, 12, 25)},
     {"title": "MCSE: Cloud Platform and Infrastructure — Certified 2016", "issuer": "Microsoft", "date": date(2016, 9, 26)},
-    {"title": "MCSE: Data Management and Analytics — Certified 2016", "issuer": "Microsoft", "date": date(2016, 10, 15), "number": "F832-7079"},
-    {"title": "MCSE: Data Platform", "issuer": "Microsoft", "date": date(2016, 10, 22), "number": "F854-9622"},
+    {"title": "MCSE: Data Management and Analytics — Certified 2016", "issuer": "Microsoft", "date": date(2016, 10, 15), "number": "F832-7079", "pdf": "certificates/mcse-data-management-analytics-2016.pdf"},
+    {"title": "MCSE: Data Platform", "issuer": "Microsoft", "date": date(2016, 10, 22), "number": "F854-9622", "pdf": "certificates/mcse-data-platform-2016.pdf"},
     {"title": "MCSE: Cloud Platform and Infrastructure — Certified 2017", "issuer": "Microsoft", "date": date(2017, 2, 25)},
     {"title": "MCSE: Data Management and Analytics — Certified 2017", "issuer": "Microsoft", "date": date(2017, 3, 3)},
     {"title": "MCSA: Web Applications — Certified 2016", "issuer": "Microsoft", "date": date(2016, 9, 26)},

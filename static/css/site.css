@@ -337,3 +337,4 @@ footer.site nav a:hover{color:var(--fg)}
 /* Green call-to-action, used for "See my portfolio" */
 .btn.green{background:#2f8a5f;color:#fff;box-shadow:0 24px 60px -30px rgba(47,138,95,.6)}
 .btn.green:hover{filter:brightness(1.08)}
+.cert-number a{color:var(--primary);text-decoration:underline;text-underline-offset:3px}

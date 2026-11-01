@@ -13,7 +13,7 @@
         <li class="cert-row">
           <span class="cert-issuer">{{ c.issuer }}</span>
           <span class="cert-name">{{ c.title }}</span>
-          <span class="cert-number">{{ c.number or '' }}</span>
+          <span class="cert-number">{% if c.pdf %}<a href="{{ url_for('static', filename=c.pdf) }}" target="_blank" rel="noopener noreferrer">{{ c.number }}</a>{% else %}{{ c.number or '' }}{% endif %}</span>
         </li>
         {% endfor %}
       </ol>
