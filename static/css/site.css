@@ -329,3 +329,7 @@ footer.site nav a:hover{color:var(--fg)}
 .cert-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;box-shadow:var(--glow)}
 .cert-card .eyebrow{font-size:.68rem}
 .cert-card h4{font-family:"Space Grotesk",sans-serif;font-size:1.05rem;line-height:1.35;margin:10px 0 0;font-weight:600}
+
+/* Green call-to-action, used for "See my portfolio" */
+.btn.green{background:#2f8a5f;color:#fff;box-shadow:0 24px 60px -30px rgba(47,138,95,.6)}
+.btn.green:hover{filter:brightness(1.08)}
