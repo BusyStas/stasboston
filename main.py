@@ -250,14 +250,18 @@ def trip_2025():
     return render_template('trips/aug25/trip_sofia_2025.html', schedule=schedule)
 
  
-# Certificates shown on /certificates. Only the MCSE credentials and the
-# blockchain course are listed for now; the rest stay off the site.
+# Certificates shown on /certificates, in display order: blockchain first,
+# then MCSE, then MCSA. Only these are listed for now; the rest stay off the site.
 CERTIFICATES = [
-    {"title": "MCSE: Cloud Platform and Infrastructure — Certified 2016", "issuer": "Microsoft", "date": date(2016, 9, 26), "group": "Microsoft"},
-    {"title": "MCSE: Data Management and Analytics — Certified 2016", "issuer": "Microsoft", "date": date(2016, 10, 15), "group": "Microsoft"},
-    {"title": "MCSE: Cloud Platform and Infrastructure — Certified 2017", "issuer": "Microsoft", "date": date(2017, 2, 25), "group": "Microsoft"},
-    {"title": "MCSE: Data Management and Analytics — Certified 2017", "issuer": "Microsoft", "date": date(2017, 3, 3), "group": "Microsoft"},
-    {"title": "Blockchain Essentials for Developers", "issuer": "IBM", "date": date(2016, 12, 25), "group": "Blockchain"},
+    {"title": "Blockchain Essentials for Developers", "issuer": "IBM", "date": date(2016, 12, 25)},
+    {"title": "MCSE: Cloud Platform and Infrastructure — Certified 2016", "issuer": "Microsoft", "date": date(2016, 9, 26)},
+    {"title": "MCSE: Data Management and Analytics — Certified 2016", "issuer": "Microsoft", "date": date(2016, 10, 15)},
+    {"title": "MCSE: Cloud Platform and Infrastructure — Certified 2017", "issuer": "Microsoft", "date": date(2017, 2, 25)},
+    {"title": "MCSE: Data Management and Analytics — Certified 2017", "issuer": "Microsoft", "date": date(2017, 3, 3)},
+    {"title": "MCSA: Web Applications — Certified 2016", "issuer": "Microsoft", "date": date(2016, 9, 26)},
+    {"title": "MCSA: Cloud Platform — Certified 2016", "issuer": "Microsoft", "date": date(2016, 9, 26)},
+    {"title": "MCSA: SQL Server 2012/2014 — Certified 2016", "issuer": "Microsoft", "date": date(2016, 10, 15)},
+    {"title": "MCSA: Windows Server 2012 — Certified 2017", "issuer": "Microsoft", "date": date(2017, 2, 25)},
 ]
 CREDLY_PROFILE = 'https://www.credly.com/users/stas'
 
