@@ -250,6 +250,21 @@ def trip_2025():
     return render_template('trips/aug25/trip_sofia_2025.html', schedule=schedule)
 
  
+# Certificates shown on /certificates. Only the MCSE credentials and the
+# blockchain course are listed for now; the rest stay off the site.
+CERTIFICATES = [
+    {"title": "MCSE: Cloud Platform and Infrastructure — Certified 2016", "issuer": "Microsoft", "date": date(2016, 9, 26), "group": "Microsoft"},
+    {"title": "MCSE: Data Management and Analytics — Certified 2016", "issuer": "Microsoft", "date": date(2016, 10, 15), "group": "Microsoft"},
+    {"title": "MCSE: Cloud Platform and Infrastructure — Certified 2017", "issuer": "Microsoft", "date": date(2017, 2, 25), "group": "Microsoft"},
+    {"title": "MCSE: Data Management and Analytics — Certified 2017", "issuer": "Microsoft", "date": date(2017, 3, 3), "group": "Microsoft"},
+    {"title": "Blockchain Essentials for Developers", "issuer": "IBM", "date": date(2016, 12, 25), "group": "Blockchain"},
+]
+CREDLY_PROFILE = 'https://www.credly.com/users/stas'
+
+@app.route('/certificates')
+def certificates():
+    return render_template('certificates.html', certificates=CERTIFICATES, credly_profile=CREDLY_PROFILE)
+
 @app.route('/privacy')
 def privacy():
     return render_template('privacy.html')
@@ -308,6 +323,7 @@ def sitemap_xml():
     pages = [(url_for('index'), None), (url_for('blog'), POSTS[0]['date'] if POSTS else None)]
     pages += [(url_for('blog_post', slug=p['slug']), p['date']) for p in POSTS]
     pages += [(url_for('pitch_a_job'), None), (url_for('talk'), None), (url_for('shop'), None),
+              (url_for('certificates'), None),
               (url_for('privacy'), None)]
     entries = ''.join(
         f"  <url><loc>{SITE_URL}{path}</loc>"

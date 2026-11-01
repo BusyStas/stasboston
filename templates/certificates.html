@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block title %}Certificates — Stanislav Prikhodko{% endblock %}
+{% block description %}Microsoft Certified Solutions Expert (MCSE) credentials and an IBM blockchain course, earned by Stanislav Prikhodko.{% endblock %}
+{% block content %}
+<main>
+  <section class="certs">
+    <div class="wrap">
+      <div class="head"><div><p class="eyebrow">Certificates</p><h2>Credentials</h2></div></div>
+      <p class="certs-lead">Microsoft Certified Solutions Expert (MCSE) credentials and a blockchain course. Verified badges are on <a href="{{ credly_profile }}" target="_blank" rel="noopener noreferrer">Credly</a>.</p>
+
+      {% for group in certificates|groupby('group') %}
+      <h3 class="cert-group">{{ group.grouper }}</h3>
+      <div class="cert-list">
+        {% for c in group.list %}
+        <article class="cert-card">
+          <p class="eyebrow">{{ c.issuer }} · {{ c.date.strftime('%B') }} {{ c.date.day }}, {{ c.date.year }}</p>
+          <h4>{{ c.title }}</h4>
+        </article>
+        {% endfor %}
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+</main>
+{% endblock %}

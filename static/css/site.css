@@ -319,3 +319,13 @@ footer.site nav a:hover{color:var(--fg)}
 .more-post-title{font-family:"Space Grotesk",sans-serif;font-size:1.1rem;transition:color .15s}
 .more-post:hover .more-post-title{color:var(--primary)}
 .share+.more-posts{margin-top:28px}
+
+/* ===== Certificates ===== */
+.certs{padding:72px 0 96px}
+.certs-lead{color:var(--muted);max-width:640px;margin:0 0 32px}
+.certs-lead a{color:var(--primary);text-decoration:underline;text-underline-offset:3px}
+.cert-group{font-size:1.1rem;margin:40px 0 16px;color:var(--primary)}
+.cert-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.cert-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;box-shadow:var(--glow)}
+.cert-card .eyebrow{font-size:.68rem}
+.cert-card h4{font-family:"Space Grotesk",sans-serif;font-size:1.05rem;line-height:1.35;margin:10px 0 0;font-weight:600}
