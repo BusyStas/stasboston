@@ -9,14 +9,14 @@
       {% for p in projects %}
       <article class="project" id="{{ p.slug }}">
         <header class="project-head">
-          <h2>{{ p.title }} <a class="domain" href="{{ p.url }}" target="_blank" rel="noopener">({{ p.domain }})</a></h2>
-          <p>{{ p.subtitle }}</p>
+          <h2>{{ p.title }}{% if p.year %}, {{ p.year }}{% endif %} <a class="domain" href="{{ p.url }}" target="_blank" rel="noopener">({{ p.domain }})</a></h2>
+          {% if p.subtitle %}<p>{{ p.subtitle }}</p>{% endif %}
         </header>
         <div class="project-body">
           <div class="gallery" data-gallery role="region" aria-roledescription="carousel" aria-label="{{ p.title }} screenshots">
             <div class="slides">
               {% for img in p.images %}
-              <figure class="slide{% if loop.first %} is-active{% endif %}"{% if not loop.first %} aria-hidden="true"{% endif %}>
+              <figure class="slide{% if loop.first %} is-active{% endif %}" style="--img:url('{{ url_for('static', filename=img.src) }}')"{% if not loop.first %} aria-hidden="true"{% endif %}>
                 <img src="{{ url_for('static', filename=img.src) }}" alt="{{ img.alt }}"{% if not loop.first %} loading="lazy"{% endif %}>
               </figure>
               {% endfor %}

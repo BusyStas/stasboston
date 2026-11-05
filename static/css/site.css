@@ -361,12 +361,14 @@ footer.site nav a:hover{color:var(--fg)}
 .project-head h2 .domain{font-size:.6em;font-weight:500;color:var(--primary);white-space:nowrap}
 .project-head h2 .domain:hover{text-decoration:underline}
 .project-head p{margin:6px 0 0;color:var(--muted)}
-.project-body{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:40px;margin-top:28px;align-items:start}
+.project-body{display:grid;grid-template-columns:minmax(0,1.8fr) minmax(0,1fr);gap:40px;margin-top:28px;align-items:start}
 .gallery{position:relative}
 .gallery .slides{display:grid;border:1px solid var(--border);border-radius:18px;overflow:hidden;background:var(--surface);box-shadow:var(--glow)}
-.gallery .slide{grid-area:1/1;margin:0;opacity:0;visibility:hidden;transition:opacity .5s ease,visibility .5s}
+.gallery .slide{position:relative;overflow:hidden;grid-area:1/1;margin:0;opacity:0;visibility:hidden;transition:opacity .5s ease,visibility .5s}
 .gallery .slide.is-active{opacity:1;visibility:visible}
-.gallery .slide img{display:block;width:100%;aspect-ratio:16/10;object-fit:contain}
+/* Fixed 4:3 frame; a blurred, dimmed copy of the picture fills whatever the picture itself leaves empty */
+.gallery .slide::before{content:"";position:absolute;inset:-24px;background:var(--img) center/cover no-repeat;filter:blur(22px) brightness(.55) saturate(1.2)}
+.gallery .slide img{position:relative;display:block;width:100%;aspect-ratio:4/3;object-fit:contain}
 .gallery .dots{display:flex;justify-content:center;gap:10px;margin-top:16px}
 .gallery .dot{width:10px;height:10px;padding:0;border:0;border-radius:50%;background:var(--border);cursor:pointer;transition:background .2s,transform .2s}
 .gallery .dot:hover{background:var(--muted)}

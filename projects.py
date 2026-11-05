@@ -9,8 +9,8 @@ PROJECTS = [
     {
         "slug": "astrotoken",
         "title": "AI-native astrology and numerology",
+        "year": "2026",
         "domain": "astrotoken.info",
-        "subtitle": "Every reading is written by AI once, saved, and served in ten languages",
         "url": "https://astrotoken.info",
         "images": [
             {"src": "images/portfolio/astrotoken/01-home.webp", "alt": "AstroToken home page: twelve zodiac signs, a feature menu on the left and cards for each reading"},
