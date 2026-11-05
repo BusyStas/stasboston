@@ -12,7 +12,10 @@ PROJECTS = [
         "subtitle": "AI-first astrology and numerology, in ten languages",
         "url": "https://astrotoken.info",
         "images": [
-            {"src": "images/projects/astrotoken.svg", "alt": "AstroToken cover art: a zodiac wheel on a night sky"},
+            {"src": "images/portfolio/astrotoken/01-home.webp", "alt": "AstroToken home page: twelve zodiac signs, a feature menu on the left and cards for each reading"},
+            {"src": "images/portfolio/astrotoken/02-zodiac-sign.webp", "alt": "The Sagittarius reading: ruling planet, character, strengths, challenges and love"},
+            {"src": "images/portfolio/astrotoken/03-name-meaning.webp", "alt": "Name meaning for Stas: native and English forms of the name, then origin, character and destiny"},
+            {"src": "images/portfolio/astrotoken/04-zodiac-compatibility.webp", "alt": "Zodiac compatibility of a Gemini man and a Virgo woman: strengths, friction, money and family life"},
         ],
         "problem": (
             "Most astrology and numerology sites either publish thin, generic text or pay for an AI call "
