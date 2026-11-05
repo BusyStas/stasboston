@@ -17,6 +17,7 @@ PROJECTS = [
             {"src": "images/portfolio/astrotoken/02-zodiac-sign.webp", "alt": "The Sagittarius reading: ruling planet, character, strengths, challenges and love"},
             {"src": "images/portfolio/astrotoken/03-name-meaning.webp", "alt": "Name meaning for Stas: native and English forms of the name, then origin, character and destiny"},
             {"src": "images/portfolio/astrotoken/04-zodiac-compatibility.webp", "alt": "Zodiac compatibility of a Gemini man and a Virgo woman: strengths, friction, money and family life"},
+            {"src": "images/portfolio/astrotoken/05-business-by-ticker.webp", "alt": "Business review for the stock ticker MSFT: IPO date found by AI, founding sign, name number, character and good and hard years"},
         ],
         "problem": (
             "Most astrology and numerology sites either publish thin, generic text or pay for an AI call "
@@ -24,7 +25,8 @@ PROJECTS = [
             "The first visitor who asks for a reading triggers one AI call; the result is saved, and "
             "everyone after that reads the saved text. AI spend converges to zero as the audience grows, "
             "while the library of zodiac, name, compatibility and birth-chart readings keeps growing "
-            "by itself."
+            "by itself. It also reviews businesses: enter a stock ticker, or a company name and founding "
+            "date, and get a character profile and a ten-year outlook."
         ),
         "difficulty": [
             "Get-or-generate pipeline: cache first, then database, and only then the AI. Ordinary page "
@@ -33,6 +35,12 @@ PROJECTS = [
             "translation says the same thing.",
             "Cost guards: per-visitor and daily limits on new readings, plus an automatic retry when the "
             "AI answer is cut off.",
+            "Business reviews with a fixed cost: the AI reading depends only on the company's founding sign "
+            "and its name number, so there are 144 per language however many companies people look up. "
+            "The company name, dates and the year-by-year table are calculated in code.",
+            "Ticker lookups have no data feed: the AI finds the company, exchange and IPO date once and saves "
+            "it. The page says the date was found by AI, shows how confident it is and lets the visitor "
+            "correct it.",
             "Name meanings need a dictionary that builds itself: the AI detects the name's language and "
             "origin and derives its local and English forms before the meaning is written and stored.",
             "A serverless database that pauses when idle: fixed content is served from an edge cache so "
