@@ -358,7 +358,8 @@ footer.site nav a:hover{color:var(--fg)}
 .project{padding:48px 0;border-top:1px solid var(--border)}
 .project:first-of-type{margin-top:32px}
 .project-head h2{font-size:1.75rem;margin:0}
-.project-head h2 a:hover{color:var(--primary)}
+.project-head h2 .domain{font-size:.6em;font-weight:500;color:var(--primary);white-space:nowrap}
+.project-head h2 .domain:hover{text-decoration:underline}
 .project-head p{margin:6px 0 0;color:var(--muted)}
 .project-body{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:40px;margin-top:28px;align-items:start}
 .gallery{position:relative}

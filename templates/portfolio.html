@@ -9,7 +9,7 @@
       {% for p in projects %}
       <article class="project" id="{{ p.slug }}">
         <header class="project-head">
-          <h2><a href="{{ p.url }}" target="_blank" rel="noopener">{{ p.title }}</a></h2>
+          <h2>{{ p.title }} <a class="domain" href="{{ p.url }}" target="_blank" rel="noopener">({{ p.domain }})</a></h2>
           <p>{{ p.subtitle }}</p>
         </header>
         <div class="project-body">
@@ -37,7 +37,7 @@
               {% for d in p.difficulty %}<li>{{ d }}</li>{% endfor %}
             </ul>
             <p class="stack">{% for t in p.stack %}<span class="chip">{{ t }}</span>{% endfor %}</p>
-            <a class="more" href="{{ p.url }}" target="_blank" rel="noopener">Visit {{ p.title }} →</a>
+            <a class="more" href="{{ p.url }}" target="_blank" rel="noopener">Visit {{ p.domain }} →</a>
           </div>
         </div>
       </article>
