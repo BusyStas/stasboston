@@ -352,3 +352,30 @@ footer.site nav a:hover{color:var(--fg)}
 .proj .d{font-size:.875rem;line-height:1.65;color:var(--muted)}
 .proj:hover .t{color:var(--primary)}
 @media (max-width:640px){.projects{grid-template-columns:1fr}}
+
+/* ===== /portfolio page ===== */
+.portfolio-page .head h1{font-family:"Space Grotesk",sans-serif;font-size:clamp(2rem,4vw,2.75rem);margin:6px 0 0}
+.project{padding:48px 0;border-top:1px solid var(--border)}
+.project:first-of-type{margin-top:32px}
+.project-head h2{font-size:1.75rem;margin:0}
+.project-head h2 a:hover{color:var(--primary)}
+.project-head p{margin:6px 0 0;color:var(--muted)}
+.project-body{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:40px;margin-top:28px;align-items:start}
+.gallery{position:relative}
+.gallery .slides{display:grid;border:1px solid var(--border);border-radius:18px;overflow:hidden;background:var(--surface);box-shadow:var(--glow)}
+.gallery .slide{grid-area:1/1;margin:0;opacity:0;visibility:hidden;transition:opacity .5s ease,visibility .5s}
+.gallery .slide.is-active{opacity:1;visibility:visible}
+.gallery .slide img{display:block;width:100%;aspect-ratio:16/10;object-fit:contain}
+.gallery .dots{display:flex;justify-content:center;gap:10px;margin-top:16px}
+.gallery .dot{width:10px;height:10px;padding:0;border:0;border-radius:50%;background:var(--border);cursor:pointer;transition:background .2s,transform .2s}
+.gallery .dot:hover{background:var(--muted)}
+.gallery .dot.is-active{background:var(--primary);transform:scale(1.25)}
+.gallery .dot:focus-visible{outline:2px solid var(--primary);outline-offset:3px}
+.project-text h3{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--primary);font-weight:600;margin:0 0 8px}
+.project-text h3:not(:first-child){margin-top:24px}
+.project-text p{margin:0;font-size:.95rem;line-height:1.7;color:var(--muted)}
+.project-text ul{margin:0;padding-left:18px;font-size:.9rem;line-height:1.65;color:var(--muted)}
+.project-text li+li{margin-top:8px}
+.project-text .stack{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0}
+.project-text .more{font-weight:600;font-size:.9rem;color:var(--primary)}
+@media (max-width:860px){.project-body{grid-template-columns:1fr;gap:28px}}

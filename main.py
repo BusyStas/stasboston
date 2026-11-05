@@ -7,6 +7,7 @@ from collections import defaultdict, deque
 from datetime import datetime, date
 
 import job_agent
+from projects import PROJECTS
 import talk_client
 
 app = Flask(__name__ )
@@ -72,6 +73,10 @@ for _post in POSTS:
 def index():
     return render_template('index.html', posts=POSTS, pitch_enabled=job_agent.configured(),
                            talk_enabled=talk_client.configured())
+
+@app.route('/portfolio')
+def portfolio():
+    return render_template('portfolio.html', projects=PROJECTS)
 
 @app.route('/blog')
 def blog():
@@ -325,7 +330,7 @@ def robots_txt():
 
 @app.route('/sitemap.xml')
 def sitemap_xml():
-    pages = [(url_for('index'), None), (url_for('blog'), POSTS[0]['date'] if POSTS else None)]
+    pages = [(url_for('index'), None), (url_for('portfolio'), None), (url_for('blog'), POSTS[0]['date'] if POSTS else None)]
     pages += [(url_for('blog_post', slug=p['slug']), p['date']) for p in POSTS]
     pages += [(url_for('pitch_a_job'), None), (url_for('talk'), None), (url_for('shop'), None),
               (url_for('certificates'), None),

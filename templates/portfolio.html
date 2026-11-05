@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% block title %}Portfolio — Stanislav Prikhodko{% endblock %}
+{% block description %}Projects and accomplishments by Stanislav Prikhodko: what each one does, the real problem it solves and what made it technically hard.{% endblock %}
+{% block content %}
+<main>
+  <section class="portfolio-page">
+    <div class="wrap">
+      <div class="head"><div><p class="eyebrow">Portfolio</p><h1>Projects &amp; accomplishments</h1></div></div>
+      {% for p in projects %}
+      <article class="project" id="{{ p.slug }}">
+        <header class="project-head">
+          <h2><a href="{{ p.url }}" target="_blank" rel="noopener">{{ p.title }}</a></h2>
+          <p>{{ p.subtitle }}</p>
+        </header>
+        <div class="project-body">
+          <div class="gallery" data-gallery role="region" aria-roledescription="carousel" aria-label="{{ p.title }} screenshots">
+            <div class="slides">
+              {% for img in p.images %}
+              <figure class="slide{% if loop.first %} is-active{% endif %}"{% if not loop.first %} aria-hidden="true"{% endif %}>
+                <img src="{{ url_for('static', filename=img.src) }}" alt="{{ img.alt }}"{% if not loop.first %} loading="lazy"{% endif %}>
+              </figure>
+              {% endfor %}
+            </div>
+            {% if p.images|length > 1 %}
+            <div class="dots">
+              {% for img in p.images %}
+              <button type="button" class="dot{% if loop.first %} is-active{% endif %}" aria-label="Show screenshot {{ loop.index }} of {{ p.images|length }}"{% if loop.first %} aria-current="true"{% endif %}></button>
+              {% endfor %}
+            </div>
+            {% endif %}
+          </div>
+          <div class="project-text">
+            <h3>The problem it solves</h3>
+            <p>{{ p.problem }}</p>
+            <h3>What made it hard</h3>
+            <ul>
+              {% for d in p.difficulty %}<li>{{ d }}</li>{% endfor %}
+            </ul>
+            <p class="stack">{% for t in p.stack %}<span class="chip">{{ t }}</span>{% endfor %}</p>
+            <a class="more" href="{{ p.url }}" target="_blank" rel="noopener">Visit {{ p.title }} →</a>
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+</main>
+<script src="{{ url_for('static', filename='js/gallery.js') }}" defer></script>
+{% endblock %}
