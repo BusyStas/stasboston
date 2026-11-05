@@ -340,3 +340,15 @@ footer.site nav a:hover{color:var(--fg)}
 .cert-number a{color:var(--primary);text-decoration:underline;text-underline-offset:3px}
 .verdict-resume{margin:8px 0 24px;padding:20px;border:1px solid var(--border);border-radius:14px;background:var(--surface)}
 .verdict-resume-text{margin:0 0 14px;color:var(--muted)}
+
+/* ===== Portfolio project cards ===== */
+.projects{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.proj{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden;transition:transform .2s,box-shadow .2s}
+.proj:hover{transform:translateY(-4px);box-shadow:var(--glow)}
+.proj img{display:block;width:100%;height:auto;aspect-ratio:8/5;object-fit:cover}
+.proj .body{display:flex;flex-direction:column;gap:6px;padding:22px 24px 26px}
+.proj .meta{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--primary);font-weight:600}
+.proj .t{font-family:"Space Grotesk",sans-serif;font-size:1.25rem}
+.proj .d{font-size:.875rem;line-height:1.65;color:var(--muted)}
+.proj:hover .t{color:var(--primary)}
+@media (max-width:640px){.projects{grid-template-columns:1fr}}

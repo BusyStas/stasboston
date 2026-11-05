@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-label="Crypto hub cover">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7a58c4"/><stop offset="1" stop-color="#2a1b57"/></linearGradient></defs>
+<rect width="640" height="400" fill="url(#g)"/>
+<g stroke="#fff" stroke-opacity=".35" stroke-width="2" fill="none">
+<path d="M150 110L320 70 490 120 530 270 380 320 220 300 110 240z"/><path d="M150 110L220 300M320 70L380 320M490 120L220 300M110 240L490 120M320 70L110 240M530 270L320 70"/></g>
+<g fill="#fff" opacity=".9"><circle cx="150" cy="110" r="9"/><circle cx="320" cy="70" r="9"/><circle cx="490" cy="120" r="9"/><circle cx="530" cy="270" r="9"/><circle cx="380" cy="320" r="9"/><circle cx="220" cy="300" r="9"/><circle cx="110" cy="240" r="9"/></g>
+<g transform="translate(320 195)">
+<circle r="78" fill="#f5c15a"/><circle r="78" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="4"/>
+<circle r="58" fill="none" stroke="#a9741a" stroke-width="5"/>
+<path d="M-22 -20h34a14 14 0 0 1 0 28h-24a14 14 0 0 0 0 28h38" stroke="#7a4f0f" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M0 -38v14M0 24v14" stroke="#7a4f0f" stroke-width="9" stroke-linecap="round"/>
+</g>
+<text x="40" y="372" font-family="Georgia,serif" font-size="30" fill="#fff" font-weight="700">stas.club</text>
+</svg>
