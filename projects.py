@@ -91,4 +91,37 @@ PROJECTS = [
         ],
         "stack": ["AI parsing", "Point-based ranking", "Skills analytics", "Public job feeds"],
     },
+    {
+        "slug": "erp-2006",
+        "title": "Custom ERP for a bottled-water manufacturer",
+        "year": "2006",
+        "images": [
+            {"src": "images/portfolio/erp-2006/01-delivery-routes.webp", "alt": "Delivery routes: orders grouped into routes for Moscow, PET and other deliveries, with totals of bottles, coolers, cups and gas cylinders, and the orders of the selected route below (customer names and addresses blurred)"},
+            {"src": "images/portfolio/erp-2006/03-journal-entry.webp", "alt": "An accounting entry: debit and credit accounts from the chart of accounts, exchange rate, amounts in rubles and dollars, and who created, posted and last changed it (names blurred)"},
+            {"src": "images/portfolio/erp-2006/05-invoice-form-designer.webp", "alt": "Invoice form designer: the official TORG-12 delivery note laid out on screen, with a list of sections and data fields to place on the form"},
+            {"src": "images/portfolio/erp-2006/02-home-finance-expenses.webp", "alt": "Home Finance: a day-by-day list of expenses and income in several currencies, with running daily balances"},
+            {"src": "images/portfolio/erp-2006/04-home-finance-by-category.webp", "alt": "Home Finance: yearly expenses by category and month, with totals and the average spent per day"},
+        ],
+        "problem": (
+            "A water producer delivers returnable 19-litre bottles, PET bottles, coolers and cups to homes "
+            "and offices across a big city. Every day it has to know who ordered what, which driver takes it "
+            "where, what is left in stock, and who has paid. This custom ERP ran that whole chain in one "
+            "system: orders turned into delivery routes, stock was tracked, payments were reconciled and "
+            "the books were kept to GAAP-style standards."
+        ),
+        "difficulty": [
+            "Orders to routes. Orders are grouped by address into delivery routes, and the "
+            "dispatcher sees each route's totals of bottles, coolers, cups and gas cylinders at a glance.",
+            "Several kinds of goods and packaging at once. Stock and orders are tracked per item type, "
+            "including returnable bottles that come back and have to be counted again.",
+            "Proper double-entry accounting in more than one currency. Every posting has a debit and a "
+            "credit account, an exchange rate, amounts in rubles and dollars, and a full trail of who "
+            "created, posted and changed it. A wrong entry is reversed, never silently overwritten.",
+            "Payments reconciliation. Money received is matched to the orders and invoices it pays, so "
+            "what is paid and what is still owed is always clear.",
+            "Invoice mass printing. Official forms such as the TORG-12 delivery note are laid out in an "
+            "on-screen designer, then filled with live data and printed for a whole day of deliveries at once.",
+        ],
+        "stack": ["GAAP accounting", "Inventory management", "Orders tracking", "Payments reconciliation", "Invoice mass printing"],
+    },
 ]
