@@ -54,6 +54,8 @@ PROJECTS = [
         "slug": "job-finder",
         "title": "Job Finder: AI-driven job search",
         "year": "2026",
+        "domain": "contentedwife.com/jobs",
+        "url": "https://contentedwife.com/jobs/",
         "images": [
             {"src": "images/portfolio/job-finder/04-job-openings.webp", "alt": "Job Openings: postings graded A to E with a match score, the best-fitting target and Hate, Dislike, Like and Dream buttons"},
             {"src": "images/portfolio/job-finder/01-job-profile.webp", "alt": "My Job Profile: sliders from -5 to +5 for what matters in a job, such as on-call, travel, remote work, compensation and stability"},
