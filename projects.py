@@ -79,7 +79,7 @@ PROJECTS = [
             "travel, remote, pay, stability, commute and more) and every posting gets a match score and an "
             "A to E grade. Move a slider and the whole ranking updates at once.",
             "Careers described in plain words. You write the directions you are weighing, for example "
-            "\"Blockchain developer\", and the AI rates every posting from 0 to 10 against each one.",
+            "\"Blockchain developer\", and the AI rates every posting from 0 to 100 against each one.",
             "Nothing is ever forgotten or lost. Every posting you have seen is kept with your verdict (hate, "
             "dislike, like, dream, want to apply), so you never read the same listing twice.",
             "It also reads the market. A map shows where the jobs are, a skills table shows how many fitting "
