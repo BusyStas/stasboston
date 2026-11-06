@@ -382,3 +382,5 @@ footer.site nav a:hover{color:var(--fg)}
 .project-text .stack{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0}
 .project-text .more{font-weight:600;font-size:.9rem;color:var(--primary)}
 @media (max-width:860px){.project-body{grid-template-columns:1fr;gap:28px}}
+
+.portfolio-page .lead{margin:14px 0 0;font-size:1.1rem;color:var(--muted)}
