@@ -9,7 +9,7 @@
       {% for p in projects %}
       <article class="project" id="{{ p.slug }}">
         <header class="project-head">
-          <h2>{{ p.title }}{% if p.year %}, {{ p.year }}{% endif %} <a class="domain" href="{{ p.url }}" target="_blank" rel="noopener">({{ p.domain }})</a></h2>
+          <h2>{{ p.title }}{% if p.year %}, {{ p.year }}{% endif %}{% if p.url %} <a class="domain" href="{{ p.url }}" target="_blank" rel="noopener">({{ p.domain }})</a>{% endif %}</h2>
           {% if p.subtitle %}<p>{{ p.subtitle }}</p>{% endif %}
         </header>
         <div class="project-body">
@@ -32,12 +32,12 @@
           <div class="project-text">
             <h3>The problem it solves</h3>
             <p>{{ p.problem }}</p>
-            <h3>What made it hard</h3>
+            <h3>{{ p.second_heading or "What made it hard" }}</h3>
             <ul>
               {% for d in p.difficulty %}<li>{{ d }}</li>{% endfor %}
             </ul>
             <p class="stack">{% for t in p.stack %}<span class="chip">{{ t }}</span>{% endfor %}</p>
-            <a class="more" href="{{ p.url }}" target="_blank" rel="noopener">Visit {{ p.domain }} →</a>
+            {% if p.url %}<a class="more" href="{{ p.url }}" target="_blank" rel="noopener">Visit {{ p.domain }} →</a>{% endif %}
           </div>
         </div>
       </article>

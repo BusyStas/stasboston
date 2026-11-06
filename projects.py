@@ -50,4 +50,43 @@ PROJECTS = [
         ],
         "stack": ["Python / Flask", "Claude API", "Google Cloud Run", "SQL database", "Cloudflare R2"],
     },
+    {
+        "slug": "job-finder",
+        "title": "Job Finder: AI-driven job search",
+        "year": "2026",
+        "images": [
+            {"src": "images/portfolio/job-finder/04-job-openings.webp", "alt": "Job Openings: postings graded A to E with a match score, the best-fitting target and Hate, Dislike, Like and Dream buttons"},
+            {"src": "images/portfolio/job-finder/01-job-profile.webp", "alt": "My Job Profile: sliders from -5 to +5 for what matters in a job, such as on-call, travel, remote work, compensation and stability"},
+            {"src": "images/portfolio/job-finder/03-job-targets.webp", "alt": "Job Targets: career directions described in plain words, with the number of postings that fit each"},
+            {"src": "images/portfolio/job-finder/06-job-skills.webp", "alt": "Job Skills: how many fitting postings ask for each programming language, and how many require it"},
+            {"src": "images/portfolio/job-finder/02-summary-dashboard.webp", "alt": "Summary Dashboard: a world map shaded by the number of saved postings, filterable by region and remote"},
+            {"src": "images/portfolio/job-finder/05-job-websites.webp", "alt": "Job Websites: the best places to look for a chosen target, each with a fit score and a reason"},
+        ],
+        "problem": (
+            "Searching for a job means reading long, multi-page listings scattered across many sites, "
+            "then losing track of which ones you have already seen. Job Finder hands that reading to AI. "
+            "It turns every unstructured posting into a tidy, searchable record, scores it against what "
+            "matters to you, and remembers it for good. You look at a ranked shortlist instead of a pile "
+            "of tabs, which saves hours every week."
+        ),
+        "second_heading": "What is new about it",
+        "difficulty": [
+            "AI reads the posting for you. A messy listing becomes a structured record: company, place, "
+            "topic, and the skills it requires or merely prefers.",
+            "Ranking by your priorities, not keywords. Slide about twenty factors from -5 to +5 (on-call, "
+            "travel, remote, pay, stability, commute and more) and every posting gets a match score and an "
+            "A to E grade. Move a slider and the whole ranking updates at once.",
+            "Careers described in plain words. You write the directions you are weighing, for example "
+            "\"Blockchain developer\", and the AI rates every posting from 0 to 10 against each one.",
+            "Nothing is ever forgotten or lost. Every posting you have seen is kept with your verdict (hate, "
+            "dislike, like, dream, want to apply), so you never read the same listing twice.",
+            "It also reads the market. A map shows where the jobs are, a skills table shows how many fitting "
+            "postings require each skill, and the AI recommends which job sites are worth searching for "
+            "each target.",
+            "A private search that feeds public sites. The listings you liked most are streamed to topic "
+            "sites such as the crypto site stas.club and the AI site agentics.actor, so one person's job "
+            "hunt becomes a curated job board for everyone else.",
+        ],
+        "stack": ["AI parsing", "Point-based ranking", "Skills analytics", "Public job feeds"],
+    },
 ]
